@@ -1,0 +1,123 @@
+<div id="singUp-Wrapper">
+    <div id="singup-block">
+      @if(singInStep == 0){
+
+      
+      <div>
+        <h1>Sign Up</h1>
+        <!-- <div id="buttonCover"></div> -->
+        <mat-stepper #stepper>
+          <mat-step [stepControl]="signUpForm" errorMessage="All Parameters required">
+            <ng-template matStepLabel>Setup</ng-template>
+            <p>Enter your Account <strong>Credentials</strong></p>
+            <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()" id="form">
+              <mat-form-field class="matInput">
+                  <mat-label>Email</mat-label>
+                  <input type="email" matInput formControlName="email" [errorStateMatcher]="matcher"
+                         placeholder="YourCool@Email.com" required>
+                  @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+                      <mat-error>Please enter a valid email address</mat-error>
+                      }
+                  @if (emailFormControl.hasError('required')) {
+                      <mat-error>Email is <strong>required</strong></mat-error>
+                  }
+              </mat-form-field>
+  
+              <mat-form-field class="matInput">
+                  <mat-label>Name</mat-label>
+                  <input type="text" matInput formControlName="name"
+                         placeholder="YourUserName">
+                  @if (userFormControl.hasError('required')) {
+                    <mat-error>Name is <strong>required</strong></mat-error>
+                  }
+              </mat-form-field>
+  
+  
+              <mat-form-field class="matInput">
+                  <mat-label>Password</mat-label>
+                  <input type="password" matInput formControlName="password"
+                         placeholder="Password">
+                  @if (passwordFormControl.hasError('required')) {
+                    <mat-error>Password is <strong>required</strong></mat-error>
+                  }
+                  @if(isPasswordMismatch()){
+                    <mat-error>Passwords do not match</mat-error>
+                  }
+              </mat-form-field>
+              <mat-form-field class="matInput">
+                  <mat-label>Verify Password</mat-label>
+                  <input type="password" matInput formControlName="agpassword"
+                         placeholder="Password" required>
+                      @if (isPasswordMismatch()) {
+                        <mat-error>Passwords do not <strong>match</strong></mat-error>
+
+                      }
+              </mat-form-field>
+              @if(isPasswordMismatch()){
+                <mat-error id="pwCorrectIndicator">Passwords dont <strong>match</strong></mat-error>
+              }
+            <div id="buttonLine"> 
+            
+            @if(signUpForm.valid){
+            <button matStepperNext type="submit"  style="float: right;padding-left: 9vmin; padding-right: 9vmin;">Verify</button>
+            }@else{
+            <button matStepperNext type="submit"  style="float: right;padding-left: 9vmin; padding-right: 9vmin; background: gray; cursor:default;" disabled>Verify</button>
+            }
+            
+            <button style="padding-left: 2vmin; padding-right: 2vmin; background: #794f92; color: #eddfef"(click)="logC.exitSingIn()">Cancel</button>
+         
+            </div>
+            <span>{{ this.tryAgain }}</span>
+          </form>
+          </mat-step>
+          <mat-step [ariaDisabled]="signUpForm.invalid">
+            <ng-template matStepLabel>Verify</ng-template>
+            <p>Enter the verification key</p>
+
+            <form [formGroup]="verificationForm" (ngSubmit)="onVerfSubmit()" id="form">
+              <mat-form-field class="matInput">
+                  <mat-label>Verification Key</mat-label>
+                  <input type="text" matInput formControlName="emailVerification" [errorStateMatcher]="matcher"
+                         placeholder="2fg4c" required>
+                  @if(emailVerificationFormControl.hasError('required')) {
+                    <mat-error>Verification Key is <strong>required</strong></mat-error>
+                  }
+                  </mat-form-field>
+                  <div id="buttonLine"> 
+                    @if(verificationForm.valid){
+                      <button type="submit"  style="float: right;padding-left: 9vmin; padding-right: 9vmin;" matStepperNext>Create</button>
+                      }@else{
+                      <button type="submit" style="float: right;padding-left: 9vmin; padding-right: 9vmin; background: gray; cursor:default;" disabled>Create</button>
+                      }
+                    <button matStepperPrevious style="padding-left: 2vmin; padding-right: 2vmin; background: #794f92; color: #eddfef" >Back</button>
+                    </div>
+
+                  
+                </form>
+          </mat-step>
+          <mat-step>
+          <form>
+            <ng-template matStepLabel>Done</ng-template>
+            <h1>Done</h1>
+
+            <p style="text-align: center; width: 80%; padding-left: 10%; padding-right: 10%;">{{ this.status }}</p>
+            <div id="buttonLine">
+              <button (click)="this.logC.exitSingIn()" style="padding-left: 2vmin; padding-right: 2vmin; background: gray; color:#eddfef;">Exit</button>
+              @if(this.isAbleToLogin){
+                <button (click)="this.logIn()" style="float:right; padding-left: 9vmin; padding-right: 9vmin;">Login</button>
+              } @else {
+                <button matStepperPrevious style="float:right; padding-left: 9vmin; padding-right: 9vmin; background: #794f92; color: #eddfef;">Back</button>
+              }
+            </div>
+          </form>
+          </mat-step>
+
+        </mat-stepper>
+
+      </div>
+    }
+
+      <!-- <button (click)="this.userService.showUsers()">schow all users</button> -->
+    </div>
+  </div>
+  

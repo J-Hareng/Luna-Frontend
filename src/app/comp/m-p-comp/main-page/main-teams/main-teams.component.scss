@@ -1,0 +1,223 @@
+$ritchblack: #040f0f;
+$royalpurple: #794f92;
+$africanviolet: #9f86ac;
+$palepurple: #eddfef;
+$palepurpleLowOp: #eddfefb0;
+$NonphotoBlue: #92dce5;
+$gege: #99ff94;
+$grey: #494d5f;
+$grey2: #56495f;
+$grey3: #56495fa2;
+
+$button-gradient-start: $NonphotoBlue; // Pink (same as accent color)
+$button-gradient-end: $gege; // Lighter shade of orange
+$button-gradient: linear-gradient(
+  to right,
+  $button-gradient-start,
+  $button-gradient-end
+);
+
+$back-gradient: linear-gradient(
+  50deg ,
+  $grey3,
+  $grey3,
+  $royalpurple,
+  $NonphotoBlue,
+  $gege,
+);
+.nbutton {
+    float: right;
+    border-radius: 100px;
+    padding: 1.5em;
+    content: 0px;
+    mat-icon{
+      position: absolute;
+      transform: translate(-50%, -50%);
+    }
+}
+#TeamPageWrapper{
+    flex-grow: 1;
+    display: flex;
+    // background-color: ;
+
+    #Teams{
+      
+        // flex-shrink: 1;
+        // height: 100%;
+        overflow-y: auto;
+        .team{
+            background: $back-gradient;
+            background-size: 250%;
+            background-position: left;
+
+            border: 1px solid $grey3; 
+            
+            margin: 1em .5em;
+            padding: 1em .5em;
+
+            border-radius: .3rem;
+            transition: all .5s;
+
+            padding-bottom: .2em;
+
+            button{
+                background: $back-gradient;
+                background-size: 300%;
+                height: 4em;
+                width: 6em;
+                font-size: .5rem;
+                padding: 0;
+                margin-top: 1em;
+                margin-bottom: 0;
+
+                color: $palepurpleLowOp !important;
+
+                &:hover{
+                    color:$ritchblack !important;
+                    background-position: right;
+                }
+            }
+
+        }
+        .team.Free{
+            background-position: left;
+            background-size: 400%;
+        }
+        .selected{
+            background-size: 400%;
+            background-position: top right !important;
+            border-radius: 1rem;
+            p , button{
+                color: $ritchblack;
+            }
+        }
+    }
+
+    #body{
+        flex-grow: 1;
+        display: flex;
+
+        #chat{
+            
+            display: flex;
+            flex-direction: column;
+            flex-grow: 2;
+            #header{
+                margin: .5em;
+                display: flex;
+                justify-content: space-between;
+                align-content: end;
+                
+                h1{
+                    font-size: 2em;
+                    flex-grow: 1;
+                    text-align: center;
+                }
+
+            }
+            #msgs{
+                display: flex;
+                flex-direction: column-reverse;
+                flex-grow: 1;
+                .msg{
+                    background-color: $grey3;
+                    display: flex;
+                    border-radius: 30px;
+                    border-top-right-radius: 1px;
+                    padding: 1em 2em;
+                    width: max(50em);
+                    float:right;
+                    margin: 1em 2em;
+                    border: 2px solid $grey3;
+                    flex-wrap: nowrap;
+                    flex-direction: column;
+                    align-items: end;
+                    p{
+                        font-weight: bold;
+                        float: right;
+                        display: block;
+                    }
+                    span{
+                        font-weight: lighter;
+                        float: right;
+                        display: block;
+                    }
+                }
+                .fromYou{
+                    align-items: start;
+                    border-radius: 30px;
+                    border-top-left-radius: 1px;
+                    float: left;
+                    border: none;
+                    p, span{
+                        float: left;
+                    }
+                }
+            }
+            #controll{
+                margin: 1em;
+                display: flex;
+                gap: 1em;
+                .msgInput{
+                    flex-grow: 1;
+                }
+                button{
+                    padding: 1.5em;
+                    flex-grow: .2;
+                    height: fit-content;
+
+                }
+            }
+        }
+
+        #info{
+            display: none;
+            width: 0;
+        } 
+        .Show{
+            overflow-y: auto;
+            border-left: 1px solid $grey3;
+            display: block !important ;
+            width: 25em !important;
+            #header{
+                padding: .5em;
+                display: flex;
+                justify-content: space-between;
+                h1{
+                    font-size: 2em;
+                    flex-grow: 1;
+                    text-align: center;
+                }
+            }
+
+            .Users{
+                margin: 1em .5em;
+                .IsWorking{
+                    background-color: $royalpurple;
+                }
+                .email{
+                    font-weight: lighter;
+                    margin-bottom: 1em;
+                }
+                .userTask{
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    div{
+                        background-color: $grey3;
+                        border: 1px solid $grey2;
+                        border-radius: 1em;
+                        padding:  .3em .5em;
+                        margin: .3em;
+                        margin-left: 0;
+                        // width: min-content;
+                        span{
+                            font-size: 1em;
+                            font-weight: lighter;
+                        }
+                    }
+                }
+                }
+        }
+    }
+}

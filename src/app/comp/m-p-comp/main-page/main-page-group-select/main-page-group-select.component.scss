@@ -1,0 +1,112 @@
+$ritchblack: #040f0f;
+$royalpurple: #794f92;
+$africanviolet: #9f86ac;
+$palepurple: #eddfef;
+$palepurpleLowOp: #eddfefb0;
+$NonphotoBlue: #92dce5;
+$gege: #99ff94;
+$grey: #494d5f;
+$grey2: #56495f;
+$grey3: #56495fa2;
+$grey4: #352c3b;
+
+$button-gradient-start: $NonphotoBlue; // Pink (same as accent color)
+$button-gradient-end: $gege; // Lighter shade of orange
+$button-gradient: linear-gradient(
+  to right,
+  $button-gradient-start,
+  $button-gradient-end
+);
+
+$back-gradient: linear-gradient(
+  50deg ,
+  $grey3,
+  $grey3,
+  $royalpurple,
+  $NonphotoBlue,
+  $gege,
+);
+
+.mat-divider {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    margin-top: 20px !important;
+}
+
+#SelectGroup {
+
+display: grid;
+grid-template-columns: 49% 10px 49%;
+margin-left: auto;
+margin-right: auto;
+margin-top: auto;
+margin-bottom: auto;
+height: 100%;
+width: 95%;
+
+  form {
+    padding: 2px;
+    margin: 15px;
+
+    background: $back-gradient;
+    background-size: 400%;
+    background-position: bottom left;
+    .innerWrapper{
+
+        background-color: $grey4;
+        width: 95%;
+        height: 100%;
+        border-radius: 20px;
+        .inInnerWrapper{
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+    }
+    // background-color: red;
+    border-radius: 20px;
+    // border: 1px solid $grey4;
+    transition: .3s;
+
+    h1{
+        color: $palepurple;
+        font-size: 4vmin;
+        font-weight: normal;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+    h1, li, p {
+        transition: .3s;
+    }
+    li, p{
+    font-weight: lighter;
+    }
+    strong{
+        font-weight: bold;
+    }
+
+    .inp{
+        margin-top: auto;
+        display: grid;
+        width: 100%;
+        grid-template-rows: auto auto;
+
+        margin-top: auto;
+        margin-bottom: 100px;
+        button{
+            margin-left: 10px;
+            margin-right: 10px;
+            box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.487);
+        }
+        button:hover{
+            box-shadow: 0px 5px 5px 1px rgba(0, 0, 0, 0.487);
+        }
+    }
+  }
+  form:hover {
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.487);
+    margin: 10px;
+    background-position: top right;
+  }
+}

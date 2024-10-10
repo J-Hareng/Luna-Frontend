@@ -1,0 +1,45 @@
+<div id="login-page-wrapper">
+    <div id="login-form">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" id="form"> 
+        <h1>Sign in</h1>
+        <mat-form-field class="matInput">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput  formControlName="email" [errorStateMatcher]="matcher"
+                   placeholder="YourCool@Email.com">
+            @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+              <mat-error>Please enter a valid email address</mat-error>
+            }
+            @if (emailFormControl.hasError('required')) {
+              <mat-error>Email is <strong>required</strong></mat-error>
+            }
+
+            
+        </mat-form-field>
+        <mat-form-field class="matInput">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput formControlName="password"
+                   placeholder="Password">
+            @if (passwordFormControl.hasError('required')) {
+              <mat-error>Password is <strong>required</strong></mat-error>
+            }
+        </mat-form-field>
+
+        <button id="login-button" type="submit">Login</button>
+
+        <p (click)="enableSingIn()" id="singinbutton" >Register new account</p>
+        <div id="side-border"></div>
+        </form>
+    </div>
+    
+    <img src="assets/Luna_icon.svg">
+  </div>
+  @if (singin){
+    <fieldset class="singinWrapper">
+      <app-signup-page></app-signup-page>
+      <div id="exit" (click)="exitSingIn()">
+        <app-exit-onbackklick></app-exit-onbackklick>
+      </div>
+    </fieldset>
+
+  }
+  

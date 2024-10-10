@@ -1,0 +1,27 @@
+<div id="mainPageWrapper">
+    @if(mc.isLoading){
+        <div id="loadingCover">
+            <p>Lunas Dashboard Is Loading . . .</p>
+            <div>
+                <mat-progress-bar class="lb" mode="buffer"></mat-progress-bar>
+                <mat-progress-bar class="lb" mode="query"></mat-progress-bar>
+                <mat-progress-bar class="lb" mode="buffer"></mat-progress-bar>
+            </div>
+        </div>
+    } @else if (this.mc.user.groupid == "" || this.mc.user.groupid == null) {
+            <div id="gsWrapper">
+                <app-main-header></app-main-header>
+                <app-main-page-group-select></app-main-page-group-select>
+            </div>
+            
+    } @else if (this.mc.SiteStatus === SiteStatus.Main) {
+       
+        <app-main-header></app-main-header>
+        <app-main-dashboard></app-main-dashboard>
+
+    }
+    @else if (this.mc.SiteStatus === SiteStatus.Teams) {
+        <app-main-header></app-main-header>
+        <app-main-teams></app-main-teams>
+    }
+</div>

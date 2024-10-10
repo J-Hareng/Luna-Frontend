@@ -1,0 +1,10 @@
+<div id="CKpopup">
+<h1 mat-dialog-title><strong>Invite other users</strong></h1>
+<mat-dialog-content id="content">
+  <p>With the following Link you can invite Other Users to the <strong>{{mc.getGrupIdName()}}</strong> Group</p>
+  <button id="copyME" (click)="clicked()">{{data.Key}} <mat-icon>content_copy</mat-icon></button>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Done</button>
+</mat-dialog-actions>
+</div>

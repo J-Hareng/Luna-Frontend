@@ -1,0 +1,30 @@
+<div id="CKpopup">
+    <h1 mat-dialog-title><strong>Edit Collection</strong></h1>
+    <mat-dialog-content id="content">
+      <p>Tags Are used to group your data, create a tag and append them to a file. you can group your collection files with by your tags</p>
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <form (ngSubmit)="Submit()" [formGroup]="fg">
+            <mat-form-field>
+            <mat-label>Tag Name</mat-label>
+    
+            <input matInput formControlName="name" 
+                     placeholder="Coll New Tag Name" required>
+                     @if (this.NameControll.hasError("required")) {
+                    <mat-error>Name is <strong>required</strong></mat-error>
+                }
+    
+            </mat-form-field>
+    
+            <div class="btnRow">
+            <button mat-button class="can"(click)="onNoClick()">Cancel</button>
+    
+            <button mat-button class="sub" type="submit" [disabled]="this.fg.invalid">Create</button>
+            </div>
+    
+        </form>
+
+
+    </mat-dialog-actions>
+  </div>

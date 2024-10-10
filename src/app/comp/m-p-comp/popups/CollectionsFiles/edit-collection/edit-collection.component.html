@@ -1,0 +1,47 @@
+<div id="CKpopup">
+    <h1 mat-dialog-title><strong>Edit Collection</strong></h1>
+    <mat-dialog-content id="content">
+      <p>You can edit your collection propertys here. Changes done to <strong>{{this.data.collection.name}}</strong>, A Collection is used for <strong>Storing</strong> files, you cann add tags for gruping the files.</p>
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <form (ngSubmit)="Submit()" [formGroup]="fg">
+        <mat-form-field>
+          <mat-label>Collection Name</mat-label>
+
+          <input matInput formControlName="name" 
+                 placeholder="Cool Collection" required>
+                 @if (this.NameControll.hasError("required")) {
+                  <mat-error>Name is <strong>required</strong></mat-error>
+              }
+
+        </mat-form-field>
+
+        <mat-expansion-panel class="ex">
+          <mat-expansion-panel-header>
+            <mat-panel-title>Tags</mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="ex-body">
+            <button (click)="addTagClick()">Create New Tag</button>
+
+            <div class="ChipWrapper">
+              <span class="tagChip"*ngFor="let tag of data.collection.tags ?? [] ">
+               {{tag}}
+                <mat-icon>edit</mat-icon>
+              </span>
+            </div>
+          </div>
+
+
+        </mat-expansion-panel>
+
+        <div class="btnRow">
+          <button mat-button class="can"(click)="onNoClick()">Cancel</button>
+
+          <button mat-button class="sub" type="submit" [disabled]="this.fg.invalid || this.NameControll.value == data.collection.name && this.TagsControll.value == data.collection.tags">Create</button>
+        </div>
+
+      </form>
+
+    </mat-dialog-actions>
+  </div>

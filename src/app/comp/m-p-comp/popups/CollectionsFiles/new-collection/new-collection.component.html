@@ -1,0 +1,28 @@
+<div id="CKpopup">
+    <h1 mat-dialog-title><strong>Create A New Collection</strong></h1>
+    <mat-dialog-content id="content">
+      <p>You can add a new Collection to <strong>{{mc.getGrupIdName()}}</strong>, A Collection is used for <strong>Storing</strong> files, you cann add tags for gruping the files.</p>
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <form (ngSubmit)="Submit()" [formGroup]="fg">
+        <mat-form-field>
+          <mat-label>Collection Name</mat-label>
+
+          <input matInput formControlName="name" 
+                 placeholder="Cool Collection" required>
+                 @if (this.NameControll.hasError("required")) {
+                  <mat-error>Name is <strong>required</strong></mat-error>
+              }
+
+        </mat-form-field>
+        <div class="btnRow">
+          <button mat-button class="can"(click)="onNoClick()">Cancel</button>
+
+          <button mat-button class="sub" type="submit" [disabled]="this.fg.invalid">Create</button>
+        </div>
+
+      </form>
+
+    </mat-dialog-actions>
+  </div>

@@ -1,0 +1,285 @@
+$background-color: #1e1e1e;
+$ritchblack: #040f0f;
+$royalpurple: #794f92;
+$africanviolet: #9f86ac;
+$palepurple: #eddfef;
+$palepurpleLowOp: #eddfefb0;
+$NonphotoBlue: #92dce5;
+$gege: #99ff94;
+$grey: #494d5f;
+$grey2: #56495f;
+$grey3: #56495fa2;
+$grey4: #352c3b3a;
+
+$button-gradient-start: $NonphotoBlue; // Pink (same as accent color)
+$button-gradient-end: $gege; // Lighter shade of orange
+$button-gradient: linear-gradient(
+  to right,
+  $button-gradient-start,
+  $button-gradient-end
+);
+
+::ng-deep .mat-mdc-tab-body-wrapper{
+    height: 100% !important; 
+  }
+
+::ng-deep .mat-button-toggle-label-content {
+    line-height: 1.2em !important;
+}
+
+
+#NoTeamWrapper{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    #NoTeam{
+        background-color: $grey3;
+        border:1px solid $grey2;
+        padding: 2em;
+
+        border-radius: 1em;
+
+        p{
+            font-weight: lighter;
+            font-size: 1em;
+        }
+        h1{
+            font-size: 2em;
+        }
+        button{
+            width: 100%;
+            margin-top: 1em;
+        }
+    } 
+}
+
+@keyframes ApplyBtn {
+    0% {
+        transform: scale(1) rotateZ(0deg) translate(-50%, -50%);
+
+    }
+    25% {
+        transform: scale(1.1) rotateZ(20deg) translate(-50% ,-60%);
+    }
+    // 50%{
+    //     transform: scale(1.2) rotateZ(0deg) translate(-50%, -50%);
+    // }
+    75% {
+        transform: scale(1.1) rotateZ(-20deg) translate(-60%, -70%);
+    }
+    100% {
+        transform: scale(1) rotateZ(0deg)translate(-50%, -50%);
+    }
+
+}
+
+
+#teamsWrapper {
+ margin: 2vmin;
+ display: grid;
+ grid-template-columns: auto 15em ;
+
+ #teams{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
+    position: relative;
+    // background: inherit;  
+    // justify-content: space-around;
+    gap: 1vmin;
+ }
+ .teamCard{
+    background-color: $grey4;
+    border-radius: 20px;
+
+    padding: 2vmin;
+
+    border:1px solid $grey2;
+    flex: 30%;
+    // height: 10vmin;
+
+    .team-editBtn{
+        float: right;
+        border-radius: 100px;
+        padding: 1em;
+        content: 0px;
+        mat-icon{
+          position: absolute;
+          transform: translate(-50%, -50%);
+        }
+    }
+    .teamCardHeader{
+        .TeamTitle{
+            font-size: 3vmin;
+            color: $palepurple;
+            font-weight: normal;
+        }
+        .TeamDes{
+            font-size: 1.5vmin;
+            color: $palepurpleLowOp;
+            font-weight: lighter;
+        }
+    }
+    .teamCardContent{
+    .filters{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        .filter{
+
+            height: min-content;
+            margin-top: 1vmin;
+            width: 100%;
+            .NotDef{
+                padding-top: .2rem;
+                width: 34%;
+                height: 1.5rem; // the modified height that I wanted.
+
+
+            // default value is 48px. I wanted the height to be 2rem, but had to adjust this line-height to 1rem so that the icons were vertically centered.
+                   
+            }
+
+        }
+    }
+
+        .tasks{
+
+            .mat-expansion-panel-header{
+                height: min-content;
+                min-height: min-content;
+                .mat-expansion-panel-header-title{
+                    width: max-content;
+                    h1{
+                        width: max-content;
+                    }
+                }
+                .mat-expansion-panel-header-description{
+                    flex-direction: row-reverse;
+                }
+            }
+            .task{
+                margin-top: 1vmin;
+        
+
+                .WorkingUsers{
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: .2em .5em;
+                    span{
+                        font-size: 1rem;
+                        border-radius: 30rem;
+                        border:1px solid $grey2;
+                        padding: 0 1rem;
+                        background-color: $grey4;
+                    }
+                    margin-bottom: .2em;
+                }
+                .taskContent{
+                    // display: flexbox;
+                    .taskDes{
+                        font-size: 1.5vmin;
+                        color: $palepurpleLowOp;
+                        font-weight: lighter;
+                    }
+
+                    .TaskNav{
+                        width: 100%;
+                        background-color: red;
+
+                        .applyForTask-Btn{
+                            float: right;
+                            border-radius: 100px;
+                            padding: 1em 3em;
+                            // margin-bottom: 1em;
+                            margin-right: .5em;
+                            content: 0px;
+                            mat-icon{
+                              position: absolute;
+                              transform: translate(-50%, -50%);
+                            }
+                            &:hover{
+                                .mat-icon{
+                                    animation: ApplyBtn .7s;
+                                }
+                            }
+                        }
+                        .task-editBtn{
+                            float: right;
+                            border-radius: 100px;
+                            padding: 1em;
+                            content: 0px;
+                            mat-icon{
+                              position: absolute;
+                              transform: translate(-50%, -50%);
+                            }
+                        }
+                    }
+                }
+
+                // .applyForTask-Btn:hover{
+                //     // background: $button-gradient;
+                //     // color: $ritchblack;
+                //     .mat-icon{
+                //         position: absolute;
+                //         transform: translate(-50%, -50%);
+                //         animation: ApplyBtn 1s 1;
+                //     }
+                  
+                // }
+            }
+        }
+
+    }
+ }
+
+ #TeamNav{
+    display: flex;
+    flex-direction: column;
+    background-color: $grey3;
+    border-radius: 20px;
+    padding: 1em;
+    border-radius: 10px;
+    margin-left: 2vmin;
+    flex-grow: 2;
+    button{
+
+        float: right;
+        border-radius: 100px;
+        padding: 1em;
+        content: 0px;
+
+        mat-icon{
+          position: absolute;
+          transform: translate(-50%, -50%);
+        }
+
+    }
+    .teamChip{
+
+        padding: 1em;
+        border-radius: 1vmin;
+        background-color: $grey2;
+
+        margin-top: 1em;
+        
+        transition: all .3s;
+        &:hover{
+            background-color: $grey3;
+        }
+    }
+ }
+}
+
+.TaskInProg{
+    background: $royalpurple;
+}
+
+.TaskInProgByUser{
+    background: $button-gradient;
+    p, h1, span , svg {
+        color: $ritchblack !important;
+    }
+}

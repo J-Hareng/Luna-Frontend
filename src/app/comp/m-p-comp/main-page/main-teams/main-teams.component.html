@@ -1,0 +1,94 @@
+<div id="TeamPageWrapper">
+    <div id="Teams">
+        <div *ngFor="let team of mc.Teams; let i = index" (click)="this.setSelectedIndex(i)">
+            @if(this.isCurrentUserInTeam(team)){
+                <div class="team" [ngClass]="IsTeamSelected(i)">
+                    <p>{{team.name}}</p>
+                    <button (click)="LeaveTeamClick(getTeamId(team))">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                </div>
+            } @else {
+                <div class="team Free" [ngClass]="IsTeamSelected(i)">
+                    <p>{{team.name}}</p>
+                    <button (click)="JoinTeamClick(getTeamId(team))">
+                         <mat-icon>check</mat-icon>
+                    </button>
+                </div>
+            }
+
+        </div>        
+    </div>
+
+    <div id="body">
+
+        <div id="chat">
+            <div id="header">
+                <h1>{{getSelectedTeam().name}}'s Chat</h1>
+                <button (click)="this.ShowInfo = true" *ngIf="!this.ShowInfo" class="nbutton">
+                    <mat-icon>arrow_back_ios</mat-icon>
+                </button>
+            </div>
+            <mat-divider></mat-divider>
+
+            <div id="msgs">
+                <div class="msgWrapper">
+                    <div class="msg fromYou">
+                        <p>$You</p>
+                        <span>Womp Womp</span>
+                    </div>
+                </div>
+
+                <div class="msgWrapper">
+                    <div class="msg ">
+                        <p>$Luna</p>
+                        <span>Sadly the Chat isnt implemented yet</span>
+                    </div>
+                </div>
+
+
+            </div> 
+            <form id="controll">
+                    <mat-form-field class="msgInput">
+                      <mat-label>New post</mat-label>
+                      <input matInput placeholder="Ogga Bogga  c: ! ">
+                    </mat-form-field>
+                    <button>Send</button>
+            </form>
+        </div>
+        <div id="info" [ngClass]="ShowInfoClass()">
+           
+            <div id="header">
+                <button (click)="this.ShowInfo = false" class="nbutton">
+                    <mat-icon>arrow_forward_ios</mat-icon>
+                </button>
+
+                <h1>Users</h1>
+            </div>
+
+            
+            <div *ngFor="let user of this.getSelectedTeam().users" class="Users">
+                <mat-expansion-panel [ngClass]="getClassIfUserIsWorking(user)">
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                            <span>
+                                {{user.name}}
+                            </span>
+                    </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="content" >
+                        <p class="email">{{this.getOtherUser(user).email}}</p>
+                        <div class="userTask" *ngIf="getClassIfUserIsWorking(user) != ''">
+                            <p>IsWorking On: </p>
+                            <div *ngFor="let task of this.getOtherUser(user).tasks">
+                                <span>{{task.name}}</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </mat-expansion-panel>
+            </div>
+        </div>
+    </div>
+</div>

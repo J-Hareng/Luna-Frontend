@@ -1,0 +1,75 @@
+$ritchblack: #040f0f;
+$royalpurple: #794f92;
+$africanviolet: #9f86ac;
+$palepurple: #eddfef;
+$palepurpleLowOp: #eddfefb0;
+$NonphotoBlue: #92dce5;
+$gege: #99ff94;
+$grey: #494d5f;
+$grey2: #56495f;
+$grey3: #56495fa2;
+
+// $button-gradient-start: $NonphotoBlue; // Pink (same as accent color)
+// $button-gradient-end: $gege; // Lighter shade of orange
+// $button-gradient: linear-gradient(
+//   to right,
+//   $button-gradient-start,
+//   $button-gradient-end
+// );
+.NavButton{
+    color: $ritchblack !important;
+    margin-left: 1em;
+
+
+
+}
+#Sub{
+    background: $grey3 !important;
+    color: $palepurple !important;
+}
+// #RUS {
+//   z-index: 200;
+//   h1 {
+//     font-size: 3vmin;
+//     margin-bottom: 1vmin;
+//   }
+//   p {
+//     font-size: 1.5vmin;
+//   }
+//   button {
+//     margin-top: 2vmin;
+//   }
+//   #Acc {
+//     margin-left: 2vmin;
+//     background-image: none;
+//     background-color: $grey3;
+//     border: $grey2 solid 2px;
+//     &:hover {
+//       background-color: $grey2;
+//     }
+//   }
+// }
+// @media screen and (max-width: 600px) {
+//   #RUS {
+//     width: 80vw;
+//     h1 {
+//       font-size: 5vmin;
+//       margin-bottom: 1vmin;
+//     }
+//     p {
+//       font-size: 3vmin;
+//     }
+//     button {
+//       margin-top: 2vmin;
+//     }
+//     #Acc {
+//       margin-left: 2vmin;
+//       background-image: none;
+//       background-color: $grey3;
+//       border: $grey2 solid 2px;
+//       &:hover {
+//         background-color: $grey2;
+//       }
+//     }
+//   }
+// }

@@ -1,0 +1,59 @@
+<div id="SelectGroup" >
+    <form  [formGroup]="JoinGroupForm" (submit)="joinGroupID()" >
+        <div class="innerWrapper">
+            <div class="inInnerWrapper">
+        <h1>Join an Existing Group</h1>
+        <p>
+            If you've received an <strong>invite key</strong> from one of the team members. Here's how to get started:
+        </p>
+            <ol>
+                <li><strong>Enter Your Invite Key:</strong> In the space below, please enter the unique invite key you've received. It's a special code that unlocks your access to our group.</li>
+                <li><strong>Click 'Join':</strong> After entering your invite key, hit the 'Join' button to proceed. </li>
+                <li><strong>Enjoy Your Membership:</strong> Once you've completed the above steps, you're all set! Dive into discussions, explore our resources, and start connecting with fellow members.</li>
+            </ol>
+            <p>Welcome to the family!</p>
+        <div class="inp">
+            <mat-form-field>
+                <mat-label>Group Key</mat-label>
+                <input type="text" matInput formControlName="key" placeholder="Group Key">
+                @if (JoinFromControl.hasError('required')) {
+                <mat-error>
+                    Group ID is <strong>required</strong>
+                </mat-error>
+            }
+            </mat-form-field>
+            <button type="submit">Join</button>
+            </div>
+        </div>
+    </div>
+    </form>
+    <mat-divider [vertical]="true" ></mat-divider>
+
+    <form class="DesFrom" [formGroup]="CreateGroupForm" (submit)="addGroupID()" >
+        <div class="innerWrapper">
+            <div class="inInnerWrapper">
+        <h1>Create A New Group</h1>
+        <p>Welcome to the first step in building your <strong> project community!</strong> Creating a group is just the beginning. Follow these simple steps to set up your group:</p>
+        <ol>
+            <li><strong>Create Your Group:</strong> Start by naming your group. This name will be the identity of your community, so choose something that reflects its essence.</li>
+            <li><strong>Click 'Create':</strong> After entering your groups Name, hit the 'Create' button to proceed. </li>
+            <li><strong>Enjoy Your Membership:</strong> Once you've completed the above steps, you're all set!Invite project members, create teams, collections, and tasks, and enjoy enhanced team productivity.</li>
+        </ol>
+        <p>Welcome to the family!</p>
+        <div class="inp">
+        <mat-form-field>
+            <mat-label>Group Name</mat-label>
+            <input type="text" matInput formControlName="name" placeholder="Group Name">
+            @if (CreateFormControl.hasError('required')) {
+                <mat-error>
+                    Group Name is <strong>required</strong>
+                </mat-error>
+            }
+        </mat-form-field>
+        <button type="submit">Create</button>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+  

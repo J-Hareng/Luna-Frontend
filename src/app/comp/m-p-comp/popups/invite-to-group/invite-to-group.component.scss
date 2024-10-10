@@ -1,0 +1,55 @@
+$ritchblack: #040f0f;
+$royalpurple: #794f92;
+$africanviolet: #9f86ac;
+$palepurple: #eddfef;
+$palepurpleLowOp: #eddfefb0;
+$NonphotoBlue: #92dce5;
+$gege: #99ff94;
+$grey: #494d5f;
+$grey2: #56495f;
+$grey3: #56495fa2;
+
+$buttonGradientCool: linear-gradient(
+  to right,
+  $royalpurple,
+  $royalpurple,
+  $NonphotoBlue,
+  $gege,
+);
+
+#CKpopup{
+    #copyME{
+        background: $buttonGradientCool;
+        background-size: 300% auto;
+        background-position: left;
+        font-size: 3vmin;
+        margin-top: 1vmin;
+        margin-bottom: 10px;
+        border-radius: 20px;
+        padding: .5vmin;
+        text-align: center;
+        color: $palepurple !important;
+
+        width: 50%;
+        height: inherit;
+        border-radius: 50px;
+        box-shadow: 0px .5px 5px 1px rgba(0, 0, 0, 0.487); 
+
+        transition: .3s;
+    }
+    #copyME:hover {
+        box-shadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.487); 
+      }
+
+      #copyME:active {
+        color:black !important;
+        background-position: right;
+        box-shadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.487);
+        border-radius: 5px;
+
+      }
+
+    #content{
+        height: 110%;
+    }
+}

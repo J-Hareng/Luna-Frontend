@@ -1,0 +1,43 @@
+.ex-body{
+
+    mat-icon{
+        font-size: 24px;
+        font-weight: lighter;
+    }
+
+
+}
+
+.ex{
+    margin-bottom: 2em;
+}
+.ChipWrapper{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    gap: 1em;
+
+    .tagChip{
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 1em;
+        border-radius: 1em;
+        border:1px solid #E0E0E0;
+        padding: .25em .5em;
+        font-size: 14px;
+        font-weight:lighter;
+
+        transition: all .3s;
+        &:hover{
+            box-shadow: 0px 0px 5px 0px #E0E0E0;
+            cursor: pointer;
+        }
+    }
+
+
+
+}
+

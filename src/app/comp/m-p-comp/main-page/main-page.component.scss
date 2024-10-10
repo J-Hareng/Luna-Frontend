@@ -1,0 +1,76 @@
+// Dark Mode Color Palette
+
+// Background color
+$background-color: #1e1e1e;
+$ritchblack: #040f0f;
+$royalpurple: #794f92;
+$africanviolet: #9f86ac;
+$palepurple: #eddfef;
+$palepurpleLowOp: #eddfefb0;
+$NonphotoBlue: #92dce5;
+$gege: #99ff94;
+$grey: #494d5f;
+$grey2: #56495f;
+$grey3: #56495fa2;
+
+$button-gradient-start: $NonphotoBlue; // Pink (same as accent color)
+$button-gradient-end: $gege; // Lighter shade of orange
+$button-gradient: linear-gradient(
+  to right,
+  $button-gradient-start,
+  $button-gradient-end
+);
+
+html {
+  background-color: $background-color;
+}
+
+#loadingCover{
+    width: 100%;
+    height: 100%;
+
+    display: grid;
+    align-content: center;
+    p {
+        text-align: center;
+        font-size: 2vmin;
+        color: $palepurple;
+        
+    };
+
+    .lb {
+        width: 60%;
+        text-align: center;
+        margin-left: 20%;
+        margin-right: 20%;
+    }    
+}
+
+
+
+
+.mat-mdc-tab-group{
+  display: inline-block !important;
+}
+app-main-dashboard{
+  flex-grow: 1;
+}
+
+app-main-teams{
+  flex-grow: 1;
+  display:flex;
+  overflow-y: hidden;
+}
+
+#mainPageWrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#gsWrapper{
+  height: 100%;
+  display: grid;
+
+  grid-template-rows: min-content auto;
+}

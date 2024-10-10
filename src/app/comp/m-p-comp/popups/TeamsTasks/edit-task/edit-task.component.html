@@ -1,0 +1,55 @@
+
+<div id="CKpopup">
+    <h1 mat-dialog-title><strong>Edit Task</strong></h1>
+    <mat-dialog-content id="content">
+      <p>you can edit the task <strong>{{this.data.name}}</strong>here.</p>
+    
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <form (ngSubmit)="Submit()" [formGroup]="fg">
+        <mat-form-field>
+          <mat-label>NewName</mat-label>
+
+          <input matInput formControlName="name" 
+                 placeholder="MyNewTeam" required>
+                 @if (this.NameControll.hasError("required")) {
+                  <mat-error>Name is <strong>required</strong></mat-error>
+              }
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Task Desctipion</mat-label>
+
+          <textarea matInput formControlName="des" 
+                 placeholder="My Team Is soo cool because . . . .">
+                </textarea>
+            </mat-form-field>
+
+
+            <mat-form-field>
+                <mat-label>Select a Collection</mat-label>
+                <mat-select formControlName="collection">
+                    <mat-option *ngFor="let col of mc.groupColl; let i = index" [value]="i">
+                      {{col.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field >
+    
+            <mat-form-field *ngIf="this.Collection.value != null">
+                <mat-label>Select some Tags</mat-label>
+                <mat-select formControlName="tags" multiple>
+                    <mat-option *ngFor="let tag of mc.groupColl[this.Collection.value].tags" [value]="tag">
+                        {{tag}}
+                      </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+        <div class="btnRow">
+          <button mat-button class="can"(click)="onNoClick()">Cancel</button>
+          <button mat-button class="sub" type="submit" [disabled]="this.fg.invalid">Create</button>
+        </div>
+
+      </form>
+
+    </mat-dialog-actions>
+  </div>

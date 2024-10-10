@@ -1,0 +1,344 @@
+$ritchblack: #040f0f;
+$royalpurple: #794f92;
+$africanviolet: #9f86ac;
+$palepurple: #eddfef;
+$NonphotoBlue: #92dce5;
+$gege: #99ff94;
+$grey: #494d5f;
+$grey2: #56495f;
+
+$background-color: #171717; // Background color
+$text-color: #ffffff; // Text color
+$accent-color: #ff6b81; // Accent color (Pink)
+$secondary-accent-color: #ffc7d2; // Secondary accent color (Light Pink)
+$highlight-color: #ff9aa2; // Highlight color (Soft Pink)
+$button-color: #ff6b81; // Button color
+$button-hover-color: #e64a5b; // Button hover color
+$link-color: #ff6b81; // Link color
+$link-hover-color: #ffc7d2; // Link hover color
+$border-color: #3a3a3a; // Border color
+
+// Gradient color for header background
+$header-gradient-start: #4b0082; // Dark purple
+$header-gradient-end: #8a2be2; // Blue Violet
+$header-gradient: linear-gradient(
+  to right,
+  $header-gradient-start,
+  $header-gradient-end
+);
+
+$button-gradient-start: #99ff94; // Pink (same as accent color)
+$button-gradient-end: #92dce5; // Lighter shade of orange
+$button-gradient: linear-gradient(
+  to right,
+  $button-gradient-start,
+  $button-gradient-end
+);
+
+$lightText: rgb(181, 163, 187);
+
+#UserMenuButton{
+  border-radius: 100px;
+  padding: 2vmin;
+  content: 0px;
+  mat-icon{
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
+}
+#PageCover{
+  position: absolute;
+  display: block;
+  // background-color: rgba(0, 0, 0, 0.194);
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  top: 0;
+}
+nav{
+  float:right;
+  width: 50%;
+  height: 40px;
+  .navB {
+    height: inherit;
+    border-radius: 50px;
+    box-shadow: 0px .5px 5px 1px rgba(0, 0, 0, 0.487); 
+  }
+  .navB:hover {
+    box-shadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.487); 
+  }
+  .navB:disabled{
+    background: $header-gradient;
+    background-size: 200%;
+    box-shadow: none !important;
+    cursor: Default;
+    color: $text-color !important;
+
+  }
+}
+
+#UserInfo{
+  display: grid;
+  grid-template-rows: auto auto;
+  width: 50%;
+  
+}
+header {
+  h1 {
+    display: inline-block;
+    position: relative;
+    font-size: 5vmin;
+    align-items: flex-end;
+    justify-content: flex-start;
+  }
+  p {
+    display: inline-block;
+    position: relative;
+    color: $lightText;
+    font-size: small;
+  }
+  padding: 10px;
+  background: $royalpurple;
+  // background-image: $header-gradient;
+  // background-size: auto 200%;
+
+  #subtext {
+    transform: translate(3px, -9px);
+  }
+  button {
+    margin-left: 1vmin;
+    float: right;
+  }
+  .MainUser {
+    border-radius: 3vmin;
+    background-color: $africanviolet;
+    float: right;
+    margin-left: 3vmin;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    cursor: pointer;
+    p {
+      text-align: center;
+      color: $ritchblack;
+    }
+    .HiddenContent {
+      z-index: 100 !important;
+      opacity: 0;
+      width: 15vmin;
+      height: 15vmin;
+      transition: visibility 0s, opacity 0.5s linear;
+      position: absolute;
+      background-color: $grey2;
+      border: 1px solid $border-color;
+      border-radius: 5px;
+      padding: 1vmin;
+      z-index: 1;
+      transform: translateX(-100%) !important;
+      padding: 10px;
+      button {
+        display: none;
+      }
+      #Hbody {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        padding-bottom: 10px;
+        .svgWrapper {
+          display: inline-block;
+          width: 20px;
+        }
+      }
+    }
+    &:hover {
+      .HiddenContent {
+        visibility: visible !important;
+        opacity: 1 !important;
+        transform: translateX(-100%);
+      }
+    }
+  }
+}
+#HiddenFullname {
+  font-size: 16px;
+  margin-bottom: 1vmin;
+  font-weight: bold;
+}
+// @media screen and (min-width: 800px) {
+//   header {
+//     h1 {
+//       display: inline-block;
+//       position: relative;
+//       font-size: 5vmin;
+//       align-items: flex-end;
+//       justify-content: flex-start;
+//     }
+//     p {
+//       display: inline-block;
+//       position: relative;
+//       color: $lightText;
+//       font-size: small;
+//     }
+//     padding: 10px;
+//     background: $royalpurple;
+//     // background-image: $header-gradient;
+//     // background-size: auto 200%;
+
+//     #subtext {
+//       transform: translate(3px, -9px);
+//     }
+//     button {
+//       margin-left: 1vmin;
+//       float: right;
+//     }
+//     .MainUser {
+//       border-radius: 3vmin;
+//       background-color: $africanviolet;
+//       float: right;
+//       margin-left: 3vmin;
+//       padding: 10px;
+//       padding-left: 15px;
+//       padding-right: 15px;
+//       cursor: pointer;
+//       p {
+//         text-align: center;
+//         color: $ritchblack;
+//       }
+//       .HiddenContent {
+//         z-index: 100 !important;
+//         opacity: 0;
+//         width: 15vmin;
+//         height: 15vmin;
+//         transition: visibility 0s, opacity 0.5s linear;
+//         position: absolute;
+//         background-color: $grey2;
+//         border: 1px solid $border-color;
+//         border-radius: 5px;
+//         padding: 1vmin;
+//         z-index: 1;
+//         transform: translateX(-100%) !important;
+//         padding: 10px;
+//         button {
+//           display: none;
+//         }
+//         #Hbody {
+//           display: grid;
+//           grid-template-columns: auto auto auto;
+//           padding-bottom: 10px;
+//           .svgWrapper {
+//             display: inline-block;
+//             width: 20px;
+//           }
+//         }
+//       }
+//       &:hover {
+//         .HiddenContent {
+//           visibility: visible !important;
+//           opacity: 1 !important;
+//           transform: translateX(-100%);
+//         }
+//       }
+//     }
+//   }
+//   #HiddenFullname {
+//     font-size: 16px;
+//     margin-bottom: 1vmin;
+//     font-weight: bold;
+//   }
+// }
+// // @media screen and (max-width: 800px) {
+//   header {
+//     padding: 10px;
+//     background: $royalpurple;
+//     // background-image: $header-gradient;
+//     // background-size: auto 200%;
+//     h1 {
+//       display: inline-block;
+//       position: relative;
+//       font-size: 5vmin;
+//       align-items: flex-end;
+//       justify-content: flex-start;
+//     }
+//     p {
+//       display: inline-block;
+//       position: relative;
+//       color: $lightText;
+//       font-size: small;
+//     }
+//     #subtext {
+//       transform: translate(3px, -9px);
+//     }
+//     button {
+//       margin-left: 1vmin;
+//       float: right;
+//       display: none;
+//     }
+//     .MainUser {
+//       -webkit-user-select: none;
+//       -moz-user-select: none;
+//       -ms-user-select: none;
+//       user-select: none;
+//       border-radius: 3vmin;
+//       background-color: $africanviolet;
+//       float: right;
+//       margin-left: 3vmin;
+//       padding: 10px;
+//       padding-left: 15px;
+//       padding-right: 15px;
+//       p {
+//         text-align: center;
+//         color: $ritchblack;
+//       }
+//       .HiddenContent {
+//         -webkit-user-select: none;
+//         -moz-user-select: none;
+//         -ms-user-select: none;
+//         user-select: none;
+//         z-index: 100 !important;
+
+//         visibility: hidden;
+//         opacity: 0;
+//         width: 0%;
+//         top: 0%;
+//         right: 0%;
+//         height: 100%;
+//         transform: translateX(0%) !important;
+//         position: absolute;
+//         background-color: $grey2;
+//         border: 1px solid $border-color;
+//         border-radius: 5px;
+//         padding: 1vmin;
+//         z-index: 1;
+//         transition: width opacity visibility 0.3s;
+//         .svg {
+//           position: relative;
+//           left: auto;
+//           right: auto;
+//           width: 70%;
+//         }
+//         button {
+//           display: block;
+//           width: 100%;
+//           padding: 0;
+//           margin: 0;
+//           margin-top: 10px;
+//           position: relative;
+//         }
+//         #Hbody {
+//           margin-top: 5vmin;
+//           align-items: center !important;
+//           width: 100%;
+//           display: grid;
+//           grid-template-columns: 33% 33% 33%;
+//           height: 5vmin;
+//           padding-bottom: 10px;
+//           // .svgWrapper {
+//           //   display: inline-block;
+//           //   width: 20px;
+//           //   height: 20px;
+//           //   margin-right: 10px;
+//           // }
+//         }
+//       }
+//     }
+//   }
+// }

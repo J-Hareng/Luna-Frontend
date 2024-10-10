@@ -1,0 +1,35 @@
+<div id="CKpopup">
+    <h1 mat-dialog-title><strong>Create A New Team</strong></h1>
+    <mat-dialog-content id="content">
+      <p>You can add a new team to <strong>{{mc.getGrupIdName()}}</strong>, so that you can create tasks for your team members to apply to </p>
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+      <form (ngSubmit)="Submit()" [formGroup]="fg">
+        <mat-form-field>
+          <mat-label>NewName</mat-label>
+
+          <input matInput formControlName="name" 
+                 placeholder="MyNewTeam" required>
+                 @if (this.NameControll.hasError("required")) {
+                  <mat-error>Name is <strong>required</strong></mat-error>
+              }
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Team Desctipion</mat-label>
+
+          <textarea matInput formControlName="des" 
+                 placeholder="My Team Is soo cool because . . . .">
+                </textarea>
+        </mat-form-field>
+        <div class="btnRow">
+          <button mat-button class="can"(click)="onNoClick()">Cancel</button>
+
+          <button mat-button class="sub" type="submit" [disabled]="this.fg.invalid">Create</button>
+        </div>
+
+      </form>
+
+    </mat-dialog-actions>
+  </div>

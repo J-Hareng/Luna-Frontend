@@ -1,0 +1,34 @@
+<div id="CKpopup"><h2 mat-dialog-title>Edit Team {{this.data.name}} </h2>
+    <mat-dialog-content>
+    <p></p>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+
+        <form (ngSubmit)="submit()" [formGroup]="fg">
+          <mat-form-field>
+            <mat-label>NewName</mat-label>
+  
+            <input matInput formControlName="name" 
+                   placeholder="MyNewTeam" required>
+                   @if (this.NameControll.hasError("required")) {
+                    <mat-error>Name is <strong>required</strong></mat-error>
+                }
+          </mat-form-field>
+  
+          <mat-form-field>
+            <mat-label>Team Desctipion</mat-label>
+  
+            <textarea matInput formControlName="des" 
+                   placeholder="My Team Is soo cool because . . . .">
+                  </textarea>
+          </mat-form-field>
+          <div class="btnRow">
+
+            <button mat-button class="can" type="button" (click)="onNoClick()">Cancel</button>
+            <button mat-button class="sub" type="submit" [disabled]="this.fg.value.name == data.name && this.fg.value.des == data.des || !this.fg.valid">Update</button>
+         
+          </div>
+        </form>
+  
+      </mat-dialog-actions>
+</div>
