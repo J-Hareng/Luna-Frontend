@@ -13,7 +13,7 @@ import { MainCacheService } from '../../../../../serv/logic/main-cache.service';
 import { MatIconModule } from '@angular/material/icon';
 import { NewCollectionResponse, NewTeamResponse } from '../../DialogResponse';
 import { MatInputModule } from '@angular/material/input';
-import { EditCollectionData } from '../../DialogData';
+import { AddTagToCollectionData} from '../../DialogData';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -37,8 +37,10 @@ import { NgFor } from '@angular/common';
 })
 export class AddTagComponent {
   constructor(public mc: MainCacheService, private dialog: MatDialog){}
+  
   readonly dialogRef = inject(MatDialogRef<AddTagComponent>);
 
+  readonly data = inject<AddTagToCollectionData>(MAT_DIALOG_DATA);
 
 
 

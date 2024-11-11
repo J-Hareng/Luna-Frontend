@@ -39,3 +39,6 @@ export interface EditTaskData{
 export interface EditCollectionData{
     collection: CollectionType
 }
+export interface AddTagToCollectionData{
+    collection: CollectionType;
+}

@@ -1,8 +1,7 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@use '@angular/material' as mat;
-@use '../m3-theme.scss' ;
+@use "@angular/material" as mat;
+@use "../m3-theme.scss";
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -10,12 +9,13 @@
 // Be sure that you only ever include this mixin once!
 @include mat.core();
 
-
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
 // that you are using.
 :root {
   @include mat.all-component-themes(m3-theme.$dark-theme);
+
+  --mdc-dialog-container-shape: 1vmin !important;
 }
 
 $ritchblack: #040f0f;
@@ -65,58 +65,55 @@ $button-gradient: linear-gradient(
   $button-gradient-end
 );
 $Disabled-gradient: linear-gradient(
-  50deg ,
+  50deg,
   $grey3,
   $grey3,
   $royalpurple,
   $NonphotoBlue,
-  $gege,
+  $gege
 );
-#CKpopup{
-    form{
-      flex-grow: 1;
+#CKpopup {
+  form {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1em 2em;
+    .btnRow {
       display: flex;
-      flex-direction: column;
-      padding: 1em 2em;
-      .btnRow{
-        display: flex;
-        justify-content: space-between;
+      justify-content: space-between;
 
-        .can{
-          background: $royalpurple;
-          color: $text-color !important;
-          padding: 1em 2em;
+      .can {
+        background: $royalpurple;
+        color: $text-color !important;
+        padding: 1em 2em;
+      }
+      .sub {
+        background: $Disabled-gradient;
+        background-size: 200%;
+        background-position: center;
+        padding: 1em 4em;
+        transition: all 0.3s;
+        color: $text-color !important;
+
+        &:disabled {
+          background-position: left center;
         }
-        .sub{
-          background: $Disabled-gradient;
-          background-size: 200%;
-          background-position: center;
-          padding: 1em 4em;
-          transition: all .3s;
-          color: $text-color !important;
-
-          &:disabled{
-            background-position: left center;
-          }
-          &:hover:not(&:disabled){
-            color: $ritchblack !important;
-            background-position: right center;
-          }
+        &:hover:not(&:disabled) {
+          color: $ritchblack !important;
+          background-position: right center;
         }
-        
-
       }
     }
-
+  }
 }
-
 
 body {
   // overflow-x: hidden;
   margin: 0px !important;
   padding: 0px !important;
 }
-.mat-mdc-dialog-surface, .mat-mdc-menu-panel{
+.mat-mdc-dialog-surface,
+.mat-mdc-menu-panel {
   background-color: $grey2 !important;
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.487) !important;
 }
@@ -142,7 +139,7 @@ body {
 }
 .Custominput {
   padding: 10px;
-  border-radius: 2vmin;
+  border-radius: 0.5vmin;
   border: none;
   margin: 10px;
   margin-left: 0px;
@@ -158,7 +155,13 @@ body {
     outline: none;
   }
 }
-button:not(.mat-mdc-menu-item, .mat-button-toggle, .NotDef, .mat-button-toggle-button, .mat-mdc-chip-action) {
+button:not(
+    .mat-mdc-menu-item,
+    .mat-button-toggle,
+    .NotDef,
+    .mat-button-toggle-button,
+    .mat-mdc-chip-action
+  ) {
   background: $button-gradient;
   color: $ritchblack;
   border: none;
@@ -171,21 +174,19 @@ button:not(.mat-mdc-menu-item, .mat-button-toggle, .NotDef, .mat-button-toggle-b
   background-position: left center;
   &:hover {
     background-position: right center;
-    box-shadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.487); 
+    box-shadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.487);
   }
-    height: inherit;
-    border-radius: 50px;
-    box-shadow: 0px .5px 5px 1px rgba(0, 0, 0, 0.487); 
-  &:disabled{
+  height: inherit;
+  border-radius: 50px;
+  box-shadow: 0px 0.5px 5px 1px rgba(0, 0, 0, 0.487);
+  &:disabled {
     background: $Disabled-gradient;
     background-size: 200%;
     box-shadow: none !important;
     cursor: Default;
     color: $text-color !important;
-
   }
 }
-
 
 .borderStyle {
   padding: 0.5vmin;
@@ -346,7 +347,6 @@ button:not(.mat-mdc-menu-item, .mat-button-toggle, .NotDef, .mat-button-toggle-b
     // visibility: hidden;
   }
 
-
   .borderStyle {
     padding: 0.5vmin;
     margin: 1vmin;
@@ -390,5 +390,11 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
