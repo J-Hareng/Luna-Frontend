@@ -49,15 +49,20 @@ export class EditCollectionComponent {
   readonly dialogRef = inject(MatDialogRef<EditCollectionComponent>);
 
   readonly data = inject<EditCollectionData>(MAT_DIALOG_DATA);
-
+  
+  tagbtn = 0;
+  tagInput = "";
+  
+  selectedTag = "";
+  
   NameControll = new FormControl(this.data.collection.name, [
     Validators.required,
   ]);
-  TagsControll = new FormControl(this.data.collection.tags);
-
+  TagsControll = new FormControl("", [Validators.required]);
+  
+  
   fg = new FormGroup({
     name: this.NameControll,
-    tags: this.TagsControll,
   });
 
   Submit() {
@@ -82,5 +87,23 @@ export class EditCollectionComponent {
     //     }
     //   }
     // });
+  }
+  isdisabled(): boolean {
+  if (this.TagsControll.invalid && this.tagbtn === 0) {
+    return true;
+    } else if (this.tagbtn === 1 && this.TagsControll.value === this.selectedTag) {
+    return true
+    } else {
+    return false;
+    }
+  
+  }
+  
+  getTagBtnText(): string{
+    if (this.tagbtn == 0) {
+      return "Add Tag";
+    } else {
+      return "Edit Tag";
+    }
   }
 }

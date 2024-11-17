@@ -1,0 +1,58 @@
+/** Dark theme primary colors */
+$color-primary-a0: #973fca;
+$color-primary-a10: #a456d0;
+$color-primary-a20: #b16cd7;
+$color-primary-a30: #bd81dd;
+$color-primary-a40: #c996e3;
+$color-primary-a50: #d4abe9;
+
+/** Dark theme adon secondary colors */
+$color-secondary-a: #92dce5; // NonphotoBlue
+$color-trinary-a: #99ff94; // green
+
+// $text-color: #eddfef;
+$text-color: #ffffff;
+$text-colorLowOp: #ffffffb0;
+// $text-colorLowOp: #eddfefb0;
+
+/** Dark theme surface colors */
+$color-surface-a0: #1d1b1d;
+$color-surface-a10: #323032;
+$color-surface-a20: #484648;
+$color-surface-a30: #5f5e5f;
+$color-surface-a40: #787778;
+$color-surface-a50: #919091;
+
+/** Dark theme mixed surface colors */
+$color-surface-mixed-a0: #582f6d;
+$color-surface-mixed-a10: #6a447c;
+$color-surface-mixed-a20: #7c5a8c;
+$color-surface-mixed-a30: #8e709c;
+$color-surface-mixed-a40: #a186ac;
+$color-surface-mixed-a50: #b39ebc;
+
+$shadow-color: rgba(0, 0, 0, 0.422);
+
+$header-color: #323032a0;
+
+$heading-color: #d4abe9;
+$description-color: #d4abe9b5;
+
+$Disabled-gradient: linear-gradient(
+  50deg,
+  $color-surface-a10,
+  $color-surface-mixed-a20,
+  $color-surface-mixed-a30,
+  $color-primary-a0,
+  $color-secondary-a,
+  $color-trinary-a
+);
+
+$highlight-background: linear-gradient(
+  120deg,
+  $color-secondary-a,
+  $color-trinary-a
+);
+
+$BORDER_RADIUS: 1em;
+$BORDER_RADIUS2: 1.5em;

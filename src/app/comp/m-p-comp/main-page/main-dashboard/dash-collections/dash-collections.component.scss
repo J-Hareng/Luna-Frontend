@@ -1,3 +1,5 @@
+@import "../../../../../../CssUtilitys/colors.scss";
+
 $ritchblack: #040f0f;
 $royalpurple: #794f92;
 $africanviolet: #9f86ac;
@@ -44,198 +46,204 @@ $button-gradient: linear-gradient(
   $button-gradient-start,
   $button-gradient-end
 );
-#NoCollWrapper{
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    #NoColl{
-        background-color: $grey3;
-        border:1px solid $grey2;
-        padding: 2em;
 
-        border-radius: 1em;
+#NoCollWrapper {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  #NoColl {
+    background-color: $grey3;
+    border: 1px solid $grey2;
+    padding: 2em;
 
-        p{
-            font-weight: lighter;
-            font-size: 1em;
-        }
-        h1{
-            font-size: 2em;
-        }
-        button{
-            width: 100%;
-            margin-top: 1em;
-        }
+    border-radius: 1em;
+
+    p {
+      font-weight: lighter;
+      font-size: 1em;
     }
+    h1 {
+      font-size: 2em;
+    }
+    button {
+      width: 100%;
+      margin-top: 1em;
+    }
+  }
 }
 
-
-#CollectionWrapper{
-    #CollHeader{
-    
-    #scroller{
-        max-height: min-content;
-        display: flex;
-        flex-direction: column;
-        align-items:end;
-    
-
-        // justify-content: space-between;
-        
-        align-items: center;
-        padding:1em 5em;
-        width: 100%;
-        overflow: hidden;
-        height: 15rem;
-        .card{
-            h1{
-                color: $palepurple;
-                font-size: 2em;
-                margin: 0;
-                height: 100%;
-                vertical-align: middle;
-                margin: 10px;
-            }
-            position: absolute;
-            // left: auto;
-            right: 50%;
-            transform: translateX(50%);
-
-            // left: 50%;
-            // transform: translateX(-50%);
-            box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.487);
-
-            z-index: 10;
-
-            background-color: $royalpurple;
-            display: inline-block;
-            width: 15em;
-            height: 15em;
-            border-radius: 2em;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-
-            transition: all 1s ;
-        }
-        .left{
-            z-index: 5;
-            transform: scale(.7) translateX(0);
-            // left: 20%;
-        }
-        .right{
-            z-index: 5;
-            transform: scale(.7) translateX(150%);
-        }
-        .farLeft{
-            z-index: 2;
-            transform: scale(.5) translateX(-150%);
-            opacity: 0;
-            visibility: hidden;
-        }
-        .farRight{
-            z-index: 2;
-            transform: scale(.5) translateX(300%);
-            
-            opacity: 0;
-            
-            visibility: hidden;
-        }
-        
+#CollectionWrapper {
+  #CollHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0px 1em;
+    padding: 0.25em 1em;
+    background-color: $color-surface-a10;
+    border-radius: $BORDER_RADIUS;
+    #HeaderInfo {
+      h1 {
+        color: $heading-color;
+        font-size: 2em;
+      }
     }
-    #Seletor{
-        display: flex;
+    #HeaderActions {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .Coll-editBtn {
+        float: right;
+        border-radius: 100px;
+        padding: 1em;
+        content: 0px;
+        margin-right: 1em;
+        mat-icon {
+          position: absolute;
+          transform: translate(-50%, -50%);
+        }
+      }
+    }
+    #scroller {
+      max-height: min-content;
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+
+      // justify-content: space-between;
+
+      align-items: center;
+      padding: 1em 5em;
+      width: 100%;
+      overflow: hidden;
+      height: 15rem;
+      .card {
+        h1 {
+          color: $palepurple;
+          font-size: 2em;
+          margin: 0;
+          height: 100%;
+          vertical-align: middle;
+          margin: 10px;
+        }
+        position: absolute;
+        // left: auto;
+        right: 50%;
+        transform: translateX(50%);
+
+        // left: 50%;
+        // transform: translateX(-50%);
+        box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.487);
+
+        z-index: 10;
+
+        background-color: $royalpurple;
+        display: inline-block;
+        width: 15em;
+        height: 15em;
+        border-radius: 2em;
+        align-items: center;
         justify-content: center;
-        align-items: center;
+        text-align: center;
+
+        transition: all 1s;
+      }
+      .left {
+        z-index: 5;
+        transform: scale(0.7) translateX(0);
+        // left: 20%;
+      }
+      .right {
+        z-index: 5;
+        transform: scale(0.7) translateX(150%);
+      }
+      .farLeft {
+        z-index: 2;
+        transform: scale(0.5) translateX(-150%);
+        opacity: 0;
+        visibility: hidden;
+      }
+      .farRight {
+        z-index: 2;
+        transform: scale(0.5) translateX(300%);
+
+        opacity: 0;
+
+        visibility: hidden;
+      }
     }
+    #Seletor {
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
-    .Collection{
-        .CollName{
+  }
+  .Collection {
+    .CollName {
+      color: $palepurple;
+      font-size: 2em;
+      vertical-align: middle;
+      margin: 0.5em;
+      margin-top: 0;
+    }
+
+    .body {
+      display: grid;
+      grid-template-columns: 0.3fr 1fr;
+      margin: 0.5em;
+      .filter {
+        .nav {
+          display: flex;
+          align-items: stretch;
+          gap: 0.5em;
+          button {
+            margin-bottom: 0.5em;
+            flex-grow: 1;
+          }
+        }
+      }
+      .files {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1em;
+        padding: 1em;
+        .file {
+          // flex-grow: 1;
+          padding: 1em;
+          width: 10em;
+          height: 15em;
+          overflow: hidden;
+          // background-color: red;
+          background-color: $grey3;
+          border-radius: 1em;
+          border: 1px solid $grey2;
+          .imgWrapper {
+            border-radius: 0.5em;
+            border: 1px solid $grey2;
+            width: 100%;
+            height: 10em;
+            overflow: hidden;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .img {
+              width: 100%;
+              // visibility: hidden;
+              // width: 10em;
+              // height: 10em;
+            }
+          }
+          h1 {
             color: $palepurple;
-            font-size: 2em;
-            vertical-align: middle;
-            margin: .5em;
-            margin-top: 0;
+            font-size: 1em;
+            margin: 0;
+            margin-top: 0.5em;
+          }
         }
-        .Coll-editBtn{
-            float: right;
-            border-radius: 100px;
-            padding: 1em;
-            content: 0px;
-            margin-right: 1em;
-            mat-icon{
-              position: absolute;
-              transform: translate(-50%, -50%);
-            }
-        }
-        .body{
-            display: grid;
-            grid-template-columns: .3fr 1fr;
-            margin: .5em;
-            .filter{
-
-
-                .nav{
-                    display: flex;
-                    align-items: stretch;
-                    gap: .5em;
-                    button{
-                        margin-bottom: .5em;
-                        flex-grow: 1;
-                    }
-                }
-            }
-            .files{
-
-                display: flex;
-                flex-wrap: wrap;
-                gap: 1em;
-                padding: 1em;
-                .file{
-                    // flex-grow: 1;
-                    padding: 1em;
-                    width: 10em;
-                    height: 15em;
-                    overflow: hidden;
-                    // background-color: red;
-                    background-color: $grey3;
-                    border-radius: 1em;
-                    border: 1px solid $grey2;
-                    .imgWrapper{
-                        border-radius: .5em;
-                        border: 1px solid $grey2;
-                        width: 100%;
-                        height: 10em;
-                        overflow: hidden;
-                        
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-
-                        .img{  
-                            width: 100%;
-                            // visibility: hidden;
-                            // width: 10em;
-                            // height: 10em;
-                            
-                        }
-
-                    }
-                    h1{
-                        color: $palepurple;
-                        font-size: 1em;
-                        margin: 0;
-                        margin-top: .5em;
-                    }
-
-
-
-
-                }
-            }
-
-        }
-        
+      }
     }
+  }
 }

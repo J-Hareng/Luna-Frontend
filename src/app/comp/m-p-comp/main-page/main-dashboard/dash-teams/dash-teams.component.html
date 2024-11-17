@@ -1,121 +1,196 @@
 <div id="teamsWrapper">
-    <form id="teams" [formGroup]="formGroup" *ngIf="this.mc.userTeams.length != 0; else NoTeams" >
-    
-            <div class="teamCard" *ngFor="let team of this.mc.userTeams; let i = index">
-
-                    <div class="teamCardHeader">
-                        <button class="team-editBtn" mat-icon-button [matMenuTriggerFor]="TeamMenu">
-                            <mat-icon>more_vert</mat-icon>
-                        </button>
-                        <mat-menu #TeamMenu="matMenu">
-                            <button mat-menu-item (click)="this.editTeam(team)">Edit</button>
-                            <button mat-menu-item (click)="this.deleteTeam(team)">Delete</button>
-                            <button mat-menu-item (click)="this.addNewTask(team)">Add Task</button>
-                        </mat-menu>
-
-                        <h1 class="TeamTitle">{{team.name}}</h1>
-                        <span class="TeamDes">{{team.des}}</span>
-                    </div>
-                    <mat-divider></mat-divider>
-
-                        <div class="teamCardContent">
-                            <div class="filters">
-                                <mat-button-toggle-group [formControlName]="CreateNewFormControll(team)" hideSingleSelectionIndicator class="filter" name="fontStyle" aria-label="Font Style">
-                                    <mat-button-toggle class="NotDef" value="All">All</mat-button-toggle>
-                                    <mat-button-toggle class="NotDef" value="your">Your</mat-button-toggle>
-                                    <mat-button-toggle class="NotDef" value="free">Free</mat-button-toggle>
-                                    <mat-button-toggle class="NotDef" value="inProg">In progress</mat-button-toggle>
-                                </mat-button-toggle-group>
-                            </div>
-                            <div class="tasks">
-                                <div *ngFor="let task of team.tasks">
-                                    <ng-container *ngIf="getTeamFormValue(team) == 'All' || getTeamFormValue(team) == ''">
-                                        <ng-container *ngTemplateOutlet="taskTemplate; context: {$implicit: task, Team: team}"></ng-container>
-                                    </ng-container>
-                                    <ng-container *ngIf="getTeamFormValue(team) == 'your' && IsUserInIt(task)">
-                                        <ng-container *ngTemplateOutlet="taskTemplate; context: {$implicit: task, Team: team}"></ng-container>
-                                    </ng-container>
-                                    <ng-container *ngIf="getTeamFormValue(team) == 'free' && WhoIsWorkingOnIt(task).length == 0">
-                                        <ng-container *ngTemplateOutlet="taskTemplate; context: {$implicit: task, Team: team}"></ng-container>
-                                    </ng-container>
-                                    <ng-container *ngIf="getTeamFormValue(team) == 'inProg' && WhoIsWorkingOnIt(task).length != 0">
-                                        <ng-container *ngTemplateOutlet="taskTemplate; context: {$implicit: task, Team: team}"></ng-container>
-                                    </ng-container>
-
-                                </div>
-                            </div>
-                    </div>
-            </div>
-    </form>
-
-    <div id="TeamNav">
-
-        <button mat-icon-button (click)="this.createNewTeam()" aria-label="Example icon-button with a menu">
-            <mat-icon>add</mat-icon>
+  <form
+    id="teams"
+    [formGroup]="formGroup"
+    *ngIf="this.mc.userTeams.length != 0; else NoTeams"
+  >
+    <div class="teamCard" *ngFor="let team of this.mc.userTeams; let i = index">
+      <div class="teamCardHeader">
+        <button
+          class="team-editBtn"
+          mat-icon-button
+          [matMenuTriggerFor]="TeamMenu"
+        >
+          <mat-icon>more_vert</mat-icon>
         </button>
+        <mat-menu #TeamMenu="matMenu">
+          <button mat-menu-item (click)="this.editTeam(team)">Edit</button>
+          <button mat-menu-item (click)="this.deleteTeam(team)">Delete</button>
+          <button mat-menu-item (click)="this.addNewTask(team)">
+            Add Task
+          </button>
+        </mat-menu>
 
-        <div class="teamChip" *ngFor="let t of this.mc.userTeams">
-            <p>{{t.name}}</p>
+        <h1 class="TeamTitle">{{ team.name }}</h1>
+        <span class="TeamDes">{{ team.des }}</span>
+      </div>
+      <mat-divider></mat-divider>
+
+      <div class="teamCardContent">
+        <div class="filters">
+          <mat-button-toggle-group
+            [formControlName]="CreateNewFormControll(team)"
+            hideSingleSelectionIndicator
+            class="filter"
+            name="fontStyle"
+            aria-label="Font Style"
+          >
+            <mat-button-toggle class="NotDef" value="All"
+              >All</mat-button-toggle
+            >
+            <mat-button-toggle class="NotDef" value="your"
+              >Your</mat-button-toggle
+            >
+            <mat-button-toggle class="NotDef" value="free"
+              >Free</mat-button-toggle
+            >
+            <mat-button-toggle class="NotDef" value="inProg"
+              >In progress</mat-button-toggle
+            >
+          </mat-button-toggle-group>
         </div>
-
-
+        <div class="tasks">
+          <div *ngFor="let task of team.tasks">
+            <ng-container
+              *ngIf="
+                getTeamFormValue(team) == 'All' || getTeamFormValue(team) == ''
+              "
+            >
+              <ng-container
+                *ngTemplateOutlet="
+                  taskTemplate;
+                  context: { $implicit: task, Team: team }
+                "
+              ></ng-container>
+            </ng-container>
+            <ng-container
+              *ngIf="getTeamFormValue(team) == 'your' && IsUserInIt(task)"
+            >
+              <ng-container
+                *ngTemplateOutlet="
+                  taskTemplate;
+                  context: { $implicit: task, Team: team }
+                "
+              ></ng-container>
+            </ng-container>
+            <ng-container
+              *ngIf="
+                getTeamFormValue(team) == 'free' &&
+                WhoIsWorkingOnIt(task).length == 0
+              "
+            >
+              <ng-container
+                *ngTemplateOutlet="
+                  taskTemplate;
+                  context: { $implicit: task, Team: team }
+                "
+              ></ng-container>
+            </ng-container>
+            <ng-container
+              *ngIf="
+                getTeamFormValue(team) == 'inProg' &&
+                WhoIsWorkingOnIt(task).length != 0
+              "
+            >
+              <ng-container
+                *ngTemplateOutlet="
+                  taskTemplate;
+                  context: { $implicit: task, Team: team }
+                "
+              ></ng-container>
+            </ng-container>
+          </div>
+        </div>
+      </div>
     </div>
+  </form>
+
+  <div id="TeamNav">
+    <button
+      mat-icon-button
+      (click)="this.createNewTeam()"
+      aria-label="Example icon-button with a menu"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+
+    <div class="teamChip" *ngFor="let t of this.mc.userTeams">
+      <p>{{ t.name }}</p>
+    </div>
+  </div>
 </div>
 
 <ng-template #taskTemplate let-task let-team="Team">
-    <mat-expansion-panel class="task" [ngClass]="getBackGroundColor(task)">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                <h1>{{task.name}}</h1>
-            </mat-panel-title>
-            <mat-panel-description>
-                <span>{{this.HowManyAreWorkingOnIt(task)}}</span>
-            </mat-panel-description>
-        </mat-expansion-panel-header>
-        <div class="taskContent">
-            
-                <div class="WorkingUsers">       
-                    <div *ngFor="let n of this.WhoIsWorkingOnIt(task)">
-                        <span> {{n.name}} </span>
-                    </div>
-                </div>
-                <mat-divider></mat-divider>
-                <span class="taskDes">{{mc.Taskmap.get(task._id)?.task?.des || "No Desctipion given"}}</span>
-
-
-            <div class="TaskNav">
-                <button class="task-editBtn" mat-icon-button [matMenuTriggerFor]="TaskMenu">
-                    <mat-icon>more_vert</mat-icon>
-                </button>
-                <mat-menu #TaskMenu="matMenu">
-                <button mat-menu-item (click)="editTask(this.getTask(task), team)">Edit</button>
-                <button mat-menu-item>Delete</button>
-                </mat-menu>
-   
-                    @if(this.IsUserInIt(task)){
-                    <button mat-icon-button class="applyForTask-Btn" (click)="OnUnApplyClick(task, team)" mat-icon-button>
-                        <mat-icon style="transform: translate(-50%, -50%) rotate(180deg);" >front_hand</mat-icon>
-                    </button>
-                    } @else {
-                    <button mat-icon-button class="applyForTask-Btn" (click)="OnApplyClick(task, team)" mat-icon-button>
-                        <mat-icon>front_hand</mat-icon>
-                    </button>
-                    }
-
-                    <!-- <p>Apply</p> -->
-                
-            </div>
+  <mat-expansion-panel class="task" [ngClass]="getBackGroundColor(task)">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <h1>{{ task.name }}</h1>
+      </mat-panel-title>
+      <mat-panel-description>
+        <span>{{ this.HowManyAreWorkingOnIt(task) }}</span>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div class="taskContent">
+      <div class="WorkingUsers">
+        <div *ngFor="let n of this.WhoIsWorkingOnIt(task)">
+          <span> {{ n.name }} </span>
         </div>
-    </mat-expansion-panel>
+      </div>
+      <mat-divider></mat-divider>
+      <span class="taskDes">{{
+        mc.Taskmap.get(task._id)?.task?.des || "No Desctipion given"
+      }}</span>
+
+      <div class="TaskNav">
+        <button
+          class="task-editBtn"
+          mat-icon-button
+          [matMenuTriggerFor]="TaskMenu"
+        >
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #TaskMenu="matMenu">
+          <button mat-menu-item (click)="editTask(this.getTask(task), team)">
+            Edit
+          </button>
+          <button mat-menu-item>Delete</button>
+        </mat-menu>
+
+        @if(this.IsUserInIt(task)){
+        <button
+          mat-icon-button
+          class="applyForTask-Btn"
+          (click)="OnUnApplyClick(task, team)"
+          mat-icon-button
+        >
+          <mat-icon style="transform: translate(-50%, -50%) rotate(180deg)"
+            >front_hand</mat-icon
+          >
+        </button>
+        } @else {
+        <button
+          mat-icon-button
+          class="applyForTask-Btn"
+          (click)="OnApplyClick(task, team)"
+          mat-icon-button
+        >
+          <mat-icon>front_hand</mat-icon>
+        </button>
+        }
+
+        <!-- <p>Apply</p> -->
+      </div>
+    </div>
+  </mat-expansion-panel>
 </ng-template>
 
 <ng-template #NoTeams>
-    <div id="NoTeamWrapper">
-        <div id="NoTeam" >
-            <h1>No Team Yet</h1>
-            <p>Create a new Team so you can create Tasks For your Team mates</p>
+  <div id="NoTeamWrapper">
+    <div id="NoTeam">
+      <h1>No Team Yet</h1>
+      <p>Create a new Team so you can create Tasks For your Team mates</p>
 
-            <button (click)="createNewTeam()">Create a New Team</button>
-        </div>
+      <button (click)="createNewTeam()">Create a New Team</button>
     </div>
+  </div>
 </ng-template>

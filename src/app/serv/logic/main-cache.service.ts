@@ -29,6 +29,7 @@ import { Conditional } from '@angular/compiler';
 export enum SiteStatus {
   Main = "MAIN",
   Teams = "TEAMS",
+  Collection = "COLLECTION",
 }
 
 

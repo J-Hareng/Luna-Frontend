@@ -1,83 +1,116 @@
-<div id="CollectionWrapper" *ngIf="this.mc.groupColl.length != 0; else NoCollection">
-    <div id="CollHeader">
-    <div id="scroller">
-        <ng-container *ngFor="let i of range">
-            <div class="card" (click)="cardAtIndexIsClicked(i)" [ngClass]="getCollClass(i)">
-                <h1>{{this.mc.groupColl[i].name}}</h1>
-            </div>
-        </ng-container>
+<div
+  id="CollectionWrapper"
+  *ngIf="this.mc.groupColl.length != 0; else NoCollection"
+>
+  <div id="CollHeader">
+    <div id="HeaderInfo">
+      <h1>{{ this.selectedCollection.name }} Collection</h1>
     </div>
+    <div id="HeaderActions">
+      <button
+        class="Coll-editBtn"
+        mat-icon-button
+        [matMenuTriggerFor]="CollMenu"
+      >
+        <mat-menu #CollMenu="matMenu">
+          <button
+            mat-menu-item
+            (click)="this.EditCollection(selectedCollection)"
+          >
+            Edit
+          </button>
+          <button mat-menu-item>Delete</button>
+          <button mat-menu-item>Upload A File</button>
+        </mat-menu>
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
+    <!-- <div class="CollectionHeader">{{ this.getCollAt(MainIndex).name }}</div>
     <div id="Seletor">
-    <mat-form-field >
+      <mat-form-field>
         <mat-label>Select an option</mat-label>
         <mat-select [(value)]="quickSelectIndex">
-        <mat-option (click)="AddCollection()">
+          <mat-option (click)="AddCollection()">
             <mat-icon>add</mat-icon>
-        </mat-option>
-          <mat-option *ngFor="let i of range" (click)="jumpToIndex(i)">{{this.mc.groupColl[i].name}}</mat-option>
+          </mat-option>
+          <mat-option *ngFor="let i of range" (click)="jumpToIndex(i)">{{
+            this.mc.groupColl[i].name
+          }}</mat-option>
         </mat-select>
-    </mat-form-field>
+      </mat-form-field>
     </div>
-    <mat-divider></mat-divider>
-    </div>
-        <ng-container *ngTemplateOutlet="CollectionBody; context: {$implicit: this.mc.groupColl[MainIndex]}"></ng-container>
+    <div id="scroller">
+      <ng-container *ngFor="let i of range">
+        <div
+          class="card"
+          (click)="cardAtIndexIsClicked(i)"
+          [ngClass]="getCollClass(i)"
+        >
+          <h1>{{ this.mc.groupColl[i].name }}</h1>
+        </div>
+      </ng-container>
+    </div> -->
+
+    <!-- <mat-divider></mat-divider> -->
+  </div>
+  <ng-container
+    *ngTemplateOutlet="
+      CollectionBody;
+      context: { $implicit: this.mc.groupColl[MainIndex] }
+    "
+  ></ng-container>
 </div>
 
 <ng-template #CollectionBody let-coll>
-    
-    <div class="Collection">
-        
-        <button class="Coll-editBtn" mat-icon-button [matMenuTriggerFor]="CollMenu">
-            <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu #CollMenu="matMenu">
-            <button mat-menu-item (click)="this.EditCollection(coll)">Edit</button>
-            <button mat-menu-item>Delete</button>
-            <button mat-menu-item>Upload A File</button>
-        </mat-menu>
-        <div class="body">
-            <div class="filter">
-                <div class="nav">
-                    <button (click)="FilterToNone()" class="clearFilter">
-                        Clear
-                    </button>
-                    <button (click)="FilterToAll()" class="all">
-                        All
-                    </button>
-                </div>
-
-                <mat-chip-listbox class="mat-mdc-chip-set-stacked" multiple="" aria-label="Cutest dog breeds">
-                      <mat-chip-option class="NotDef" *ngFor="let tag of coll.tags || []" (click)="filterIsKlicked(tag)" [selected]="this.TagfilterList.includes(tag)">{{tag}}</mat-chip-option>
-                  </mat-chip-listbox>
-            </div>
-            <div class="files">
-                <!-- <h1 class="CollName">{{coll.name}}</h1>  -->
-                <ng-container *ngFor="let file of coll.files">
-                    <div class="file" *ngIf="this.CheckFilter(file)">
-
-                        <div class="imgWrapper">
-                            @if (this.IsExtatsonValid(file.path)){
-                                <img class="img" [src]="getBlobForFile(file.path)" />
-                            } @else {
-                                <p>.{{getExtention(file.path)}}</p>
-                            }
-                        </div>
-
-                        <h1>{{file.name}}</h1>
-                    </div>
-                </ng-container>
-            </div>
+  <div class="Collection">
+    <div class="body">
+      <div class="filter">
+        <div class="nav">
+          <button (click)="FilterToNone()" class="clearFilter">Clear</button>
+          <button (click)="FilterToAll()" class="all">All</button>
         </div>
+
+        <mat-chip-listbox
+          class="mat-mdc-chip-set-stacked"
+          multiple=""
+          aria-label="Cutest dog breeds"
+        >
+          <mat-chip-option
+            class="NotDef"
+            *ngFor="let tag of coll.tags || []"
+            (click)="filterIsKlicked(tag)"
+            [selected]="this.TagfilterList.includes(tag)"
+            >{{ tag }}</mat-chip-option
+          >
+        </mat-chip-listbox>
+      </div>
+      <div class="files">
+        <!-- <h1 class="CollName">{{coll.name}}</h1>  -->
+        <ng-container *ngFor="let file of coll.files">
+          <div class="file" *ngIf="this.CheckFilter(file)">
+            <div class="imgWrapper">
+              @if (this.IsExtatsonValid(file.path)){
+              <img class="img" [src]="getBlobForFile(file.path)" />
+              } @else {
+              <p>.{{ getExtention(file.path) }}</p>
+              }
+            </div>
+
+            <h1>{{ file.name }}</h1>
+          </div>
+        </ng-container>
+      </div>
     </div>
+  </div>
 </ng-template>
 
-<ng-template #NoCollection >
-    <div id="NoCollWrapper">
-        <div id="NoColl" >
-            <h1>No Collection Yet</h1>
-            
-            <p>Create a new collection so you can store your files</p>
-            <button (click)="this.AddCollection()">Create a New Collection</button>
-        </div>
+<ng-template #NoCollection>
+  <div id="NoCollWrapper">
+    <div id="NoColl">
+      <h1>No Collection Yet</h1>
+
+      <p>Create a new collection so you can store your files</p>
+      <button (click)="this.AddCollection()">Create a New Collection</button>
     </div>
+  </div>
 </ng-template>

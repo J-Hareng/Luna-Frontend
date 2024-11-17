@@ -32,29 +32,31 @@
           </span>
         </div>
 
-        <div id="chipEditor">
-          <input class="Custominput" placeholder="My Cool New Tag" />
+        <div class="ActionWrapperH">
+          <input class="Ac Custominput" placeholder="My Cool New Tag" [formControl]="this.TagsControll" />
 
-          <button type="button" mat-icon-button>
-            <mat-icon>add</mat-icon>
+          <button type="button" class="Ac DPButton" mat-icon-button [disabled]="isdisabled()" >
+              {{getTagBtnText()}}
           </button>
         </div>
       </div>
 
       <div class="btnRow">
         <button mat-button class="can" (click)="onNoClick()">Cancel</button>
-
+        
+        
+        
+        <!-- TODO Implement to enable when a tag is edited or created -->
         <button
           mat-button
           class="sub"
           type="submit"
           [disabled]="
             this.fg.invalid ||
-            (this.NameControll.value == data.collection.name &&
-              this.TagsControll.value == data.collection.tags)
+            (this.NameControll.value == data.collection.name)
           "
         >
-          Create
+          Update
         </button>
       </div>
     </form>

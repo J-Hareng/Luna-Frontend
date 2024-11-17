@@ -1,77 +1,127 @@
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
 @use "@angular/material" as mat;
 @use "../m3-theme.scss";
-// Plus imports for other components in your app.
 
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
+@import "CssUtilitys/colors.scss";
+
 @include mat.core();
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
 :root {
   @include mat.all-component-themes(m3-theme.$dark-theme);
 
   --mdc-dialog-container-shape: 1vmin !important;
 }
+.mat-mdc-menu-panel {
+  --mat-menu-container-color: #484648 !important;
+}
 
-$ritchblack: #040f0f;
-$royalpurple: #794f92;
-$africanviolet: #9f86ac;
-$palepurple: #eddfef;
-$palepurpleLowOp: #eddfefb0;
-$NonphotoBlue: #92dce5;
-$gege: #99ff94;
-$grey: #494d5f;
-$grey2: #56495f;
-$grey3: #56495fa2;
+button:not(
+    .mat-mdc-menu-item,
+    .mat-button-toggle,
+    .NotDef,
+    .mat-button-toggle-button,
+    .mat-mdc-chip-action,
+    .noneD
+  ) {
+  border: none;
+  transition: 0.3s;
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+  background-color: $color-surface-mixed-a10;
+  color: $text-color;
+  cursor: pointer;
+  &:hover {
+    background-color: $color-primary-a30;
+    box-shadow: 0px 0px 12px 1px $shadow-color;
+  }
+  &:disabled {
+    box-shadow: 0;
+    background-color: $color-surface-mixed-a0;
+  }
+}
 
-$button-gradient-start: $NonphotoBlue; // Pink (same as accent color)
-$button-gradient-end: $gege; // Lighter shade of orange
-$button-gradient: linear-gradient(
-  to right,
-  $button-gradient-start,
-  $button-gradient-end
-);
+header {
+  margin: 0.35em 1em;
+  border-radius: $BORDER_RADIUS;
+  padding: 1em 1.5em !important;
+  padding-right: 1em !important;
+  background-color: $header-color;
+  // border-bottom: 1px solid $color-surface-a5;
+  // box-shadow: 0px 0px 10px 1px $shadow-color;
 
-$background-color: #171717; // Background color
-$text-color: #ffffff; // Text color
-$accent-color: #ff6b81; // Accent color (Pink)
-$secondary-accent-color: #ffc7d2; // Secondary accent color (Light Pink)
-$highlight-color: #ff9aa2; // Highlight color (Soft Pink)
-$button-color: #ff6b81; // Button color
-$button-hover-color: #e64a5b; // Button hover color
-$link-color: #ff6b81; // Link color
-$link-hover-color: #ffc7d2; // Link hover color
-$border-color: #3a3a3a; // Border color
+  h1 {
+    color: $text-color;
+    text-shadow: 0px 5px 10px $shadow-color;
+  }
+  p {
+    color: $description-color !important;
+  }
+}
+.Custominput {
+  padding: 10px;
+  border-radius: 0.5vmin;
+  border: none;
+  margin: 10px;
+  margin-left: 0px;
+  background-color: $color-surface-a10;
+  border: none;
+  transition: 0.3s;
+  color: $text-color;
+  border: 1px solid $color-surface-a10;
+  &:active {
+    // background-color: $N;
+    border-color: $color-surface-a50;
+  }
+  &:focus {
+    border-radius: 1vmin;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border: 1px solid $text-colorLowOp;
+    outline: none;
+  }
+}
 
-// Gradient color for header background
-$header-gradient-start: #4b0082; // Dark purple
-$header-gradient-end: #8a2be2; // Blue Violet
-$header-gradient: linear-gradient(
-  to right,
-  $header-gradient-start,
-  $header-gradient-end
-);
+.DPButton {
+  background: $Disabled-gradient;
+  background-size: 200%;
+  background-position: center;
+  padding: 1em 4em;
+  transition: all 0.3s;
+  color: $text-color !important;
 
-$button-gradient-start: $NonphotoBlue; // Pink (same as accent color)
-$button-gradient-end: $gege; // Lighter shade of orange
-$button-gradient: linear-gradient(
-  to right,
-  $button-gradient-start,
-  $button-gradient-end
-);
-$Disabled-gradient: linear-gradient(
-  50deg,
-  $grey3,
-  $grey3,
-  $royalpurple,
-  $NonphotoBlue,
-  $gege
-);
+  &:disabled {
+    background-position: left center;
+  }
+  &:hover:not(&:disabled) {
+    color: $color-surface-a0 !important;
+    background-position: right center;
+    font-weight: bolder;
+  }
+}
+
+.ActionWrapperH {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  // justify-content: space-between;
+  .Ac {
+    flex-grow: 1;
+    margin: 0;
+
+    span {
+      font-size: 1em;
+    }
+  }
+  margin-bottom: 1px;
+}
+
+.ActionWrapperV {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  justify-content: space-between;
+}
+
 #CKpopup {
   form {
     flex-grow: 1;
@@ -83,7 +133,7 @@ $Disabled-gradient: linear-gradient(
       justify-content: space-between;
 
       .can {
-        background: $royalpurple;
+        background: $color-primary-a0;
         color: $text-color !important;
         padding: 1em 2em;
       }
@@ -99,11 +149,25 @@ $Disabled-gradient: linear-gradient(
           background-position: left center;
         }
         &:hover:not(&:disabled) {
-          color: $ritchblack !important;
+          color: $color-surface-a0 !important;
           background-position: right center;
         }
       }
     }
+  }
+}
+
+.teamCard {
+  background-color: $color-surface-a10;
+  border: 1px solid $color-surface-a10;
+  border-radius: $BORDER_RADIUS;
+  padding: 2vmin;
+  transition: 0.3s ease-out;
+
+  &:hover {
+    border-radius: $BORDER_RADIUS2;
+    border-color: $color-surface-a20;
+    box-shadow: 1px 1px 10px 1px $color-surface-a20;
   }
 }
 
@@ -112,9 +176,13 @@ body {
   margin: 0px !important;
   padding: 0px !important;
 }
+.iconPrimary {
+  color: $color-primary-a20 !important;
+}
+
 .mat-mdc-dialog-surface,
 .mat-mdc-menu-panel {
-  background-color: $grey2 !important;
+  background-color: $color-surface-a10 !important;
   box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.487) !important;
 }
 
@@ -129,101 +197,19 @@ a {
   margin: 0px;
   font-family: Roboto, "Helvetica Neue", sans-serif !important;
   font-size: 2vmin;
-  color: $palepurple;
+  color: $text-color;
 }
 
 html,
 body {
   overflow-x: hidden;
-  background-color: $ritchblack;
-}
-.Custominput {
-  padding: 10px;
-  border-radius: 0.5vmin;
-  border: none;
-  margin: 10px;
-  margin-left: 0px;
-  background-color: $africanviolet;
-  border: none;
-  transition: 0.3s;
-  &:active {
-    background-color: $NonphotoBlue;
-  }
-  &:focus {
-    border-radius: 1vmin;
-    background-color: $NonphotoBlue;
-    outline: none;
-  }
-}
-button:not(
-    .mat-mdc-menu-item,
-    .mat-button-toggle,
-    .NotDef,
-    .mat-button-toggle-button,
-    .mat-mdc-chip-action
-  ) {
-  background: $button-gradient;
-  color: $ritchblack;
-  border: none;
-  padding: 10px 20px;
-  color: $ritchblack !important;
-  cursor: pointer;
-  color: $ritchblack;
-  transition: 0.3s;
-  background-size: 200% auto;
-  background-position: left center;
-  &:hover {
-    background-position: right center;
-    box-shadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.487);
-  }
-  height: inherit;
-  border-radius: 50px;
-  box-shadow: 0px 0.5px 5px 1px rgba(0, 0, 0, 0.487);
-  &:disabled {
-    background: $Disabled-gradient;
-    background-size: 200%;
-    box-shadow: none !important;
-    cursor: Default;
-    color: $text-color !important;
-  }
+  background-color: $color-surface-a0;
 }
 
 .borderStyle {
   padding: 0.5vmin;
   margin: 1vmin;
-  border-bottom: 2px solid $africanviolet;
-}
-@media screen and (min-width: 800px) {
-  .svgWrapper {
-    position: relative;
-    border: none;
-    display: inline-block;
-    &:hover {
-      .svg {
-        background-color: rgba(255, 255, 255, 0.5);
-      }
-      .svgDes {
-        transition: 0.3s;
-        display: block;
-        bottom: 0;
-        // width: 200%;
-        // width: auto;
-        visibility: visible;
-        opacity: 100%;
-        color: $palepurple !important;
-        transform: translate(5vmin, 0);
-      }
-      .svgleft {
-        transform: translate(-100%, 0) !important;
-      }
-      .svgbottom {
-        transform: translate(0, 120%) !important;
-      }
-    }
-    .svgbottom {
-      transform: translate(0, 70%) !important;
-    }
-  }
+  border-bottom: 2px solid $color-surface-a50;
 }
 .svg {
   cursor: pointer;
@@ -250,7 +236,7 @@ button:not(
   bottom: 0;
   visibility: hidden;
   position: absolute;
-  background-color: $background-color;
+  background-color: $color-surface-a40;
   padding: 10px;
   border-radius: 10px;
   transition: 0.3s;
@@ -279,7 +265,7 @@ button:not(
       position: absolute;
       width: max-content;
       visibility: visible;
-      background-color: $background-color;
+      background-color: $color-surface-a0;
       padding: 10px;
       border-radius: 10px;
       transition: 0.3s;
@@ -287,7 +273,7 @@ button:not(
       // width: 200%;
       // width: auto;
       opacity: 100%;
-      color: $palepurple !important;
+      color: $color-primary-a0 !important;
       transform: translate(5vmin, 0);
       // z-index: 100;
       // opacity: 0%;
@@ -305,81 +291,81 @@ button:not(
     }
   }
 }
-@media screen and (max-width: 800px) {
-  body {
-    margin: 0px !important;
-    padding: 0px !important;
-  }
+// @media screen and (max-width: 800px) {
+//   body {
+//     margin: 0px !important;
+//     padding: 0px !important;
+//   }
 
-  p,
-  h1,
-  h2,
-  h3,
-  h4,
-  span,
-  a {
-    margin: 0px;
-    font-family: "Rubik";
-    font-size: 2vmin;
-    color: $palepurple;
-  }
+//   p,
+//   h1,
+//   h2,
+//   h3,
+//   h4,
+//   span,
+//   a {
+//     margin: 0px;
+//     font-family: "Rubik";
+//     font-size: 2vmin;
+//     color: $color-primary-a0;
+//   }
 
-  html,
-  body {
-    overflow-x: hidden;
-    background-color: $ritchblack;
-  }
-  button {
-    background: $button-gradient;
-    color: $ritchblack;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-    background-size: 200% auto;
-    background-position: left center;
-    &:hover {
-      background-position: right center;
-    }
-  }
-  .AdminNeedet_s0 {
-    // visibility: hidden;
-  }
+//   html,
+//   body {
+//     overflow-x: hidden;
+//     background-color: $ritchblack;
+//   }
+//   button {
+//     background: $button-gradient;
+//     color: $ritchblack;
+//     border: none;
+//     padding: 10px 20px;
+//     border-radius: 5px;
+//     cursor: pointer;
+//     transition: 0.3s;
+//     background-size: 200% auto;
+//     background-position: left center;
+//     &:hover {
+//       background-position: right center;
+//     }
+//   }
+//   .AdminNeedet_s0 {
+//     // visibility: hidden;
+//   }
 
-  .borderStyle {
-    padding: 0.5vmin;
-    margin: 1vmin;
-  }
-  .svgWrapper {
-    display: inline-block;
-    position: relative;
-    border: none;
-  }
-  .svg {
-    cursor: pointer;
-    width: 5vmin;
-    filter: invert(99%) sepia(59%) saturate(711%) hue-rotate(199deg)
-      brightness(99%) contrast(90%);
-    background-color: rgba(255, 255, 255, 0.232);
-    padding: 1vmin;
-    border-radius: 100%;
-  }
-  .svgDes {
-    p {
-      background-color: red !important;
-    }
-    width: 0%;
-    height: 0%;
-    visibility: hidden;
-  }
-  .svgleft {
-    transform: translate(-50%, 0) !important;
-  }
-  .MobileHidden {
-    display: none;
-  }
-}
+//   .borderStyle {
+//     padding: 0.5vmin;
+//     margin: 1vmin;
+//   }
+//   .svgWrapper {
+//     display: inline-block;
+//     position: relative;
+//     border: none;
+//   }
+//   .svg {
+//     cursor: pointer;
+//     width: 5vmin;
+//     filter: invert(99%) sepia(59%) saturate(711%) hue-rotate(199deg)
+//       brightness(99%) contrast(90%);
+//     background-color: rgba(255, 255, 255, 0.232);
+//     padding: 1vmin;
+//     border-radius: 100%;
+//   }
+//   .svgDes {
+//     p {
+//       background-color: red !important;
+//     }
+//     width: 0%;
+//     height: 0%;
+//     visibility: hidden;
+//   }
+//   .svgleft {
+//     transform: translate(-50%, 0) !important;
+//   }
+//   .MobileHidden {
+//     display: none;
+//   }
+// }
 
 html,
 body {

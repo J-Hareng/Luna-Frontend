@@ -40,7 +40,7 @@ export class DashTeamsComponent {
   }
   getBackGroundColor(taskL: LinkType): string{
    
-    let n = 'none'
+    let n = 'TaskFree'
     let a = 'TaskInProgByUser'
     let b = 'TaskInProg'
 

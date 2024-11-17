@@ -23,5 +23,8 @@
     @else if (this.mc.SiteStatus === SiteStatus.Teams) {
         <app-main-header></app-main-header>
         <app-main-teams></app-main-teams>
-    }
+    } @else if (this.mc.SiteStatus === SiteStatus.Collection) {
+        <app-main-header></app-main-header>
+        <app-dash-collections></app-dash-collections>
+        }
 </div>

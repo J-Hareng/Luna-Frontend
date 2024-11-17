@@ -1,52 +1,52 @@
-$ritchblack: #040f0f;
-$royalpurple: #794f92;
-$africanviolet: #9f86ac;
-$palepurple: #eddfef;
-$NonphotoBlue: #92dce5;
-$gege: #99ff94;
-$grey: #494d5f;
-$grey2: #56495f;
+// $ritchblack: #040f0f;
+// $royalpurple: #794f92;
+// $africanviolet: #9f86ac;
+// $palepurple: #eddfef;
+// $NonphotoBlue: #92dce5;
+// $gege: #99ff94;
+// $grey: #494d5f;
+// $grey2: #56495f;
 
-$background-color: #171717; // Background color
-$text-color: #ffffff; // Text color
-$accent-color: #ff6b81; // Accent color (Pink)
-$secondary-accent-color: #ffc7d2; // Secondary accent color (Light Pink)
-$highlight-color: #ff9aa2; // Highlight color (Soft Pink)
-$button-color: #ff6b81; // Button color
-$button-hover-color: #e64a5b; // Button hover color
-$link-color: #ff6b81; // Link color
-$link-hover-color: #ffc7d2; // Link hover color
-$border-color: #3a3a3a; // Border color
+// $background-color: #171717; // Background color
+// $text-color: #ffffff; // Text color
+// $accent-color: #ff6b81; // Accent color (Pink)
+// $secondary-accent-color: #ffc7d2; // Secondary accent color (Light Pink)
+// $highlight-color: #ff9aa2; // Highlight color (Soft Pink)
+// $button-color: #ff6b81; // Button color
+// $button-hover-color: #e64a5b; // Button hover color
+// $link-color: #ff6b81; // Link color
+// $link-hover-color: #ffc7d2; // Link hover color
+// $border-color: #3a3a3a; // Border color
 
-// Gradient color for header background
-$header-gradient-start: #4b0082; // Dark purple
-$header-gradient-end: #8a2be2; // Blue Violet
-$header-gradient: linear-gradient(
-  to right,
-  $header-gradient-start,
-  $header-gradient-end
-);
+// // Gradient color for header background
+// $header-gradient-start: #4b0082; // Dark purple
+// $header-gradient-end: #8a2be2; // Blue Violet
+// $header-gradient: linear-gradient(
+//   to right,
+//   $header-gradient-start,
+//   $header-gradient-end
+// );
 
-$button-gradient-start: #99ff94; // Pink (same as accent color)
-$button-gradient-end: #92dce5; // Lighter shade of orange
-$button-gradient: linear-gradient(
-  to right,
-  $button-gradient-start,
-  $button-gradient-end
-);
+// $button-gradient-start: #99ff94; // Pink (same as accent color)
+// $button-gradient-end: #92dce5; // Lighter shade of orange
+// $button-gradient: linear-gradient(
+//   to right,
+//   $button-gradient-start,
+//   $button-gradient-end
+// );
 
 $lightText: rgb(181, 163, 187);
 
-#UserMenuButton{
+#UserMenuButton {
   border-radius: 100px;
   padding: 2vmin;
   content: 0px;
-  mat-icon{
+  mat-icon {
     position: absolute;
     transform: translate(-50%, -50%);
   }
 }
-#PageCover{
+#PageCover {
   position: absolute;
   display: block;
   // background-color: rgba(0, 0, 0, 0.194);
@@ -55,33 +55,30 @@ $lightText: rgb(181, 163, 187);
   z-index: 1000;
   top: 0;
 }
-nav{
-  float:right;
+nav {
+  float: right;
   width: 50%;
   height: 40px;
   .navB {
     height: inherit;
     border-radius: 50px;
-    box-shadow: 0px .5px 5px 1px rgba(0, 0, 0, 0.487); 
+    box-shadow: 0px 0.5px 5px 1px rgba(0, 0, 0, 0.487);
   }
   .navB:hover {
-    box-shadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.487); 
+    box-shadow: 0px 0px 12px 1px rgba(0, 0, 0, 0.487);
   }
-  .navB:disabled{
-    background: $header-gradient;
+  .navB:disabled {
+    // background: $header-gradient;
     background-size: 200%;
     box-shadow: none !important;
     cursor: Default;
-    color: $text-color !important;
-
   }
 }
 
-#UserInfo{
+#UserInfo {
   display: grid;
   grid-template-rows: auto auto;
   width: 50%;
-  
 }
 header {
   h1 {
@@ -98,7 +95,6 @@ header {
     font-size: small;
   }
   padding: 10px;
-  background: $royalpurple;
   // background-image: $header-gradient;
   // background-size: auto 200%;
 
@@ -111,7 +107,6 @@ header {
   }
   .MainUser {
     border-radius: 3vmin;
-    background-color: $africanviolet;
     float: right;
     margin-left: 3vmin;
     padding: 10px;
@@ -120,7 +115,6 @@ header {
     cursor: pointer;
     p {
       text-align: center;
-      color: $ritchblack;
     }
     .HiddenContent {
       z-index: 100 !important;
@@ -129,8 +123,6 @@ header {
       height: 15vmin;
       transition: visibility 0s, opacity 0.5s linear;
       position: absolute;
-      background-color: $grey2;
-      border: 1px solid $border-color;
       border-radius: 5px;
       padding: 1vmin;
       z-index: 1;

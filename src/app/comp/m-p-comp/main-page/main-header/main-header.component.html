@@ -1,76 +1,119 @@
 <header>
-    @if(this.mc.user.groupid != '' &&
-    this.mc.user.groupid != undefined) {
-        <nav>
-            <button class="navB" id="UserMenuButton" mat-icon-button [matMenuTriggerFor]="UserMenu" aria-label="Example icon-button with a menu">
-                <!-- <mat-icon svgIcon=>e7fd</mat-icon> -->
-                 <mat-icon>account_circle</mat-icon>
-              </button>
-              <mat-menu #UserMenu="matMenu">
-                <!-- <p>{{this.mc.user.name}}</p> -->
-                <button mat-menu-item (click)="singOut()" >
-                  <mat-icon>logout</mat-icon>
-                  <span>logout</span>
-                </button>
-                <button mat-menu-item (click)="leaveGroup()">
-                  <mat-icon>exit_to_app</mat-icon>
-                  <span>Leave Group</span>
-                </button>
-                <button mat-menu-item (click)="InviteToGroup()">
-                  <mat-icon>group_add</mat-icon>
-                  <span>Invite to Group</span>
-                </button>
-                <button mat-menu-item>
-                  <mat-icon>settings</mat-icon>
-                  <span>Settings</span>
-                </button>
-                @if( Ws.IsMobile() ){
-                    <mat-divider></mat-divider>
-                    <button mat-menu-item class="navB" [disabled]="mc.SiteStatus == st.Main" (click)="mc.SiteStatus = st.Main">
-                        <mat-icon>team_dashboard</mat-icon>
-                        <span>Dashboard</span>
-                    </button>
-                    <button mat-menu-item class="navB" [disabled]="mc.SiteStatus == st.Teams" (click)="mc.SiteStatus = st.Teams">
-                       <mat-icon>groups</mat-icon>
-                        <span>Teams</span>
-                    </button>
-                } 
-            </mat-menu>
-            @if( !Ws.IsMobile() ){
-                <button class="navB" [disabled]="mc.SiteStatus == st.Main" (click)="mc.SiteStatus = st.Main">Dashboard</button>
-                <button class="navB" [disabled]="mc.SiteStatus == st.Teams" (click)="mc.SiteStatus = st.Teams">Teams</button>
-            }
-        </nav>
-        <div id="UserInfo">
-            <h1>{{this.mc.getGrupIdName()}}</h1>
-            <p>{{this.mc.user.name}}'s Dashboard</p>
-        </div>
-    } @else {
-        <nav>
-        <button class="navB" id="UserMenuButton" mat-icon-button [matMenuTriggerFor]="UserMenu" aria-label="Example icon-button with a menu">
-             <mat-icon>account_circle</mat-icon>
-        </button>
-          
-          <mat-menu #UserMenu="matMenu">
-            <button mat-menu-item (click)="singOut()" >
-              <mat-icon>logout</mat-icon>
-              <span>logout</span>
-            </button>
-            <button mat-menu-item>
-              <mat-icon>settings</mat-icon>
-              <span>Settings</span>
-            </button>
-        </mat-menu>
-    </nav>
-        <div id="UserInfo">
-            <h1>Welcome {{this.mc.user.name}}!</h1>
-            <p>Join or create a New Group</p>
-        </div>
+  @if(this.mc.user.groupid != '' && this.mc.user.groupid != undefined) {
+  <nav>
+    <button
+      class="navB"
+      id="UserMenuButton"
+      mat-icon-button
+      [matMenuTriggerFor]="UserMenu"
+      aria-label="Example icon-button with a menu"
+    >
+      <!-- <mat-icon svgIcon=>e7fd</mat-icon> -->
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #UserMenu="matMenu">
+      <!-- <p>{{this.mc.user.name}}</p> -->
+      <button mat-menu-item (click)="singOut()">
+        <mat-icon class="iconPrimary">logout</mat-icon>
+        <span>logout</span>
+      </button>
+      <button mat-menu-item (click)="leaveGroup()">
+        <mat-icon class="iconPrimary">exit_to_app</mat-icon>
+        <span>Leave Group</span>
+      </button>
+      <button mat-menu-item (click)="InviteToGroup()">
+        <mat-icon class="iconPrimary">group_add</mat-icon>
+        <span>Invite to Group</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon class="iconPrimary">settings</mat-icon>
+        <span>Settings</span>
+      </button>
+      @if( Ws.IsMobile() ){
+      <mat-divider></mat-divider>
+      <button
+        mat-menu-item
+        class="navB"
+        [disabled]="mc.SiteStatus == st.Main"
+        (click)="mc.SiteStatus = st.Main"
+      >
+        <mat-icon class="iconPrimary">team_dashboard</mat-icon>
+        <span>Dashboard</span>
+      </button>
+      <button
+        mat-menu-item
+        class="navB"
+        [disabled]="mc.SiteStatus == st.Teams"
+        (click)="mc.SiteStatus = st.Teams"
+      >
+        <mat-icon class="iconPrimary">groups</mat-icon>
+        <span>Teams</span>
+      </button>
+      }
+    </mat-menu>
+    @if( !Ws.IsMobile() ){
+    <button
+      class="navB"
+      [disabled]="mc.SiteStatus == st.Collection"
+      (click)="mc.SiteStatus = st.Collection"
+    >
+      Collections
+    </button>
+    <button
+      class="navB"
+      [disabled]="mc.SiteStatus == st.Main"
+      (click)="mc.SiteStatus = st.Main"
+    >
+      Dashboard
+    </button>
+    <button
+      class="navB"
+      [disabled]="mc.SiteStatus == st.Teams"
+      (click)="mc.SiteStatus = st.Teams"
+    >
+      Teams
+    </button>
     }
+  </nav>
+  <div id="UserInfo">
+    <h1>{{ this.mc.getGrupIdName() }}</h1>
+    <p>{{ this.mc.user.name }}'s Dashboard</p>
+  </div>
+  } @else {
+  <nav>
+    <button
+      class="navB"
+      id="UserMenuButton"
+      mat-icon-button
+      [matMenuTriggerFor]="UserMenu"
+      aria-label="Example icon-button with a menu"
+    >
+      <mat-icon class="iconPrimary">account_circle</mat-icon>
+    </button>
 
+    <mat-menu #UserMenu="matMenu">
+      <button mat-menu-item (click)="singOut()">
+        <mat-icon class="iconPrimary">logout</mat-icon>
+        <span>logout</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon class="iconPrimary">settings</mat-icon>
+        <span>Settings</span>
+      </button>
+    </mat-menu>
+  </nav>
+  <div id="UserInfo">
+    <h1>Welcome {{ this.mc.user.name }}!</h1>
+    <p>Join or create a New Group</p>
+  </div>
+  }
 </header>
 @if(mc.isLoadingSmall){
-  <mat-progress-bar class="lb" mode="query"></mat-progress-bar>
-  <mat-progress-bar  style="position: absolute;" class="lb" mode="buffer"></mat-progress-bar>
-  <div id="PageCover"></div>
+<mat-progress-bar class="lb" mode="query"></mat-progress-bar>
+<mat-progress-bar
+  style="position: absolute"
+  class="lb"
+  mode="buffer"
+></mat-progress-bar>
+<div id="PageCover"></div>
 }
