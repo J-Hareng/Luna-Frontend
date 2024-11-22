@@ -4,9 +4,15 @@
 >
   <div id="CollHeader">
     <div id="HeaderInfo">
-      <h1>{{ this.selectedCollection.name }} Collection</h1>
+      <h1>{{ this.selectedDropDownObject.name }} Collection</h1>
     </div>
     <div id="HeaderActions">
+      <app-luna-drop-down-menu
+        class="lunaDropDown"
+        [items]="this.dropDownObjectArray"
+        [selecteditem]="this.selectedDropDownObject"
+        (selected)="this.handelSelection($event)"
+      ></app-luna-drop-down-menu>
       <button
         class="Coll-editBtn"
         mat-icon-button

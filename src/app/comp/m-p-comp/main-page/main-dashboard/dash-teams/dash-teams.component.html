@@ -6,6 +6,10 @@
   >
     <div class="teamCard" *ngFor="let team of this.mc.userTeams; let i = index">
       <div class="teamCardHeader">
+        <div class="info">
+          <h1 class="TeamTitle">{{ team.name }}</h1>
+          <span class="TeamDes">{{ team.des }}</span>
+        </div>
         <button
           class="team-editBtn"
           mat-icon-button
@@ -20,9 +24,6 @@
             Add Task
           </button>
         </mat-menu>
-
-        <h1 class="TeamTitle">{{ team.name }}</h1>
-        <span class="TeamDes">{{ team.des }}</span>
       </div>
       <mat-divider></mat-divider>
 

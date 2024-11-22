@@ -69,33 +69,40 @@
     gap: 1vmin;
   }
   .teamCard {
-    flex: 30%;
+    flex: 40%;
     // height: 10vmin;
-
-    .team-editBtn {
-      float: right;
-      border-radius: 100px;
-      padding: 1em;
-      content: 0px;
-      background: none;
-      mat-icon {
-        position: absolute;
-        transform: translate(-50%, -50%);
-      }
-      &:hover {
-        background-color: $color-surface-mixed-a10;
-      }
-    }
     .teamCardHeader {
-      .TeamTitle {
-        font-size: 3vmin;
-        color: $text-color;
-        font-weight: normal;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-bottom: 0.25em;
+      .info {
+        display: flex;
+        flex-direction: column;
+
+        .TeamTitle {
+          font-size: 1em;
+          color: $text-color;
+          font-weight: 500;
+        }
+        .TeamDes {
+          font-size: 0.5em;
+          color: $description-color;
+          font-weight: lighter;
+        }
       }
-      .TeamDes {
-        font-size: 1.5vmin;
-        color: $description-color;
-        font-weight: lighter;
+      .team-editBtn {
+        border-radius: 100px;
+        padding: 1em;
+        content: 0px;
+        background: none;
+        mat-icon {
+          position: absolute;
+          transform: translate(-50%, -50%);
+        }
+        &:hover {
+          background-color: $color-surface-mixed-a10;
+        }
       }
     }
     .teamCardContent {
@@ -207,11 +214,11 @@
   #TeamNav {
     display: flex;
     flex-direction: column;
-    background-color: $color-surface-a10;
+    background-color: rgba($color-surface-a10, 0.2);
     border-radius: $BORDER_RADIUS !important;
     padding: 1em;
     margin-left: 1vmin;
-    flex-grow: 2;
+    flex-grow: 1;
 
     button {
       float: right;
@@ -227,19 +234,19 @@
     .teamChip {
       padding: 1em;
       border-radius: 1vmin;
-      background-color: $color-surface-a20;
+      background-color: $color-surface-a10;
 
       margin-top: 1em;
 
       transition: all 0.3s;
       &:hover {
-        background-color: $color-surface-a30;
+        background-color: $color-surface-a20;
       }
     }
   }
 }
 .TaskFree {
-  background: $color-surface-a20;
+  background: $color-surface-a10;
 }
 
 .TaskInProg {

@@ -13,6 +13,29 @@
 .mat-mdc-menu-panel {
   --mat-menu-container-color: #484648 !important;
 }
+/* width */
+::-webkit-scrollbar {
+  position: absolute;
+  width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  position: absolute;
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  position: absolute;
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  position: absolute;
+  background: #555;
+}
 
 button:not(
     .mat-mdc-menu-item,
@@ -158,7 +181,7 @@ header {
 }
 
 .teamCard {
-  background-color: $color-surface-a10;
+  background-color: rgba($color-surface-a10, 0.3);
   border: 1px solid $color-surface-a10;
   border-radius: $BORDER_RADIUS;
   padding: 2vmin;

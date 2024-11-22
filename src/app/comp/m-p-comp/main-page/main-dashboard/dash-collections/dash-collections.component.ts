@@ -19,6 +19,11 @@ import { Dialog } from "@angular/cdk/dialog";
 import { CollServService } from "../../../../../serv/API/c-serv/coll-serv.service";
 import { EditCollectionComponent } from "../../../popups/CollectionsFiles/edit-collection/edit-collection.component";
 import { EditCollectionData } from "../../../popups/DialogData";
+import {
+  LunaDropDownMenuComponent,
+  LunaDropDownObjectCreator,
+  LunaDropDownObject,
+} from "../../../../../custom-components/luna-drop-down-menu/luna-drop-down-menu.component";
 @Component({
   selector: "app-dash-collections",
   standalone: true,
@@ -28,6 +33,7 @@ import { EditCollectionData } from "../../../popups/DialogData";
     NgClass,
     MatFormFieldModule,
     MatSelectModule,
+    LunaDropDownMenuComponent,
     NgIf,
     MatDividerModule,
     MatMenuModule,
@@ -45,6 +51,26 @@ export class DashCollectionsComponent {
     private APIcoll: CollServService
   ) {
     this.UpdateMap();
+
+    this.mc.groupColl.forEach((element, index) => {
+      this.dropDownObjectArray.push(
+        LunaDropDownObjectCreator(index, element.name)
+      );
+    });
+    this.selectedDropDownObject =
+      this.dropDownObjectArray[0] ||
+      LunaDropDownObjectCreator(0, "Select Value");
+  }
+
+  dropDownObjectArray: LunaDropDownObject[] = [];
+  selectedDropDownObject: LunaDropDownObject = LunaDropDownObjectCreator(
+    0,
+    "Select Value"
+  );
+
+  handelSelection(event: LunaDropDownObject) {
+    this.selectedDropDownObject = event;
+    this.jumpToIndex(event.index);
   }
 
   collections = this.mc.groupColl;
