@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject } from "@angular/core";
 import {
   MAT_DIALOG_DATA,
   MatDialogModule,
@@ -8,52 +8,58 @@ import {
   MatDialogContent,
   MatDialogRef,
   MatDialogTitle,
-} from '@angular/material/dialog';
-import { MainCacheService } from '../../../../../serv/logic/main-cache.service';
-import { MatIconModule } from '@angular/material/icon';
-import { NewCollectionResponse, NewTeamResponse } from '../../DialogResponse';
-import { MatInputModule } from '@angular/material/input';
-import { AddTagToCollectionData} from '../../DialogData';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatSelectModule } from '@angular/material/select';
-import {MatExpansionModule} from '@angular/material/expansion';
+} from "@angular/material/dialog";
+import { MainCacheService } from "../../../../../serv/logic/main-cache.service";
+import { MatIconModule } from "@angular/material/icon";
+import { NewCollectionResponse, NewTeamResponse } from "../../DialogResponse";
+import { MatInputModule } from "@angular/material/input";
+import { AddTagToCollectionData } from "../../DialogData";
+import { MatChipsModule } from "@angular/material/chips";
+import { MatSelectModule } from "@angular/material/select";
+import { MatExpansionModule } from "@angular/material/expansion";
 import {
   FormControl,
   FormGroupDirective,
   NgForm,
-
   FormGroup,
   Validators,
   FormsModule,
   ReactiveFormsModule,
-} from '@angular/forms';
-import { NgFor } from '@angular/common';
+} from "@angular/forms";
+import { NgFor } from "@angular/common";
 @Component({
-  selector: 'app-add-tag',
+  selector: "app-add-tag",
   standalone: true,
-  imports: [MatDialogModule, MatIconModule,MatChipsModule,MatSelectModule,NgFor,MatExpansionModule, ReactiveFormsModule, FormsModule, MatInputModule],
-  templateUrl: './add-tag.component.html',
-  styleUrl: './add-tag.component.scss'
+  imports: [
+    MatDialogModule,
+    MatIconModule,
+    MatChipsModule,
+    MatSelectModule,
+    NgFor,
+    MatExpansionModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatInputModule,
+  ],
+  templateUrl: "./add-tag.component.html",
+  styleUrl: "./add-tag.component.scss",
 })
 export class AddTagComponent {
-  constructor(public mc: MainCacheService, private dialog: MatDialog){}
-  
+  constructor(public mc: MainCacheService, private dialog: MatDialog) {}
+
   readonly dialogRef = inject(MatDialogRef<AddTagComponent>);
 
   readonly data = inject<AddTagToCollectionData>(MAT_DIALOG_DATA);
 
-
-
-  NameControll = new FormControl('', [Validators.required]);
+  NameControll = new FormControl("", [Validators.required]);
   fg = new FormGroup({
     name: this.NameControll,
-  })
+  });
 
-
-  Submit(){
-    this.dialogRef.close(this.NameControll.value)
+  Submit() {
+    this.dialogRef.close(this.NameControll.value);
   }
-  onNoClick(){
-    this.dialogRef.close(0)
+  onNoClick() {
+    this.dialogRef.close(0);
   }
 }

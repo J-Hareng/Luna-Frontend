@@ -1,0 +1,36 @@
+<div
+  #entireWrapperId
+  class="LDDWrapper"
+  [ngClass]="{ IsClosed: !Open }"
+  (click)="this.OpenDDL()"
+>
+  <div #wrapperId class="LDDcontentWrapper" [ngClass]="{ IsClosed: !Open }">
+    <div class="visableClosed" [ngClass]="{ IsClosed: !Open }">
+      <span>{{ this.getHeader() }}</span>
+    </div>
+    <i
+      #ddIconId
+      class="material-icons iconIndicator"
+      [ngClass]="{ IsClosed: !Open }"
+      >arrow_forward_ios</i
+    >
+  </div>
+
+  <div
+    #contentId
+    class="LDDcontent"
+    [ngClass]="{ IsClosed: !Open, IsOpen: Open }"
+  >
+    <div
+      class="item"
+      *ngFor="let item of this.items"
+      (click)="this.clickedItem(item)"
+    >
+      <span>{{ item.name }}</span>
+      <i *ngIf="this.selecteditems.includes(item)" class="material-icons icon"
+        >check</i
+      >
+    </div>
+  </div>
+</div>
+<div class="backGround" *ngIf="Open" (click)="this.CloseDDL()"></div>

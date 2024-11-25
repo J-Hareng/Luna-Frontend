@@ -26,7 +26,12 @@
             Edit
           </button>
           <button mat-menu-item>Delete</button>
-          <button mat-menu-item>Upload A File</button>
+          <button
+            mat-menu-item
+            (click)="this.UpenUploadFileDialog(selectedCollection)"
+          >
+            Upload A File
+          </button>
         </mat-menu>
         <mat-icon>more_vert</mat-icon>
       </button>

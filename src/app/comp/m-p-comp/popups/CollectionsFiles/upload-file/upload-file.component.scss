@@ -1,0 +1,54 @@
+@import "../../../../../../CssUtilitys/colors.scss";
+
+.Custominput {
+  border-color: $color-surface-a20;
+  &:focus {
+    border-color: inherit;
+  }
+}
+
+.custom-file-upload {
+  input[type="file"] {
+    display: none;
+  }
+  background-color: $color-surface-a20;
+  border-radius: 1em;
+  padding: 0.25em 1em;
+
+  color: $text-color;
+}
+.ContentWrapper {
+  display: grid;
+  grid-template-columns: 20em auto;
+  grid-template-rows: auto;
+  gap: 1em;
+  margin: 1em;
+
+  #FileSelection {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    input {
+      margin-right: 0px;
+    }
+  }
+
+  #TagSelection {
+    height: 10em;
+    .TagChips {
+      position: relative;
+      z-index: 1100 !important;
+
+      div,
+      span .chip {
+        flex-wrap: nowrap;
+        position: relative;
+        z-index: 1100 !important;
+      }
+    }
+  }
+}
+
+#TagSelection {
+  // z-index: 10 !important;
+}

@@ -33,6 +33,7 @@ export class LunaDropDownMenuComponent implements AfterViewInit {
   @ViewChild("wrapperId") WrapperElement!: ElementRef;
   @ViewChild("contentId") ContentElement!: ElementRef;
   @ViewChild("entireWrapperId") AlwaysShownElement!: ElementRef;
+  @ViewChild("ddIconId") DropDownIconElement!: ElementRef;
   Open: boolean = false;
   Width: number = 0;
   ngAfterViewInit(): void {
@@ -44,9 +45,16 @@ export class LunaDropDownMenuComponent implements AfterViewInit {
 
   styleDropDown() {
     if (this.WrapperElement && this.WrapperElement.nativeElement) {
-      this.WrapperElement.nativeElement.style.width = this.Width + "px";
+      const sizeOfIcon =
+        this.DropDownIconElement.nativeElement.getBoundingClientRect().width;
+
+      this.WrapperElement.nativeElement.style.width =
+        this.Width + sizeOfIcon + "px";
+      this.ContentElement.nativeElement.style.width =
+        this.Width + sizeOfIcon + "px";
       const positionOfWrapper =
         this.WrapperElement.nativeElement.getBoundingClientRect();
+
       const DDwidth = positionOfWrapper.width;
       const DDLeft = positionOfWrapper.left;
 

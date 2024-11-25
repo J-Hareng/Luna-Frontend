@@ -76,6 +76,10 @@
   height: 100%;
 }
 #CollectionWrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
   #CollHeader {
     display: flex;
     flex-direction: row;
@@ -189,7 +193,6 @@
   }
   .Collection {
     overflow-y: scroll;
-    background-color: red;
     margin: 0px 1em;
     flex-grow: 1;
 

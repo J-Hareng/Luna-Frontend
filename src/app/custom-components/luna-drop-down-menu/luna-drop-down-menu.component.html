@@ -8,7 +8,10 @@
     <div class="visableClosed" [ngClass]="{ IsClosed: !Open }">
       <span>{{ this.selecteditem.name }}</span>
     </div>
-    <i class="material-icons iconIndicator" [ngClass]="{ IsClosed: !Open }"
+    <i
+      #ddIconId
+      class="material-icons iconIndicator"
+      [ngClass]="{ IsClosed: !Open }"
       >arrow_forward_ios</i
     >
   </div>

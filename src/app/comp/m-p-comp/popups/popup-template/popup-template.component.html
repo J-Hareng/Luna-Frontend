@@ -1,0 +1,24 @@
+<div id="CKpopup">
+  <h1 mat-dialog-title>Insert Title here <strong></strong></h1>
+  <mat-dialog-content id="content">
+    <p>Add a description about this popup</p>
+
+    <input type="file" />
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <form>
+      <div class="btnRow">
+        <button mat-button class="can" (click)="onNoClick()">Cancel</button>
+
+        <button
+          mat-button
+          class="sub"
+          type="submit"
+          [disabled]="this.fg.invalid"
+        >
+          Upload
+        </button>
+      </div>
+    </form>
+  </mat-dialog-actions>
+</div>

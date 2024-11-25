@@ -24,6 +24,7 @@ import {
   LunaDropDownObjectCreator,
   LunaDropDownObject,
 } from "../../../../../custom-components/luna-drop-down-menu/luna-drop-down-menu.component";
+import { UploadFileComponent } from "../../../popups/CollectionsFiles/upload-file/upload-file.component";
 @Component({
   selector: "app-dash-collections",
   standalone: true,
@@ -302,6 +303,15 @@ export class DashCollectionsComponent {
     const dialogRef = this.dialog.open(EditCollectionComponent, { data: data });
     dialogRef.afterClosed().subscribe((result) => {
       alert("Closed");
+    });
+  }
+
+  UpenUploadFileDialog(coll: CollectionType) {
+    const data = { collection: coll };
+
+    const dialogRef = this.dialog.open(UploadFileComponent, { data: data });
+    dialogRef.afterClosed().subscribe((result) => {
+      alert("Closed UploadDialog");
     });
   }
 }

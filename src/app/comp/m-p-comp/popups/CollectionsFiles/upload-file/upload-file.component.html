@@ -1,0 +1,49 @@
+<div id="CKpopup">
+  <h1 mat-dialog-title>Upload A New File to <strong></strong></h1>
+  <mat-dialog-content id="content">
+    <p>
+      Tags Are used to group your data, create a tag and append them to a file.
+      you can group your collection files with by your tags
+    </p>
+  </mat-dialog-content>
+  <div class="ContentWrapper">
+    <div id="FileSelection">
+      <input
+        type="text"
+        [formControl]="filenamefrom"
+        class="Custominput"
+        placeholder="File Name"
+      />
+
+      <label class="custom-file-upload">
+        <input type="file" (change)="this.onFileChange($event)" />
+        {{ this.getTextForFileSelect() }}
+      </label>
+    </div>
+    <div #TagSelection id="TagSelection">
+      <app-luna-chips
+        class="TagChips"
+        [chips]="createTagList()"
+        (selectedChipsEmitter)="this.onTagChange($event)"
+        [UtilsSearch]="true"
+      ></app-luna-chips>
+    </div>
+  </div>
+
+  <mat-dialog-actions>
+    <form>
+      <div class="btnRow">
+        <button mat-button class="can" (click)="onNoClick()">Cancel</button>
+
+        <button
+          mat-button
+          class="sub"
+          type="submit"
+          [disabled]="!this.ValidForUpload()"
+        >
+          Upload
+        </button>
+      </div>
+    </form>
+  </mat-dialog-actions>
+</div>

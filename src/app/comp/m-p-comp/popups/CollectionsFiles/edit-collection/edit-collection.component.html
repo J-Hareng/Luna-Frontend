@@ -33,27 +33,33 @@
         </div>
 
         <div class="ActionWrapperH">
-          <input class="Ac Custominput" placeholder="My Cool New Tag" [formControl]="this.TagsControll" />
+          <input
+            class="Ac Custominput"
+            placeholder="My Cool New Tag"
+            [formControl]="this.TagsControll"
+          />
 
-          <button type="button" class="Ac DPButton" mat-icon-button [disabled]="isdisabled()" >
-              {{getTagBtnText()}}
+          <button
+            type="button"
+            class="Ac DPButton"
+            mat-icon-button
+            [disabled]="isdisabled()"
+          >
+            {{ getTagBtnText() }}
           </button>
         </div>
       </div>
 
       <div class="btnRow">
         <button mat-button class="can" (click)="onNoClick()">Cancel</button>
-        
-        
-        
+
         <!-- TODO Implement to enable when a tag is edited or created -->
         <button
           mat-button
           class="sub"
           type="submit"
           [disabled]="
-            this.fg.invalid ||
-            (this.NameControll.value == data.collection.name)
+            this.fg.invalid || this.NameControll.value == data.collection.name
           "
         >
           Update
