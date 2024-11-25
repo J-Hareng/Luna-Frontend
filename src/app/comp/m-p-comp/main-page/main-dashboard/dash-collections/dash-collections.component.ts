@@ -308,7 +308,7 @@ export class DashCollectionsComponent {
 
   UpenUploadFileDialog(coll: CollectionType) {
     const data = { collection: coll };
-
+    console.log("test");
     const dialogRef = this.dialog.open(UploadFileComponent, { data: data });
     dialogRef.afterClosed().subscribe((result) => {
       alert("Closed UploadDialog");
