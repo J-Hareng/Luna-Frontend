@@ -15,25 +15,27 @@
 }
 /* width */
 ::-webkit-scrollbar {
-  position: absolute;
+  // position: absolute;
   width: 3px;
 }
-
+::-webkit-scrollbar-corner {
+  background: rgba(0, 0, 0, 0);
+}
 /* Track */
 ::-webkit-scrollbar-track {
-  position: absolute;
+  // position: absolute;
   background: transparent;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  position: absolute;
+  // position: absolute;
   background: #888;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  position: absolute;
+  // position: absolute;
   background: #555;
 }
 
@@ -146,7 +148,8 @@ header {
 }
 
 #CKpopup {
-  form {
+  form,
+  .actions {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
@@ -154,6 +157,8 @@ header {
     .btnRow {
       display: flex;
       justify-content: space-between;
+      width: 100%;
+      flex-grow: 1;
 
       .can {
         background: $color-surface-mixed-a10;

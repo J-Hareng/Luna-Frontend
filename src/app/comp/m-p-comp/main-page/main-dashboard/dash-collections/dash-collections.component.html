@@ -36,33 +36,6 @@
         <mat-icon>more_vert</mat-icon>
       </button>
     </div>
-    <!-- <div class="CollectionHeader">{{ this.getCollAt(MainIndex).name }}</div>
-    <div id="Seletor">
-      <mat-form-field>
-        <mat-label>Select an option</mat-label>
-        <mat-select [(value)]="quickSelectIndex">
-          <mat-option (click)="AddCollection()">
-            <mat-icon>add</mat-icon>
-          </mat-option>
-          <mat-option *ngFor="let i of range" (click)="jumpToIndex(i)">{{
-            this.mc.groupColl[i].name
-          }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div id="scroller">
-      <ng-container *ngFor="let i of range">
-        <div
-          class="card"
-          (click)="cardAtIndexIsClicked(i)"
-          [ngClass]="getCollClass(i)"
-        >
-          <h1>{{ this.mc.groupColl[i].name }}</h1>
-        </div>
-      </ng-container>
-    </div> -->
-
-    <!-- <mat-divider></mat-divider> -->
   </div>
   <ng-container
     *ngTemplateOutlet="
@@ -76,38 +49,46 @@
   <div class="Collection">
     <div class="body">
       <div class="filter">
-        <div class="nav">
-          <button (click)="FilterToNone()" class="clearFilter">Clear</button>
-          <button (click)="FilterToAll()" class="all">All</button>
-        </div>
-
-        <mat-chip-listbox
-          class="mat-mdc-chip-set-stacked"
-          multiple=""
-          aria-label="Cutest dog breeds"
+        <app-luna-chips
+          [UtilsButtons]="true"
+          [UtilsSearch]="true"
+          [AllaciveOnStart]="true"
+          [chips]="this.createChipsObjectArray()"
+          (selectedChipsEmitter)="this.handelChipsSelection($event)"
         >
-          <mat-chip-option
-            class="NotDef"
-            *ngFor="let tag of coll.tags || []"
-            (click)="filterIsKlicked(tag)"
-            [selected]="this.TagfilterList.includes(tag)"
-            >{{ tag }}</mat-chip-option
-          >
-        </mat-chip-listbox>
+        </app-luna-chips>
       </div>
       <div class="files">
-        <!-- <h1 class="CollName">{{coll.name}}</h1>  -->
         <ng-container *ngFor="let file of coll.files">
           <div class="file" *ngIf="this.CheckFilter(file)">
-            <div class="imgWrapper">
+            <div class="imgWrapper" (click)="OpenFilePreview(file)">
               @if (this.IsExtatsonValid(file.path)){
               <img class="img" [src]="getBlobForFile(file.path)" />
               } @else {
               <p>.{{ getExtention(file.path) }}</p>
               }
             </div>
+            <div class="imgContent">
+              <h1>{{ file.name }}</h1>
 
-            <h1>{{ file.name }}</h1>
+              <div class="Actions">
+                <i #Edit class="material-icons" (click)="this.EditFile(file)"
+                  >edit</i
+                >
+                <i
+                  #Delete
+                  class="material-icons"
+                  (click)="this.DeleteFile(file)"
+                  >delete_forever</i
+                >
+                <i
+                  #Download
+                  (click)="this.DownloadFile(file)"
+                  class="material-icons"
+                  >cloud_download</i
+                >
+              </div>
+            </div>
           </div>
         </ng-container>
       </div>

@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { AuthService } from '../API/auth.service';
-import { UserUtilsService } from '../API/user-utils.service';
-import { Router } from '@angular/router';
-import { TeamServService } from '../API/c-serv/team-serv.service';
-import { CollServService } from '../API/c-serv/coll-serv.service';
+import { Injectable } from "@angular/core";
+import { AuthService } from "../API/auth.service";
+import { UserUtilsService } from "../API/user-utils.service";
+import { Router } from "@angular/router";
+import { TeamServService } from "../API/c-serv/team-serv.service";
+import { CollServService } from "../API/c-serv/coll-serv.service";
 
-import { Subscription } from 'rxjs';
+import { Subscription } from "rxjs";
 import {
   TeamType,
   userType,
@@ -18,13 +18,12 @@ import {
   LinkType,
   taskInfoType,
   otherUsers,
-} from '../mod/Types';
+} from "../mod/Types";
 
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { tap, timestamp } from 'rxjs/operators';
-import { map } from 'rxjs/operators';
-import { Conditional } from '@angular/compiler';
-
+import { BehaviorSubject, Observable, of } from "rxjs";
+import { tap, timestamp } from "rxjs/operators";
+import { map } from "rxjs/operators";
+import { Conditional } from "@angular/compiler";
 
 export enum SiteStatus {
   Main = "MAIN",
@@ -32,12 +31,16 @@ export enum SiteStatus {
   Collection = "COLLECTION",
 }
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class MainCacheService {
-  constructor(private apiAuth: AuthService, private apiUser: UserUtilsService, private apiTeam: TeamServService, private apiColl: CollServService ) { }
+  constructor(
+    private apiAuth: AuthService,
+    private apiUser: UserUtilsService,
+    private apiTeam: TeamServService,
+    private apiColl: CollServService
+  ) {}
 
   private IncrementCounter() {
     let curCounter = this.counter.getValue();
@@ -64,15 +67,13 @@ export class MainCacheService {
   }
 
   isLoading: boolean = false;
-  isLoadingSmall: boolean= false;
-  
+  isLoadingSmall: boolean = false;
 
   Teams!: TeamType[];
   user!: userType;
   userTeams: TeamType[] = [];
   groupColl!: CollectionType[];
   fileMapForColl = new Map<string, FileBlobType[]>();
-
 
   // SelectedTask!: TaskType;
   // selectedCollection!: CollectionType;
@@ -89,20 +90,19 @@ export class MainCacheService {
   reremder = new BehaviorSubject<boolean>(true);
 
   private UpdateTaskCache(tasks: TaskType[]): void {
-    if (tasks != null || tasks != undefined){
+    if (tasks != null || tasks != undefined) {
       tasks.forEach((task) => {
-
         let ui: boolean;
         let IsWorkedOn: boolean;
-        
-        if (task.inprogress == null || task.inprogress == undefined){
+
+        if (task.inprogress == null || task.inprogress == undefined) {
           ui = false;
           IsWorkedOn = false;
-
         } else {
-          ui = task.inprogress.some((user: LinkType) => user._id === this.user._id);
+          ui = task.inprogress.some(
+            (user: LinkType) => user._id === this.user._id
+          );
           IsWorkedOn = task.inprogress.length > 0;
-
         }
 
         let tInf: taskInfoType = {
@@ -110,7 +110,6 @@ export class MainCacheService {
           UserIn: ui,
           IsWorkedOn: IsWorkedOn,
         };
-
 
         this.Taskmap.set(task._id, tInf);
       });
@@ -120,41 +119,40 @@ export class MainCacheService {
   SetUpdata() {
     this.ResetCounter();
     this.isLoading = true;
-    this.apiAuth.ValidateSessionToken('Dashboard');
+    this.apiAuth.ValidateSessionToken("Dashboard");
     this.apiUser.GetUserSetupData().subscribe(
       (res) => {
-
-        if (res.error != null && res.error != undefined && res.error != ""){
-          console.error("Faild")
-          console.log(res.error)
+        if (res.error != null && res.error != undefined && res.error != "") {
+          console.error("Faild");
+          console.log(res.error);
           return;
         }
-        if (res.status == "NoID"){
+        if (res.status == "NoID") {
           this.user = res.body.user;
           this.isLoading = false;
-          return
+          return;
         }
-        
-        let resBody = res.body ;
+
+        let resBody = res.body;
 
         this.user = resBody.user;
-        
+
         if (resBody.collections == null) {
           this.groupColl = [];
         } else {
-          this.groupColl = resBody.collections 
+          this.groupColl = resBody.collections;
         }
 
-        this.updateTeamCache(resBody.teams)
+        this.updateTeamCache(resBody.teams);
 
-        this.updateUsersCache(resBody.otherusers)
+        this.updateUsersCache(resBody.otherusers);
 
         this.UpdateTaskCache(resBody.tasks);
 
         this.isLoading = false;
       },
       (err) => {
-        console.log("error")
+        console.log("error");
         console.error(err);
       }
     );
@@ -172,90 +170,84 @@ export class MainCacheService {
   //     })
   //   );
   // }
-  updateTeams(){
-    this.isLoadingSmall = true
-    
-    this.apiTeam.getAllteamsInGroup().subscribe(
-      (res) => {
-        let teams = res.body
-        this.updateTeamCache(teams)
-        this.isLoadingSmall = false
-      }
-    )
+  updateTeams() {
+    this.isLoadingSmall = true;
+
+    this.apiTeam.getAllteamsInGroup().subscribe((res) => {
+      let teams = res.body;
+      this.updateTeamCache(teams);
+      this.isLoadingSmall = false;
+    });
   }
 
-
-
-  updateTasks(tasksL: LinkType[]): void{
-    if( tasksL == null ||tasksL.length == 0){
-      return
+  updateTasks(tasksL: LinkType[]): void {
+    if (tasksL == null || tasksL.length == 0) {
+      return;
     }
     this.isLoadingSmall = true;
     this.apiTeam.GetTasksArray(tasksL).subscribe(
       (res) => {
-        if (res.status != "OK"){
+        if (res.status != "OK") {
           console.error(res.error);
           return;
         }
         this.UpdateTaskCache(res.body);
         this.isLoadingSmall = false;
-        console.log(this.Taskmap.size)
-      }, 
-      (err) => {
-        console.error(err);
-        this.isLoadingSmall = false;
-      }
-    )
-  }
-
-  updateTeamCache(teams: TeamType[]): void{
-    if( teams == null ||teams.length == 0){
-      this.Teams = []
-      this.userTeams = []
-      return
-    }
-    this.Teams = teams;
-
-    this.userTeams = []
-    teams.map((Team) => {
-      if (Team.users.some((user) => user._id === this.user._id)){
-        this.userTeams.push(Team)
-      }
-    })
-  }
-
-  updateUsersCache(users: otherUsers[]): void{
-    if( users == null || users.length == 0 ){
-      return
-    }
-
-    users.map((user) => {
-      if (user._id != this.user._id ){
-        this.UserMap.set(user._id, user)
-      }
-      
-    })
-  }
-  updateCollections(): void {
-    this.isLoadingSmall = true;
-    this.apiColl.GetAllColls(this.user.groupid).subscribe(
-      (res) => {
-        this.groupColl = res.body;
-        this.updateTeams()
+        console.log(this.Taskmap.size);
       },
       (err) => {
         console.error(err);
         this.isLoadingSmall = false;
       }
     );
-  
+  }
+
+  updateTeamCache(teams: TeamType[]): void {
+    if (teams == null || teams.length == 0) {
+      this.Teams = [];
+      this.userTeams = [];
+      return;
+    }
+    this.Teams = teams;
+
+    this.userTeams = [];
+    teams.map((Team) => {
+      if (Team.users.some((user) => user._id === this.user._id)) {
+        this.userTeams.push(Team);
+      }
+    });
+  }
+
+  updateUsersCache(users: otherUsers[]): void {
+    if (users == null || users.length == 0) {
+      return;
+    }
+
+    users.map((user) => {
+      if (user._id != this.user._id) {
+        this.UserMap.set(user._id, user);
+      }
+    });
+  }
+  updateCollections(): void {
+    this.isLoadingSmall = true;
+    this.apiColl.GetAllColls(this.user.groupid).subscribe(
+      (res) => {
+        this.groupColl = res.body;
+        this.updateTeams();
+      },
+      (err) => {
+        console.error(err);
+        this.isLoadingSmall = false;
+      }
+    );
   }
   getUser(): userType {
     return this.user;
   }
 
-  getUserLink(): LinkType{
-    return {_id: this.user._id, name: this.user.name}
+  getUserLink(): LinkType {
+    return { _id: this.user._id, name: this.user.name };
   }
 
   getGrupIdName(): string {
@@ -267,4 +259,3 @@ export class MainCacheService {
     return this.Taskmap.get(taskId) || ({} as taskInfoType);
   }
 }
-

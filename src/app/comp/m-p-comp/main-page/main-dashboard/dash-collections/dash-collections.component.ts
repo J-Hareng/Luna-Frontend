@@ -2,7 +2,11 @@ import { Component } from "@angular/core";
 import { NgFor } from "@angular/common";
 import { MainCacheService } from "../../../../../serv/logic/main-cache.service";
 import { NgTemplateOutlet } from "@angular/common";
-import { CollectionType, FileType } from "../../../../../serv/mod/Types";
+import {
+  AreYouSureConfig,
+  CollectionType,
+  FileType,
+} from "../../../../../serv/mod/Types";
 import { NgClass } from "@angular/common";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSelectModule } from "@angular/material/select";
@@ -18,13 +22,26 @@ import { MatDialog } from "@angular/material/dialog";
 import { Dialog } from "@angular/cdk/dialog";
 import { CollServService } from "../../../../../serv/API/c-serv/coll-serv.service";
 import { EditCollectionComponent } from "../../../popups/CollectionsFiles/edit-collection/edit-collection.component";
-import { EditCollectionData } from "../../../popups/DialogData";
+import {
+  AreYouSureData,
+  EditCollectionData,
+  PreviewFileData,
+} from "../../../popups/DialogData";
 import {
   LunaDropDownMenuComponent,
   LunaDropDownObjectCreator,
   LunaDropDownObject,
 } from "../../../../../custom-components/luna-drop-down-menu/luna-drop-down-menu.component";
 import { UploadFileComponent } from "../../../popups/CollectionsFiles/upload-file/upload-file.component";
+import {
+  LunaChipsComponent,
+  LunaChipsObject,
+  LunaChipsObjectCreator,
+} from "../../../../../custom-components/luna-chips/luna-chips.component";
+import { FilePreviewComponent } from "../../../popups/CollectionsFiles/file-preview/file-preview.component";
+import { AreYouSurePupComponent } from "../../../popups/are-you-sure-pup/are-you-sure-pup.component";
+import { error } from "console";
+import { computeMsgId } from "@angular/compiler";
 @Component({
   selector: "app-dash-collections",
   standalone: true,
@@ -40,6 +57,7 @@ import { UploadFileComponent } from "../../../popups/CollectionsFiles/upload-fil
     MatMenuModule,
     MatIconModule,
     MatChipsModule,
+    LunaChipsComponent,
   ],
   templateUrl: "./dash-collections.component.html",
   styleUrl: "./dash-collections.component.scss",
@@ -61,6 +79,8 @@ export class DashCollectionsComponent {
     this.selectedDropDownObject =
       this.dropDownObjectArray[0] ||
       LunaDropDownObjectCreator(0, "Select Value");
+    //TODO: Remove this after finishing dev
+    this.EditCollection(this.mc.groupColl[0]);
   }
 
   dropDownObjectArray: LunaDropDownObject[] = [];
@@ -72,6 +92,14 @@ export class DashCollectionsComponent {
   handelSelection(event: LunaDropDownObject) {
     this.selectedDropDownObject = event;
     this.jumpToIndex(event.index);
+  }
+
+  handelChipsSelection(event: LunaChipsObject[]) {
+    this.TagfilterList = event.map((element) => element.name);
+  }
+
+  createChipsObjectArray(): LunaChipsObject[] {
+    return LunaChipsObjectCreator(this.getCollAt(0).tags || []);
   }
 
   collections = this.mc.groupColl;
@@ -302,7 +330,9 @@ export class DashCollectionsComponent {
     const data: EditCollectionData = { collection: coll };
     const dialogRef = this.dialog.open(EditCollectionComponent, { data: data });
     dialogRef.afterClosed().subscribe((result) => {
-      alert("Closed");
+      if (result == 1) {
+        this.mc.updateCollections();
+      }
     });
   }
 
@@ -310,8 +340,85 @@ export class DashCollectionsComponent {
     const data = { collection: coll };
     console.log("test");
     const dialogRef = this.dialog.open(UploadFileComponent, { data: data });
+
     dialogRef.afterClosed().subscribe((result) => {
-      alert("Closed UploadDialog");
+      if (result == 0 || result == undefined || result == null) {
+        console.log("The dialog was closed");
+        return;
+      } else {
+        console.log("The dialog was closed");
+        this.mc.isLoadingSmall = true;
+        this.fm
+          .uploadFile(result.name, result.file, result.tags, result.collection)
+          .subscribe(
+            (data) => {
+              console.log("File uploaded");
+              this.mc.updateCollections();
+              this.mc.isLoadingSmall = false;
+            },
+
+            (error) => {
+              console.error("Error uploading file");
+              console.log(error.error);
+              this.mc.isLoadingSmall = false;
+            }
+          );
+      }
     });
+  }
+
+  OpenFilePreview(file: FileType) {
+    const data: PreviewFileData = {
+      file: this.getBlobForFile(file.path),
+
+      fileInfo: file,
+    };
+    const dialogRef = this.dialog.open(FilePreviewComponent, { data });
+  }
+  EditFile(file: FileType) {
+    const data: PreviewFileData = {
+      file: this.getBlobForFile(file.path),
+      fileInfo: file,
+    };
+    alert(
+      "Edit file inst implemented yet but here is the file in preview Mode :3"
+    );
+    const dialogRef = this.dialog.open(FilePreviewComponent, { data });
+  }
+  DeleteFile(file: FileType) {
+    const data: AreYouSureData = {
+      title: "Delete File",
+      text:
+        "Are you sure you want to delete the file" +
+        file.name +
+        "?" +
+        " This action cannot be undone",
+      submitText: "Delete",
+      status: true,
+    };
+
+    const dialogRef = this.dialog.open(AreYouSurePupComponent, { data });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.mc.isLoadingSmall = true;
+        this.APIcoll.RemoveFile(
+          this.collections[this.MainIndex]._id,
+          file
+        ).subscribe(
+          (data) => {
+            this.mc.updateCollections();
+            this.mc.isLoadingSmall = false;
+          },
+          (error) => {
+            console.error("Error deleting file");
+            console.log(error.error);
+            this.mc.isLoadingSmall = false;
+          }
+        );
+      }
+    });
+  }
+  DownloadFile(file: FileType) {
+    this.fm.downloadFile(file);
   }
 }

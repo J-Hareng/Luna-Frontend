@@ -8,7 +8,7 @@ import { MainCacheService } from "../../logic/main-cache.service";
 import { AuthService } from "../auth.service";
 import { LunaResponse } from "../../mod/ReqMods";
 import { FileBlob } from "../../mod/ReqMods";
-
+import { saveAs } from "file-saver";
 @Injectable({
   providedIn: "root",
 })
@@ -24,7 +24,7 @@ export class FileManagerService {
     file: File,
     tags: string[],
     coll: CollectionType
-  ): Observable<any> {
+  ): Observable<LunaResponse<string>> {
     // for tag in tags {
     let tagFormat = tags.join("§");
     const formData = new FormData();
@@ -35,10 +35,14 @@ export class FileManagerService {
     formData.append("username", this.mc.user.name);
     formData.append("coll", coll?._id);
 
-    return this.http.post(API_BASE_URL + "/api/UploadFile", formData, {
-      withCredentials: true,
-      headers: this.apiAuth.GetHeaders(),
-    });
+    return this.http.post<LunaResponse<string>>(
+      API_BASE_URL + "/api/UploadFile",
+      formData,
+      {
+        withCredentials: true,
+        headers: this.apiAuth.GetHeaders(),
+      }
+    );
   }
 
   GetFile(file: FileType): Observable<any> {
@@ -63,25 +67,26 @@ export class FileManagerService {
       }
     );
   }
-  // downloadFile(file: FileType) {
-  //   const headers = new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //     responseType: 'blob',
-  //   });
-  //   let fileExtension: string = file.path.split('.').pop() || 'txt';
+  downloadFile(file: FileType) {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+      responseType: "blob",
+      Authorization: this.apiAuth.getToken(),
+    });
+    let fileExtension: string = file.path.split(".").pop() || "txt";
 
-  //   this.http
-  //     .post(
-  //       API_BASE_URL + '/api/DownloadFile',
-  //       { file: file },
-  //       {
-  //         withCredentials: true,
-  //         headers: headers,
-  //         responseType: 'blob', // Add this line to specify the response type
-  //       }
-  //     )
-  //     .subscribe((data: Blob) => {
-  //       saveAs(data, file.name + '.' + fileExtension); // Remove the '+' operator and the extra comma
-  //     });
-  // }
+    this.http
+      .post(
+        API_BASE_URL + "/api/DownloadFile",
+        { file: file },
+        {
+          withCredentials: true,
+          headers: headers,
+          responseType: "blob", // Add this line to specify the response type
+        }
+      )
+      .subscribe((data: Blob) => {
+        saveAs(data, file.name + "." + fileExtension); // Remove the '+' operator and the extra comma
+      });
+  }
 }

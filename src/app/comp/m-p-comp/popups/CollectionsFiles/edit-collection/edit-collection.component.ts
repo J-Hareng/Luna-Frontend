@@ -23,6 +23,7 @@ import {
 import { NgFor } from "@angular/common";
 import { CollServService } from "../../../../../serv/API/c-serv/coll-serv.service";
 import { AddTagComponent } from "../add-tag/add-tag.component";
+import { CommonModule } from "@angular/common";
 @Component({
   selector: "app-edit-collection",
   standalone: true,
@@ -36,6 +37,7 @@ import { AddTagComponent } from "../add-tag/add-tag.component";
     ReactiveFormsModule,
     FormsModule,
     MatInputModule,
+    CommonModule,
   ],
   templateUrl: "./edit-collection.component.html",
   styleUrl: "./edit-collection.component.scss",
@@ -49,18 +51,17 @@ export class EditCollectionComponent {
   readonly dialogRef = inject(MatDialogRef<EditCollectionComponent>);
 
   readonly data = inject<EditCollectionData>(MAT_DIALOG_DATA);
-  
+
   tagbtn = 0;
   tagInput = "";
-  
+
   selectedTag = "";
-  
+
   NameControll = new FormControl(this.data.collection.name, [
     Validators.required,
   ]);
   TagsControll = new FormControl("", [Validators.required]);
-  
-  
+
   fg = new FormGroup({
     name: this.NameControll,
   });
@@ -71,6 +72,64 @@ export class EditCollectionComponent {
 
   onNoClick() {
     this.dialogRef.close();
+  }
+
+  selectTag(tag: string) {
+    if (this.selectedTag === tag) {
+      this.selectedTag = "";
+      this.TagsControll.setValue("");
+      this.tagbtn = 0;
+      return;
+    }
+    this.selectedTag = tag;
+    this.tagbtn = 1;
+    this.TagsControll.setValue(tag);
+  }
+
+  editCreateButtonClicked() {
+    if (this.TagsControll.invalid) {
+      return;
+    }
+    console.log(this.TagsControll.value);
+    this.mc.isLoadingSmall = true;
+
+    if (this.tagbtn === 0) {
+      this.apicoll
+        .AddTagToColl(
+          this.data.collection._id,
+          this.TagsControll.value as string
+        )
+        .subscribe(
+          (res) => {
+            console.log(res);
+            this.mc.isLoadingSmall = false;
+          },
+          (err) => {
+            console.error(err);
+            this.mc.isLoadingSmall = false;
+          }
+        );
+
+      this.dialogRef.close(1);
+    } else {
+      this.apicoll
+        .EditTagInCollection(
+          this.TagsControll.value as string,
+          this.selectedTag,
+          this.data.collection._id
+        )
+        .subscribe(
+          (res) => {
+            console.log(res);
+            this.mc.isLoadingSmall = false;
+          },
+          (err) => {
+            console.error(err);
+            this.mc.isLoadingSmall = false;
+          }
+        );
+      this.dialogRef.close(1);
+    }
   }
 
   addTagClick() {
@@ -89,17 +148,19 @@ export class EditCollectionComponent {
     // });
   }
   isdisabled(): boolean {
-  if (this.TagsControll.invalid && this.tagbtn === 0) {
-    return true;
-    } else if (this.tagbtn === 1 && this.TagsControll.value === this.selectedTag) {
-    return true
+    if (this.TagsControll.invalid && this.tagbtn === 0) {
+      return true;
+    } else if (
+      this.tagbtn === 1 &&
+      this.TagsControll.value === this.selectedTag
+    ) {
+      return true;
     } else {
-    return false;
+      return false;
     }
-  
   }
-  
-  getTagBtnText(): string{
+
+  getTagBtnText(): string {
     if (this.tagbtn == 0) {
       return "Add Tag";
     } else {

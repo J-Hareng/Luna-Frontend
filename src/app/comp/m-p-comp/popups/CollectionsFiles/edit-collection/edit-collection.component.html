@@ -26,9 +26,14 @@
 
       <div id="TagWrapper">
         <div class="ChipWrapper">
-          <span class="tagChip" *ngFor="let tag of data.collection.tags ?? []">
+          <span
+            class="tagChip"
+            (click)="this.selectTag(tag)"
+            *ngFor="let tag of data.collection.tags ?? []"
+            [ngClass]="{ selected: tag == selectedTag }"
+          >
             {{ tag }}
-            <mat-icon>edit</mat-icon>
+            <i class="material-icons">edit</i>
           </span>
         </div>
 
@@ -38,12 +43,12 @@
             placeholder="My Cool New Tag"
             [formControl]="this.TagsControll"
           />
-
           <button
             type="button"
             class="Ac DPButton"
             mat-icon-button
             [disabled]="isdisabled()"
+            (click)="this.editCreateButtonClicked()"
           >
             {{ getTagBtnText() }}
           </button>

@@ -13,11 +13,16 @@
   </div>
   <app-exit-onbackklick (click)="exit()"></app-exit-onbackklick>
    -->
-   <h2 mat-dialog-title>{{data.title}}</h2>
-   <mat-dialog-content>
-     <p>{{data.text}}</p>
-   </mat-dialog-content>
-   <mat-dialog-actions>
-     <button class="NavButton" id="Sub" (click)="onNoClick()">Cancel</button>
-     <button class="NavButton" (click)="submit()" cdkFocusInitial>{{data.submitText}}</button>
-   </mat-dialog-actions>
+
+<div class="CustomPopup">
+  <h2 mat-dialog-title>{{ data.title }}</h2>
+  <mat-dialog-content>
+    <p>{{ data.text }}</p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button class="NavButton" id="Sub" (click)="onNoClick()">Cancel</button>
+    <button class="NavButton" (click)="submit()" cdkFocusInitial>
+      {{ data.submitText }}
+    </button>
+  </mat-dialog-actions>
+</div>

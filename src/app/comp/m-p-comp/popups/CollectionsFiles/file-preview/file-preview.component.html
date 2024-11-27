@@ -1,0 +1,27 @@
+<div id="CKpopup">
+  <h1 mat-dialog-title>{{ this.data.fileInfo.name }}<strong></strong></h1>
+  <mat-dialog-content id="content">
+    <div class="content">
+      <div class="ImgWrapper">
+        <img [src]="this.data.file" alt="file preview" />
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <!-- <form>
+      <div class="btnRow">
+        <button mat-button class="can" (click)="onNoClick()">Cancel</button>
+
+        <button
+          mat-button
+          class="sub"
+          type="submit"
+          [disabled]="this.fg.invalid"
+        >
+          Upload
+        </button>
+      </div>
+    </form> -->
+  </mat-dialog-actions>
+</div>

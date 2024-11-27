@@ -27,6 +27,7 @@ export class LunaChipsComponent implements AfterViewInit {
 
   @Input() UtilsButtons: boolean = false;
   @Input() UtilsSearch: boolean = false;
+  @Input() AllaciveOnStart: boolean = false;
 
   selectedChips: LunaChipsObject[] = [];
 
@@ -39,6 +40,11 @@ export class LunaChipsComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.checkOverflow();
+    if (this.AllaciveOnStart) {
+      this.selectedChips = this.chips;
+      this.selectedChipsEmitter.emit(this.selectedChips);
+    }
+
     this.tagSelection.nativeElement.addEventListener("scroll", () =>
       this.checkOverflow()
     );
@@ -79,18 +85,11 @@ export class LunaChipsComponent implements AfterViewInit {
   }
 
   chipIsKlicked(chip: LunaChipsObject) {
-    console.log("chipIsKlicked");
-    console.log(chip);
-    console.log(this.selectedChips);
-    console.log(this.selectedChips.includes(chip));
-
     if (ContainsChip(chip, this.selectedChips)) {
-      console.log("chipContaint");
       this.selectedChips = this.selectedChips.filter(
         (element) => !isSameChip(element, chip)
       );
     } else {
-      console.log("chipNotContaint");
       this.selectedChips.push(chip);
     }
 
@@ -120,7 +119,18 @@ export class LunaChipsComponent implements AfterViewInit {
 
     return true;
   }
+
+  SetToAll() {
+    this.selectedChips = this.chips;
+    this.selectedChipsEmitter.emit(this.selectedChips);
+  }
+
+  SetToNone() {
+    this.selectedChips = [];
+    this.selectedChipsEmitter.emit(this.selectedChips);
+  }
 }
+
 export interface LunaChipsObject {
   index: number;
   name: string;

@@ -1,8 +1,8 @@
 <div #tagSelection class="LunaChipWrapper" [className]="this.getCssClasses()">
   <div class="h">
     <div class="actionButton" *ngIf="this.UtilsButtons">
-      <button (click)="this.selectedChips = this.chips">All</button>
-      <button (click)="this.selectedChips = []">None</button>
+      <button (click)="this.SetToAll()">All</button>
+      <button (click)="this.SetToNone()">None</button>
     </div>
     <input
       type="text"

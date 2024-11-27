@@ -35,6 +35,7 @@ import {
 } from "../../../../../custom-components/luna-chips/luna-chips.component";
 import { ViewChild } from "@angular/core";
 import { ElementRef } from "@angular/core";
+import { UploadFileResponse } from "../../DialogResponse";
 @Component({
   selector: "app-upload-file",
   standalone: true,
@@ -68,20 +69,14 @@ export class UploadFileComponent {
 
   onFileChange(event: any) {
     this.file = event.target.files[0];
-
-    console.log(this.file?.name);
   }
 
   ValidForUpload() {
-    console.log(this.fg.valid);
-    console.log(this.file != null);
     return this.fg.valid && this.file != null;
   }
 
   onTagChange(event: LunaDropDownObject[]) {
     this.selectedtags = event;
-    console.log("Selected Tags");
-    console.log(this.selectedtags);
   }
 
   createTagList(): LunaDropDownObject[] {
@@ -99,13 +94,30 @@ export class UploadFileComponent {
 
   getTextForFileSelect() {
     if (this.file) {
-      return this.file.name;
+      const length = this.file.name.length;
+      const str =
+        this.file.name.substring(0, 15) +
+        "..." +
+        this.file.name.substring(length - 4, length);
+      return str;
     }
     return "Select File";
   }
 
+  onSubmit(event: Event) {
+    event.preventDefault(); // Prevent default form submission
+    this.Submit();
+  }
+
   Submit() {
-    this.dialogRef.close(1);
+    const ResponseData: UploadFileResponse = {
+      collection: this.data.collection,
+      name: this.fg.value.name! || "Client Error",
+      tags: this.selectedtags.map((element) => element.name),
+      file: this.file!,
+    };
+
+    this.dialogRef.close(ResponseData);
   }
 
   onNoClick() {

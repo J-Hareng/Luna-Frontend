@@ -31,19 +31,19 @@
   </div>
 
   <mat-dialog-actions>
-    <form>
+    <div class="actions">
       <div class="btnRow">
         <button mat-button class="can" (click)="onNoClick()">Cancel</button>
 
         <button
           mat-button
           class="sub"
-          type="submit"
+          (click)="this.Submit()"
           [disabled]="!this.ValidForUpload()"
         >
           Upload
         </button>
       </div>
-    </form>
+    </div>
   </mat-dialog-actions>
 </div>
