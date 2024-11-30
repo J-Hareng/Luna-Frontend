@@ -24,6 +24,7 @@ import { AfterViewInit } from "@angular/core";
 export class LunaChipsComponent implements AfterViewInit {
   @Input() chips: LunaChipsObject[] = [];
   @Input() cssInjectorClass: string = "";
+  @Input() preeselectedChips: LunaChipsObject[] = [];
 
   @Input() UtilsButtons: boolean = false;
   @Input() UtilsSearch: boolean = false;
@@ -39,6 +40,9 @@ export class LunaChipsComponent implements AfterViewInit {
   @ViewChild("tagSelection") tagSelection!: ElementRef;
 
   ngAfterViewInit() {
+    if (this.preeselectedChips.length > 0) {
+      this.selectedChips = this.preeselectedChips;
+    }
     this.checkOverflow();
     if (this.AllaciveOnStart) {
       this.selectedChips = this.chips;

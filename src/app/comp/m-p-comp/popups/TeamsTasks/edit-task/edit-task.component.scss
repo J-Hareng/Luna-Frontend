@@ -1,0 +1,15 @@
+@import "../../../../../../CssUtilitys/colors.scss";
+form {
+  .content {
+    display: flex;
+    flex-direction: row;
+  }
+  .TagsAndCollection {
+    .Chips {
+      display: block;
+      height: 200px !important;
+      position: relative;
+      z-index: 1100 !important;
+    }
+  }
+}

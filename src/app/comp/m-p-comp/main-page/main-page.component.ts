@@ -26,7 +26,7 @@ import { DashCollectionsComponent } from "./main-dashboard/dash-collections/dash
 export class MainPageComponent {
   constructor(public mc: MainCacheService) {
     this.mc.SetUpdata();
-    this.mc.SiteStatus = SiteStatus.Collection;
+    this.mc.SiteStatus = SiteStatus.Main;
   }
 
   SiteStatus = SiteStatus;

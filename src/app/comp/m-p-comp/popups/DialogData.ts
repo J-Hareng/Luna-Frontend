@@ -1,4 +1,9 @@
-import { CollectionType, FileType } from "../../../serv/mod/Types";
+import {
+  CollectionType,
+  FileType,
+  TaskType,
+  TeamType,
+} from "../../../serv/mod/Types";
 
 export interface AreYouSureData {
   title: string;
@@ -32,7 +37,7 @@ export interface NewTaskData {
 export interface EditTaskData {
   name: string;
   des: string;
-  collection: string;
+  collection: CollectionType;
   tags: string[];
 }
 

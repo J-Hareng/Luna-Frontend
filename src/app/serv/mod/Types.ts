@@ -1,5 +1,5 @@
-import { SafeResourceUrl } from '@angular/platform-browser';
-import { Subscription } from 'rxjs';
+import { SafeResourceUrl } from "@angular/platform-browser";
+import { Subscription } from "rxjs";
 
 // types
 export type userType = {
@@ -20,7 +20,7 @@ export type otherUsers = {
   groupid: string;
   tasks: LinkType[];
   post: LinkType[];
-}
+};
 export type LinkType = {
   _id: string;
   name: string;
@@ -58,8 +58,7 @@ export type taskInfoType = {
   task: TaskType;
   UserIn: boolean;
   IsWorkedOn: boolean;
-} 
-
+};
 
 export type CollectionType = {
   _id: string;
@@ -76,14 +75,12 @@ export type FileType = {
   uploadedBy: LinkType;
 };
 
-
 export type FileBlobType = {
   blob: Blob;
   url: SafeResourceUrl;
   file: FileType;
   name: string;
 };
-
 
 export type AreYouSureConfig = {
   title: string;
@@ -92,4 +89,4 @@ export type AreYouSureConfig = {
   sub: Subscription;
 };
 
-//Enums 
+//Enums

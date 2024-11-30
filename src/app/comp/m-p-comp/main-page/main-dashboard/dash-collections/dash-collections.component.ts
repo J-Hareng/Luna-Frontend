@@ -79,8 +79,6 @@ export class DashCollectionsComponent {
     this.selectedDropDownObject =
       this.dropDownObjectArray[0] ||
       LunaDropDownObjectCreator(0, "Select Value");
-    //TODO: Remove this after finishing dev
-    this.EditCollection(this.mc.groupColl[0]);
   }
 
   dropDownObjectArray: LunaDropDownObject[] = [];
@@ -227,6 +225,7 @@ export class DashCollectionsComponent {
   jumpToIndex(index: number) {
     this.MainIndex = index;
     this.TagfilterList = this.mc.groupColl[this.MainIndex].tags || [];
+    this.selectedCollection = this.mc.groupColl[this.MainIndex];
     this.UpdateMap();
   }
 
@@ -326,6 +325,9 @@ export class DashCollectionsComponent {
     });
   }
   EditCollection(coll: CollectionType) {
+    console.log("Edit Collection");
+    console.log(this.selectedCollection);
+    console.log(this.mc.groupColl);
     console.log(coll);
     const data: EditCollectionData = { collection: coll };
     const dialogRef = this.dialog.open(EditCollectionComponent, { data: data });
