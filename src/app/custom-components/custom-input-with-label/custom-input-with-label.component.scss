@@ -1,0 +1,74 @@
+@import "../../../CssUtilitys/colors.scss";
+
+.InputWrapper {
+  --background: #{$color-surface-a10};
+  --border: #{$color-surface-a30};
+  --selected: #{$color-surface-a50};
+  padding: 1em;
+  flex-grow: 1;
+  display: flex;
+
+  label {
+    color: $text-color;
+    position: absolute;
+    margin-left: 1em;
+    font-size: 0.75em;
+    transform: translateY(-50%);
+
+    background-color: var(--background) !important;
+    padding: 0.2em 1em;
+
+    border: 1px solid var(--border);
+    border-bottom: none;
+    border-radius: 1em;
+
+    &::before {
+      content: "";
+      position: absolute;
+      height: 50%;
+      border-width: 2px;
+      border-style: solid;
+      pointer-events: none;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      border-color: transparent var(--background) var(--background)
+        var(--background); // Top-right border color
+
+      border-end-end-radius: 1em;
+
+      border-end-start-radius: 1em;
+      border-color: red;
+      border-left-width: 5px;
+    }
+  }
+  input:focus + label,
+  input:active + label {
+    border-color: var(
+      --selected
+    ) !important; // Change the border color of the label when the input is focused or active
+    border-radius: 0.5em !important;
+  }
+
+  input {
+    margin: 0px;
+    flex-grow: 1;
+    border: 1px solid var(--border) !important;
+    background-color: var(--background) !important;
+
+    &:focus {
+      border-color: var(--selected) !important;
+    }
+  }
+
+  &.a10 {
+    --background: $color-surface-a20 !important;
+    --border: $color-surface-a40 !important;
+    --selected: $color-surface-a50 !important;
+  }
+  &.a20 {
+    --background: $color-surface-a30 !important;
+    --border: $color-surface-a40 !important;
+    --selected: $color-surface-a50 !important;
+  }
+}

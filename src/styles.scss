@@ -38,7 +38,9 @@
   // position: absolute;
   background: #555;
 }
-
+app-custom-input-with-label {
+  display: flex;
+}
 button:not(
     .mat-mdc-menu-item,
     .mat-button-toggle,

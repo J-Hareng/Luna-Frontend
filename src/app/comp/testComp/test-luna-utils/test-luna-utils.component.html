@@ -1,7 +1,13 @@
 <div><h1>Luna Testing Ground</h1></div>
+<app-custom-input-with-label
+  style="display: inline-block"
+  [label]="'TestLabel'"
+  [Preselected]="'test'"
+  (selectedInputEmitter)="onInputChange($event)"
+></app-custom-input-with-label>
+
 <div class="ChipsTest" style="width: 30%; height: 100%">
   <p>Luna Chips Test</p>
-
   <app-luna-chips
     [chips]="this.LunaChipsTestList"
     (selectedChipsEmitter)="this.lunachipevent($event)"
