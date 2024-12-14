@@ -4,23 +4,24 @@ import { FormControl, FormGroup } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
 import { NgClass } from "@angular/common";
 @Component({
-  selector: "app-custom-input-with-label",
+  selector: 'app-luna-input',
   standalone: true,
   imports: [ReactiveFormsModule, NgClass],
-  templateUrl: "./custom-input-with-label.component.html",
-  styleUrl: "./custom-input-with-label.component.scss",
+  templateUrl: './luna-input.component.html',
+  styleUrl: './luna-input.component.scss',
 })
-export class CustomInputWithLabelComponent {
+export class LunaInputComponent {
   @Input() Preselected: string = "";
   @Input() surfaceLayer: string = "a0";
   @Input() label: string = "";
+  @Input() placeholder: string = "";
+  @Input() FormControl: FormControl = new FormControl("");
 
   @Output() selectedInputEmitter = new EventEmitter<string>();
 
-  InputFrom: FormControl = new FormControl("");
   constructor() {
-    this.InputFrom.registerOnChange(() => {
-      console.log(this.InputFrom.value);
+    this.FormControl.valueChanges.subscribe((value) => {
+      this.selectedInputEmitter.emit(value);
     });
   }
   getSurfaceLayerClass(): string {

@@ -1,0 +1,15 @@
+<div class="SelectorWrapper">
+  <label class="SelectorLabel">{{ label }}</label>
+
+  <div
+    class="Slider"
+    (click)="this.FromControl.setValue(!this.FromControl.value)"
+    [ngClass]="{ active: this.FromControl.value }"
+  >
+    <div class="statusIndicator" [ngClass]="{ active: this.FromControl.value }">
+      <i class="material-icons" [ngClass]="{ active: this.FromControl.value }">
+        @if(this.FromControl.value){ check } @else {remove}
+      </i>
+    </div>
+  </div>
+</div>

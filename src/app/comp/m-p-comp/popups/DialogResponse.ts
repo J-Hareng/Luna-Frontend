@@ -21,3 +21,9 @@ export interface UploadFileResponse {
   tags: string[];
   file: File;
 }
+export interface EditTaskResponse {
+  name: string;
+  des: string;
+  tags: string[];
+  collection: string;
+}

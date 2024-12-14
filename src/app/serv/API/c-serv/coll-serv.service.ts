@@ -11,7 +11,7 @@ import {
 import { HttpClient } from "@angular/common/http";
 import { API_BASE_URL } from "../../../const";
 import { AuthService } from "../auth.service";
-import { LunaResponse } from "../../mod/ReqMods";
+import { LunaResponse, UpdatedTasksResponse } from "../../mod/ReqMods";
 @Injectable({
   providedIn: "root",
 })
@@ -75,14 +75,14 @@ export class CollServService {
     newtag: string,
     oldtag: string,
     collID: string
-  ): Observable<LunaResponse<string>> {
+  ): Observable<LunaResponse<UpdatedTasksResponse>> {
     const body = {
       newtag: newtag,
       oldtag: oldtag,
       collID: collID,
     };
 
-    return this.http.post<LunaResponse<string>>(
+    return this.http.post<LunaResponse<UpdatedTasksResponse>>(
       API_BASE_URL + "/api/EditTagInCollection",
       body,
       { withCredentials: true, headers: this.apiAuth.GetHeaders() }

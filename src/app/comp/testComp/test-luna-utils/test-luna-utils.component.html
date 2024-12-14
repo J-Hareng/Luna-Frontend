@@ -1,11 +1,21 @@
 <div><h1>Luna Testing Ground</h1></div>
-<app-custom-input-with-label
+<app-luna-input
   style="display: inline-block"
   [label]="'TestLabel'"
   [Preselected]="'test'"
   (selectedInputEmitter)="onInputChange($event)"
-></app-custom-input-with-label>
-
+></app-luna-input>
+<br />
+<app-luna-textarea
+  style="display: inline-block"
+  [label]="'TestLabel'"
+  [Preselected]="'test'"
+  [FormControl]="this.textareaForm"
+></app-luna-textarea>
+<app-luna-slide-toggle
+  [label]="'TestLabel'"
+  [FromControl]="this.lunaSliderForm"
+></app-luna-slide-toggle>
 <div class="ChipsTest" style="width: 30%; height: 100%">
   <p>Luna Chips Test</p>
   <app-luna-chips

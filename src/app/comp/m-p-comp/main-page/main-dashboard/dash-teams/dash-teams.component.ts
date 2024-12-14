@@ -57,7 +57,9 @@ export class DashTeamsComponent {
     private dialog: MatDialog,
     public mc: MainCacheService,
     private apiTeam: TeamServService
-  ) {}
+  ) {
+    this.editTask(this.getTask(this.mc.Teams[2].tasks[0]));
+  }
 
   //* Display Func
   CreateNewFormControll(t: TeamType): string {
@@ -119,6 +121,7 @@ export class DashTeamsComponent {
         coll: "0",
         tags: [],
         inprogress: [],
+        futureFileName: undefined,
       };
       return emptyTask;
     }
@@ -224,13 +227,11 @@ export class DashTeamsComponent {
       if (dres == "NO CLICK") {
         return;
       }
-
-      task.name = dres.name;
-      task.des = dres.des;
-      task.coll = dres.collection;
-      task.tags = dres.tags;
-
-      console.log(task);
+      console.log(dres);
+      // task.name = dres.name;
+      // task.des = dres.des;
+      // task.coll = dres.collection;
+      // task.tags = dres.tags;
     });
   }
 

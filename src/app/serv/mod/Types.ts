@@ -52,6 +52,7 @@ export type TaskType = {
   groupid: string;
   coll: string;
   tags: string[] | undefined | null;
+  futureFileName: string | undefined;
 };
 
 export type taskInfoType = {

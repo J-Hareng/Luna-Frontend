@@ -121,6 +121,9 @@ export class EditCollectionComponent {
         .subscribe(
           (res) => {
             console.log(res);
+
+            this.mc.updateTasks(res.body.tasks);
+
             this.mc.isLoadingSmall = false;
           },
           (err) => {

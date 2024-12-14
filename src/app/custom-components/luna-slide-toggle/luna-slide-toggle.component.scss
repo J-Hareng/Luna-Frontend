@@ -1,0 +1,100 @@
+@import "../../../CssUtilitys/colors.scss";
+
+.SelectorWrapper {
+  --background: #{$color-surface-a10};
+  --border: #{$color-surface-a20};
+  --selected: #{$text-colorLowOp};
+
+  display: flex;
+  flex-direction: row;
+  margin: 0.25em 1em;
+  align-items: center;
+  gap: 0.5em;
+  label {
+    color: $text-color !important;
+    font-size: 1.25em;
+    font-weight: 500;
+  }
+  .Slider {
+    background-color: var(--background);
+    width: calc(1em + 0.5em + 1em);
+    border-radius: 1em;
+    height: 1.25em;
+    display: flex;
+    align-items: center;
+    padding: 0.17em;
+    border: 1px solid var(--border);
+
+    transition: all 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+    &.active {
+      align-items: flex-end;
+      background-color: $color-surface-mixed-a10;
+      border-color: $color-surface-mixed-a20;
+    }
+    .statusIndicator {
+      animation: slideOut 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+      background-color: var(--border);
+      width: 1.25em;
+      height: 1.25em;
+      border-radius: 1em;
+      transition: all 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+      //   box-shadow: inset 0 0 0 2px green;
+      //   box-sizing: border-box !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      i {
+        font-size: 1em;
+        user-select: none;
+        color: white;
+      }
+      &.active {
+        animation: slide 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+        transform: translateX(1.25em);
+        background-color: $color-primary-a20;
+      }
+    }
+  }
+  &.a10 {
+    --background: $color-surface-a20 !important;
+    --border: $color-surface-a30 !important;
+  }
+  &.a20 {
+    --background: $color-surface-a30 !important;
+    --border: $color-surface-a40 !important;
+  }
+  &.a30 {
+    --background: $color-surface-a40 !important;
+    --border: $color-surface-a50 !important;
+  }
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0);
+    max-width: 1.25em;
+  }
+  50% {
+    max-width: 1em;
+  }
+  100% {
+    max-width: 1.25em;
+    transform: translateX(1.25em);
+  }
+}
+@keyframes slideOut {
+  0% {
+    transform: translateX(1.25em);
+    max-width: 1.25em;
+  }
+  50% {
+    max-width: 1em;
+  }
+  100% {
+    max-width: 1.25em;
+    transform: translateX(0);
+  }
+}

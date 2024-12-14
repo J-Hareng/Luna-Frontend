@@ -4,11 +4,19 @@ import {
   LunaChipsObject,
   LunaChipsObjectCreator,
 } from "../../../custom-components/luna-chips/luna-chips.component";
-import { CustomInputWithLabelComponent } from "../../../custom-components/custom-input-with-label/custom-input-with-label.component";
+import { LunaInputComponent } from "../../../custom-components/luna-input/luna-input.component";
+import { LunaTextareaComponent } from "../../../custom-components/luna-textarea/luna-textarea.component";
+import { FormControl } from "@angular/forms";
+import { LunaSlideToggleComponent } from "../../../custom-components/luna-slide-toggle/luna-slide-toggle.component";
 @Component({
   selector: "app-test-luna-utils",
   standalone: true,
-  imports: [LunaChipsComponent, CustomInputWithLabelComponent],
+  imports: [
+    LunaChipsComponent,
+    LunaInputComponent,
+    LunaTextareaComponent,
+    LunaSlideToggleComponent,
+  ],
   templateUrl: "./test-luna-utils.component.html",
   styleUrl: "./test-luna-utils.component.scss",
 })
@@ -22,6 +30,8 @@ export class TestLunaUtilsComponent {
     "grape",
     "cock",
   ]);
+  textareaForm = new FormControl("");
+  lunaSliderForm = new FormControl("");
   lunachipevent(event: any) {
     console.log(event);
   }

@@ -2,41 +2,42 @@
   <h1 mat-dialog-title><strong>Edit Task</strong></h1>
   <mat-dialog-content id="content">
     <p>
-      you can edit the task <strong>{{ this.data.name }}</strong
-      >here.
+      You can edit the task <strong>{{ this.data.name }}</strong> here.
+    </p>
+    <p>
+      You are able to change the <strong>Name</strong> and
+      <strong>Descrtipion</strong> of the task. You can also change if there is
+      a <strong> file needed</strong> to compleate this task as well as the name
+      of the future file and the <strong>location </strong>(collection and tags)
+      where the future file will be stored. Dont mess something up :3!
     </p>
   </mat-dialog-content>
   <mat-dialog-actions>
     <form (ngSubmit)="Submit()" [formGroup]="fg">
       <div class="content">
         <div class="NameAndDes">
-          <mat-form-field>
-            <mat-label>NewName</mat-label>
+          <app-luna-input
+            [FormControl]="this.NameControll"
+            [placeholder]="'Super cool Task '"
+            [label]="'Task Name'"
+            (selectedInputEmitter)="this.onNameChange($event)"
+          >
+          </app-luna-input>
+          <app-luna-textarea
+            [FormControl]="this.DesControll"
+            [placeholder]="'My Team Is soo cool because . . . .'"
+            [label]="'Task Descrtipion'"
+          >
+          </app-luna-textarea>
 
-            <input
-              matInput
-              formControlName="name"
-              placeholder="MyNewTeam"
-              required
-            />
-            @if (this.NameControll.hasError("required")) {
-            <mat-error>Name is <strong>required</strong></mat-error>
-            }
-          </mat-form-field>
-
-          <mat-form-field>
-            <mat-label>Task Desctipion</mat-label>
-
-            <textarea
-              matInput
-              formControlName="des"
-              placeholder="My Team Is soo cool because . . . ."
-            >
-            </textarea>
-          </mat-form-field>
+          <app-luna-slide-toggle
+            [label]="'future file?'"
+            [FromControl]="this.withFile"
+          ></app-luna-slide-toggle>
+          <div></div>
         </div>
-        <div class="TagsAndCollection">
-          <mat-form-field>
+        <div class="TagsAndCollection" *ngIf="this.withFile.value">
+          <mat-form-field class="CollSelector" subscriptSizing="dynamic">
             <mat-label>Select a Collection</mat-label>
             <mat-select formControlName="collection">
               <mat-option
@@ -47,18 +48,6 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <!-- 
-          <mat-form-field *ngIf="this.Collection.value != null">
-            <mat-label>Select some Tags</mat-label>
-            <mat-select formControlName="tags" multiple>
-              <mat-option
-                *ngFor="let tag of mc.groupColl[this.Collection.value].tags"
-                [value]="tag"
-              >
-                {{ tag }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field> -->
 
           <app-luna-chips
             class="Chips"
@@ -77,9 +66,45 @@
           type="submit"
           [disabled]="NotReadyToSubmit()"
         >
-          Create
+          Update
         </button>
       </div>
     </form>
   </mat-dialog-actions>
 </div>
+<!-- 
+<mat-form-field *ngIf="this.Collection.value != null">
+  <mat-label>Select some Tags</mat-label>
+      <mat-select formControlName="tags" multiple>
+        <mat-option
+        *ngFor="let tag of mc.groupColl[this.Collection.value].tags"
+        [value]="tag"
+        >
+        {{ tag }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field> -->
+<!-- <mat-form-field>
+<mat-label>Task Desctipion</mat-label>
+    
+    <textarea
+    matInput
+    formControlName="des"
+    placeholder="My Team Is soo cool because . . . ."
+    >
+  </textarea>
+</mat-form-field> -->
+
+<!-- <mat-form-field>
+  <mat-label>NewName</mat-label>
+
+  <input
+  matInput
+  formControlName="name"
+  placeholder="MyNewTeam"
+  required
+  />
+  @if (this.NameControll.hasError("required")) {
+    <mat-error>Name is <strong>required</strong></mat-error>
+  }
+</mat-form-field> -->

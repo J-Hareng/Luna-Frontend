@@ -3,13 +3,27 @@ form {
   .content {
     display: flex;
     flex-direction: row;
+    gap: 0.5em;
   }
   .TagsAndCollection {
+    // margin-left: ;
+    .CollSelector {
+      width: 100%;
+    }
     .Chips {
-      display: block;
+      margin-bottom: 1em;
       height: 200px !important;
+      display: inline-block;
+      width: 100%;
       position: relative;
       z-index: 1100 !important;
+
+      div,
+      span .chip {
+        flex-wrap: nowrap;
+        position: relative;
+        z-index: 1100 !important;
+      }
     }
   }
 }
