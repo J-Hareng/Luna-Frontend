@@ -52,3 +52,7 @@ export interface PreviewFileData {
   file: File;
   fileInfo: FileType;
 }
+
+export interface SubmitTaskData {
+  task: TaskType;
+}

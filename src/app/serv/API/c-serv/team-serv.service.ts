@@ -4,14 +4,26 @@ import { Router } from "@angular/router";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, of } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { userType, TeamType, LinkType, TaskType } from "../../mod/Types";
+import {
+  userType,
+  TeamType,
+  LinkType,
+  TaskType,
+  FileType,
+  CollectionType,
+} from "../../mod/Types";
 import { LunaResponse } from "../../mod/ReqMods";
 import { AuthService } from "../auth.service";
+import { FileManagerService } from "./file-manager.service";
 @Injectable({
   providedIn: "root",
 })
 export class TeamServService {
-  constructor(private http: HttpClient, private apiAuth: AuthService) {}
+  constructor(
+    private http: HttpClient,
+    private apiAuth: AuthService,
+    private apiFile: FileManagerService
+  ) {}
 
   getAllteamsInGroup(): Observable<LunaResponse<TeamType[]>> {
     return this.http.get<LunaResponse<TeamType[]>>(
@@ -112,14 +124,19 @@ export class TeamServService {
     );
   }
 
-  RemoveTask(task: LinkType, id: string): Observable<any> {
+  RemoveTask(task: LinkType, id: string): Observable<LunaResponse<string>> {
     const body = {
       tasks: task,
       teamid: id,
     };
-    return this.http.post(API_BASE_URL + "/api/RemoveTask", body, {
-      withCredentials: true,
-    });
+    return this.http.post<LunaResponse<string>>(
+      API_BASE_URL + "/api/RemoveTask",
+      body,
+      {
+        withCredentials: true,
+        headers: this.apiAuth.GetHeaders(),
+      }
+    );
   }
 
   EditTask(task: TaskType): Observable<LunaResponse<string>> {
@@ -233,5 +250,20 @@ export class TeamServService {
         headers: this.apiAuth.GetHeaders(),
       }
     );
+  }
+  CompleatTask(
+    task: TaskType,
+    file: File | undefined,
+    collection: CollectionType
+  ): Observable<LunaResponse<String>> {
+    if (file != undefined && task.futureFileName != undefined) {
+      this.apiFile.uploadFile(
+        task.futureFileName,
+        file,
+        task.tags || [],
+        collection
+      );
+    }
+    return this.RemoveTask({ name: task.name, _id: task._id }, task.team._id);
   }
 }

@@ -1,0 +1,26 @@
+<div id="CKpopup">
+  <h1 mat-dialog-title>Submit {{ this.data.task.name }}<strong></strong></h1>
+  <mat-dialog-content id="content">
+    <p>
+      Yeah looks like your nearly done with your task, Just check if somthing
+      needes som fixes bevor your upload and then your done :)
+    </p>
+    <input type="file" />
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <form>
+      <div class="btnRow">
+        <button mat-button class="can" (click)="onNoClick()">Cancel</button>
+
+        <button
+          mat-button
+          class="sub"
+          type="submit"
+          [disabled]="this.fg.invalid"
+        >
+          Upload
+        </button>
+      </div>
+    </form>
+  </mat-dialog-actions>
+</div>
