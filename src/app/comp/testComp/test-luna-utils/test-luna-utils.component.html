@@ -5,6 +5,16 @@
   [Preselected]="'test'"
   (selectedInputEmitter)="onInputChange($event)"
 ></app-luna-input>
+<!-- <br /> -->
+<div class="ChipsTest" style="width: 30%; height: 100%">
+  <p>Luna From Test</p>
+  <app-luna-from-chips
+    class="luna-chips"
+    [selectedChipsFrom]="this.lunaChipFromTest"
+    [chips]="this.LunaChipsTestList"
+  >
+  </app-luna-from-chips>
+</div>
 <br />
 <app-luna-textarea
   style="display: inline-block"
@@ -24,4 +34,7 @@
     [UtilsButtons]="true"
     [UtilsSearch]="true"
   ></app-luna-chips>
+</div>
+<div>
+  <app-luna-file-upload-and-location-selector></app-luna-file-upload-and-location-selector>
 </div>

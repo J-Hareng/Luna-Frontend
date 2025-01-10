@@ -1,0 +1,32 @@
+<div #tagSelection class="LunaChipWrapper" [className]="this.getCssClasses()">
+  <div class="h">
+    <div class="actionButton" *ngIf="this.UtilsButtons">
+      <button (click)="this.SetToAll()">All</button>
+      <button (click)="this.SetToNone()">None</button>
+    </div>
+    <input
+      type="text"
+      class="Custominput"
+      placeholder="Search . . ."
+      *ngIf="this.UtilsSearch"
+      [formControl]="this.SearchFrom"
+    />
+  </div>
+
+  <ng-container *ngFor="let item of selectedChipsFrom.value">
+    <div
+      class="chip"
+      (click)="chipIsKlicked(item)"
+      [ngClass]="{ selected: this.isItemSelected(item) }"
+      *ngIf="containsFilter(item)"
+    >
+      <span>{{ item.name }}</span>
+      <i
+        #ddIconId
+        class="material-icons iconIndicator"
+        *ngIf="this.isItemSelected(item)"
+        >check</i
+      >
+    </div>
+  </ng-container>
+</div>

@@ -9,6 +9,8 @@ import { AuthService } from "../auth.service";
 import { LunaResponse } from "../../mod/ReqMods";
 import { FileBlob } from "../../mod/ReqMods";
 import { saveAs } from "file-saver";
+import { TaskType } from "../../mod/Types";
+import { TeamServService } from "./team-serv.service";
 @Injectable({
   providedIn: "root",
 })
@@ -16,6 +18,7 @@ export class FileManagerService {
   constructor(
     private mc: MainCacheService,
     private http: HttpClient,
+    private apiTeam: TeamServService,
     private apiAuth: AuthService
   ) {}
 
@@ -88,5 +91,18 @@ export class FileManagerService {
       .subscribe((data: Blob) => {
         saveAs(data, file.name + "." + fileExtension); // Remove the '+' operator and the extra comma
       });
+  }
+  CompleatTask(
+    task: TaskType,
+    file: File | undefined,
+    collection: CollectionType
+  ): Observable<LunaResponse<String>> {
+    if (file != undefined && task.futureFileName != undefined) {
+      this.uploadFile(task.futureFileName, file, task.tags || [], collection);
+    }
+    return this.apiTeam.RemoveTask(
+      { name: task.name, _id: task._id },
+      task.team._id
+    );
   }
 }

@@ -84,6 +84,16 @@ header {
     color: $description-color !important;
   }
 }
+.custom-file-upload {
+  input[type="file"] {
+    display: none;
+  }
+  background-color: $color-surface-a20;
+  border-radius: 1em;
+  padding: 0.25em 1em;
+
+  color: $text-color;
+}
 .Custominput {
   padding: 10px;
   border-radius: 0.5vmin;

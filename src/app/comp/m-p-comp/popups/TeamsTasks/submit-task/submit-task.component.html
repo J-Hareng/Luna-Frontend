@@ -3,15 +3,61 @@
   <mat-dialog-content id="content">
     <p>
       Yeah looks like your nearly done with your task, Just check if somthing
-      needes som fixes bevor your upload and then your done :)
+      needes some fixes bevor your upload and then your done :)
     </p>
-    <input type="file" />
+
+    <div class="action-content-wrapper" *ngIf="this.formWithFile.value">
+      <div class="location-selector">
+        <div class="collSelector">
+          <mat-form-field>
+            <mat-select
+              [placeholder]="'Select a collection'"
+              [formControl]="this.fromColl"
+            >
+              <mat-option
+                *ngFor="let coll of this.mc.groupColl"
+                [value]="coll._id"
+                >{{ coll.name }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+
+          <div class="file-selector">
+            <app-luna-input
+              [FormControl]="fromName"
+              [label]="'FileName'"
+              [placeholder]="'Super Cool New File'"
+            ></app-luna-input>
+            <label class="custom-file-upload">
+              <input type="file" (change)="this.onFileChange($event)" />
+              {{ this.getTextForFileSelect() }}
+            </label>
+          </div>
+        </div>
+
+        <app-luna-chips
+          class="luna-chips"
+          [preeselectedChips]="this.preSelectedTags"
+          [chips]="this.AvailableTags"
+          (selectedChipsEmitter)="this.onTagsChange($event)"
+          [UtilsSearch]="true"
+        >
+        </app-luna-chips>
+      </div>
+    </div>
+
+    <!-- <input type="file" /> -->
   </mat-dialog-content>
   <mat-dialog-actions>
     <form>
       <div class="btnRow">
         <button mat-button class="can" (click)="onNoClick()">Cancel</button>
 
+        <app-luna-slide-toggle
+          class="withFile"
+          [label]="'With file ?'"
+          [FromControl]="this.formWithFile"
+        ></app-luna-slide-toggle>
         <button
           mat-button
           class="sub"

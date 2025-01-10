@@ -14,15 +14,14 @@ import {
 } from "../../mod/Types";
 import { LunaResponse } from "../../mod/ReqMods";
 import { AuthService } from "../auth.service";
-import { FileManagerService } from "./file-manager.service";
+// import { FileManagerService } from "./file-manager.service";
 @Injectable({
   providedIn: "root",
 })
 export class TeamServService {
   constructor(
     private http: HttpClient,
-    private apiAuth: AuthService,
-    private apiFile: FileManagerService
+    private apiAuth: AuthService // private apiFile: FileManagerService
   ) {}
 
   getAllteamsInGroup(): Observable<LunaResponse<TeamType[]>> {
@@ -250,20 +249,5 @@ export class TeamServService {
         headers: this.apiAuth.GetHeaders(),
       }
     );
-  }
-  CompleatTask(
-    task: TaskType,
-    file: File | undefined,
-    collection: CollectionType
-  ): Observable<LunaResponse<String>> {
-    if (file != undefined && task.futureFileName != undefined) {
-      this.apiFile.uploadFile(
-        task.futureFileName,
-        file,
-        task.tags || [],
-        collection
-      );
-    }
-    return this.RemoveTask({ name: task.name, _id: task._id }, task.team._id);
   }
 }

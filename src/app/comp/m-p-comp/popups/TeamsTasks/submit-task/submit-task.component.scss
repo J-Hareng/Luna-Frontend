@@ -1,0 +1,36 @@
+.file-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+
+  label {
+    // width: 100%;
+    flex-grow: 1;
+  }
+}
+
+.location-selector {
+  display: flex;
+  gap: 1em;
+  // align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
+  width: 100%;
+
+  .collSelector {
+    flex-grow: 1;
+    width: 50%;
+
+    div,
+    .mat-form-field,
+    mat-form-field {
+      width: 100% !important;
+    }
+  }
+  .luna-chips {
+    flex-grow: 1;
+    height: 20em;
+    display: inline-block;
+    position: relative;
+  }
+}

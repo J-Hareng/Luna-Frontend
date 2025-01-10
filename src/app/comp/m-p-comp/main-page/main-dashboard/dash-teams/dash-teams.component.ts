@@ -26,12 +26,14 @@ import {
   EditTaskData,
   EditTeamData,
   NewTaskData,
+  SubmitTaskData,
 } from "../../../popups/DialogData";
 import { AreYouSurePupComponent } from "../../../popups/are-you-sure-pup/are-you-sure-pup.component";
 import { NewTeamComponent } from "../../../popups/TeamsTasks/new-team/new-team.component";
 import { EditTeamComponent } from "../../../popups/TeamsTasks/edit-team/edit-team.component";
 import { NewTaskComponent } from "../../../popups/TeamsTasks/new-task/new-task.component";
 import { EditTaskComponent } from "../../../popups/TeamsTasks/edit-task/edit-task.component";
+import { SubmitTaskComponent } from "../../../popups/TeamsTasks/submit-task/submit-task.component";
 @Component({
   selector: "app-dash-teams",
   standalone: true,
@@ -58,7 +60,7 @@ export class DashTeamsComponent {
     public mc: MainCacheService,
     private apiTeam: TeamServService
   ) {
-    this.editTask(this.getTask(this.mc.Teams[2].tasks[0]));
+    this.submitTask(this.getTask(this.mc.Teams[2].tasks[0]));
   }
 
   //* Display Func
@@ -267,5 +269,13 @@ export class DashTeamsComponent {
         console.log(err);
       }
     );
+  }
+  submitTask(taskLink: LinkType) {
+    let task = this.getTask(taskLink);
+
+    console.log(task);
+    let data: SubmitTaskData = { task: task };
+
+    let dialogRef = this.dialog.open(SubmitTaskComponent, { data: data });
   }
 }

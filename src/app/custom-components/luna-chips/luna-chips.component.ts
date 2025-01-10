@@ -22,6 +22,8 @@ import { AfterViewInit } from "@angular/core";
   styleUrl: "./luna-chips.component.scss",
 })
 export class LunaChipsComponent implements AfterViewInit {
+  @Input() fromControl: FormControl<LunaChipsObject[]> = new FormControl();
+
   @Input() chips: LunaChipsObject[] = [];
   @Input() cssInjectorClass: string = "";
   @Input() preeselectedChips: LunaChipsObject[] = [];
