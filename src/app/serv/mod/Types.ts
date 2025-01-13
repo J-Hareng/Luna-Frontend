@@ -90,4 +90,10 @@ export type AreYouSureConfig = {
   sub: Subscription;
 };
 
+export type LunaUploadObject = {
+  collection: string;
+  tags: string[];
+  file: File;
+  name: string;
+};
 //Enums

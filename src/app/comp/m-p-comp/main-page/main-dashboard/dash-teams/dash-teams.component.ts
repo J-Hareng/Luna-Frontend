@@ -34,6 +34,7 @@ import { EditTeamComponent } from "../../../popups/TeamsTasks/edit-team/edit-tea
 import { NewTaskComponent } from "../../../popups/TeamsTasks/new-task/new-task.component";
 import { EditTaskComponent } from "../../../popups/TeamsTasks/edit-task/edit-task.component";
 import { SubmitTaskComponent } from "../../../popups/TeamsTasks/submit-task/submit-task.component";
+import { FileManagerService } from "../../../../../serv/API/c-serv/file-manager.service";
 @Component({
   selector: "app-dash-teams",
   standalone: true,
@@ -58,10 +59,9 @@ export class DashTeamsComponent {
   constructor(
     private dialog: MatDialog,
     public mc: MainCacheService,
-    private apiTeam: TeamServService
-  ) {
-    this.submitTask(this.getTask(this.mc.Teams[2].tasks[0]));
-  }
+    private apiTeam: TeamServService,
+    private apiFile: FileManagerService
+  ) {}
 
   //* Display Func
   CreateNewFormControll(t: TeamType): string {
@@ -201,7 +201,7 @@ export class DashTeamsComponent {
       this.apiTeam
         .AddTask(
           dres.name,
-          dres.des,
+          dres.des || "",
           team,
           this.mc.user.groupid,
           dres.collection,
@@ -273,9 +273,21 @@ export class DashTeamsComponent {
   submitTask(taskLink: LinkType) {
     let task = this.getTask(taskLink);
 
-    console.log(task);
     let data: SubmitTaskData = { task: task };
 
     let dialogRef = this.dialog.open(SubmitTaskComponent, { data: data });
+    dialogRef.afterClosed().subscribe((dres) => {
+      if (dres == 0) {
+        return;
+      }
+      let coll = this.mc.groupColl.find((coll) => coll._id == dres.collection);
+      this.mc.isLoadingSmall = true;
+      this.apiFile.CompleatTask(task, coll, dres).subscribe((res) => {
+        console.log(res);
+        this.mc.updateTeams();
+        this.mc.isLoadingSmall = false;
+        return;
+      });
+    });
   }
 }

@@ -9,7 +9,10 @@ import { LunaTextareaComponent } from "../../../custom-components/luna-textarea/
 import { FormControl, FormsModule } from "@angular/forms";
 import { LunaSlideToggleComponent } from "../../../custom-components/luna-slide-toggle/luna-slide-toggle.component";
 import { LunaFileUploadAndLocationSelectorComponent } from "../../../custom-components/luna-file-upload-and-location-selector/luna-file-upload-and-location-selector.component";
-import { LunaFromChipsComponent } from "../../../custom-components/luna-from-chips/luna-from-chips.component";
+import {
+  LunaChipsObjectGetSelectedChipList,
+  LunaFromChipsComponent,
+} from "../../../custom-components/luna-from-chips/luna-from-chips.component";
 @Component({
   selector: "app-test-luna-utils",
   standalone: true,
@@ -34,12 +37,13 @@ export class TestLunaUtilsComponent {
     "grape",
     "cock",
   ]);
-  LunaChipsTestListPreselect: LunaChipsObject[] = LunaChipsObjectCreator([
-    "banana",
-    "orange",
-    "pear",
-    "grape",
-  ]);
+  LunaChipsTestListPreselect: LunaChipsObject[] =
+    LunaChipsObjectGetSelectedChipList(this.LunaChipsTestList, [
+      "banana",
+      "orange",
+      "pear",
+      "grape",
+    ]);
 
   lunaChipFromTest = new FormControl(this.LunaChipsTestListPreselect || []);
   constructor() {

@@ -1,72 +1,39 @@
 <div id="CKpopup">
   <h1 mat-dialog-title>Submit {{ this.data.task.name }}<strong></strong></h1>
   <mat-dialog-content id="content">
-    <p>
+    <p style="margin-bottom: 1em">
       Yeah looks like your nearly done with your task, Just check if somthing
       needes some fixes bevor your upload and then your done :)
     </p>
-
-    <div class="action-content-wrapper" *ngIf="this.formWithFile.value">
-      <div class="location-selector">
-        <div class="collSelector">
-          <mat-form-field>
-            <mat-select
-              [placeholder]="'Select a collection'"
-              [formControl]="this.fromColl"
-            >
-              <mat-option
-                *ngFor="let coll of this.mc.groupColl"
-                [value]="coll._id"
-                >{{ coll.name }}</mat-option
-              >
-            </mat-select>
-          </mat-form-field>
-
-          <div class="file-selector">
-            <app-luna-input
-              [FormControl]="fromName"
-              [label]="'FileName'"
-              [placeholder]="'Super Cool New File'"
-            ></app-luna-input>
-            <label class="custom-file-upload">
-              <input type="file" (change)="this.onFileChange($event)" />
-              {{ this.getTextForFileSelect() }}
-            </label>
-          </div>
-        </div>
-
-        <app-luna-chips
-          class="luna-chips"
-          [preeselectedChips]="this.preSelectedTags"
-          [chips]="this.AvailableTags"
-          (selectedChipsEmitter)="this.onTagsChange($event)"
-          [UtilsSearch]="true"
-        >
-        </app-luna-chips>
-      </div>
-    </div>
-
-    <!-- <input type="file" /> -->
+    <app-luna-file-upload-and-location-selector
+      *ngIf="this.formWithFile.value"
+      class="FileLocationSelector"
+      [Task]="this.data.task"
+      [FromControl]="fromUpload"
+    ></app-luna-file-upload-and-location-selector>
   </mat-dialog-content>
   <mat-dialog-actions>
-    <form>
+    <!-- <form> -->
+    <div class="actions">
       <div class="btnRow">
         <button mat-button class="can" (click)="onNoClick()">Cancel</button>
-
-        <app-luna-slide-toggle
-          class="withFile"
-          [label]="'With file ?'"
-          [FromControl]="this.formWithFile"
-        ></app-luna-slide-toggle>
+        <div class="withFileWrapper">
+          <app-luna-slide-toggle
+            class="withFile"
+            [label]="'With file ?'"
+            [FromControl]="this.formWithFile"
+          ></app-luna-slide-toggle>
+        </div>
         <button
           mat-button
           class="sub"
-          type="submit"
-          [disabled]="this.fg.invalid"
+          (click)="Submit()"
+          [disabled]="!this.isValid()"
         >
           Upload
         </button>
       </div>
-    </form>
+    </div>
+    <!-- </form> -->
   </mat-dialog-actions>
 </div>

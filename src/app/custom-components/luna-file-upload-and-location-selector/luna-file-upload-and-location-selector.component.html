@@ -1,4 +1,4 @@
-<!-- <div class="Location Selector Wrapper">
+<div class="Location Selector Wrapper">
   <div class="location-selector">
     <div class="collSelector">
       <mat-form-field>
@@ -26,14 +26,20 @@
         </label>
       </div>
     </div>
-
-    <app-luna-chips
+    <app-luna-from-chips
+      class="luna-chips"
+      [chips]="this.AvailableTags"
+      [selectedChipsFrom]="this.TagsFromControl"
+      [UtilsSearch]="true"
+    >
+    </app-luna-from-chips>
+    <!-- <app-luna-chips
       class="luna-chips"
       [preeselectedChips]="this.preSelectedTags"
       [chips]="this.AvailableTags"
       (selectedChipsEmitter)="this.onTagsChange($event)"
       [UtilsSearch]="true"
     >
-    </app-luna-chips>
+    </app-luna-chips> -->
   </div>
-</div> -->
+</div>

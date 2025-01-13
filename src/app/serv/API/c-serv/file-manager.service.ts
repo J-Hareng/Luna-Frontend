@@ -3,7 +3,12 @@ import { Injectable } from "@angular/core";
 import { API_BASE_URL } from "../../../const";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { FileType, CollectionType } from "../../mod/Types";
+import {
+  FileType,
+  CollectionType,
+  LinkType,
+  LunaUploadObject,
+} from "../../mod/Types";
 import { MainCacheService } from "../../logic/main-cache.service";
 import { AuthService } from "../auth.service";
 import { LunaResponse } from "../../mod/ReqMods";
@@ -11,6 +16,7 @@ import { FileBlob } from "../../mod/ReqMods";
 import { saveAs } from "file-saver";
 import { TaskType } from "../../mod/Types";
 import { TeamServService } from "./team-serv.service";
+import { UploadFileComponent } from "../../../comp/m-p-comp/popups/CollectionsFiles/upload-file/upload-file.component";
 @Injectable({
   providedIn: "root",
 })
@@ -94,11 +100,26 @@ export class FileManagerService {
   }
   CompleatTask(
     task: TaskType,
-    file: File | undefined,
-    collection: CollectionType
+    collection: CollectionType | undefined,
+    uploadData: LunaUploadObject
   ): Observable<LunaResponse<String>> {
-    if (file != undefined && task.futureFileName != undefined) {
-      this.uploadFile(task.futureFileName, file, task.tags || [], collection);
+    console.log(uploadData);
+    console.log(collection);
+    if (
+      uploadData.file != undefined &&
+      uploadData.name != undefined &&
+      uploadData.name != "" &&
+      collection != undefined
+    ) {
+      this.uploadFile(
+        uploadData.name,
+        uploadData.file,
+        uploadData.tags || [],
+        collection
+      ).subscribe((res) => {
+        console.log(res);
+        this.mc.updateCollections();
+      });
     }
     return this.apiTeam.RemoveTask(
       { name: task.name, _id: task._id },

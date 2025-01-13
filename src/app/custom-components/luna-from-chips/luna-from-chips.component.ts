@@ -22,8 +22,9 @@ import { AfterViewInit } from "@angular/core";
   styleUrl: "./luna-from-chips.component.scss",
 })
 export class LunaFromChipsComponent {
-  @Input() selectedChipsFrom: FormControl<LunaChipsObject[] | null> =
-    new FormControl([] as LunaChipsObject[]);
+  @Input() selectedChipsFrom: FormControl = new FormControl(
+    [] as LunaChipsObject[]
+  );
   @Input() chips: LunaChipsObject[] = [];
 
   // @Input() chips: LunaChipsObject[] = [];
@@ -47,6 +48,7 @@ export class LunaFromChipsComponent {
     // if (this.preeselectedChips.length > 0) {
     //   this.selectedChips = this.preeselectedChips;
     // }
+    console.log(this.selectedChipsFrom.value);
 
     this.checkOverflow();
     if (this.AllaciveOnStart) {
@@ -94,7 +96,7 @@ export class LunaFromChipsComponent {
   }
 
   chipIsKlicked(chip: LunaChipsObject) {
-    let newChipList = this.selectedChipsFrom.value;
+    let newChipList: LunaChipsObject[] = this.selectedChipsFrom.value;
     if (this.ContainsChip(chip)) {
       newChipList = newChipList.filter((element) => !isSameChip(element, chip));
     } else {
@@ -146,7 +148,8 @@ export class LunaFromChipsComponent {
     // selectedChips: LunaChipsObject[]
   ): boolean {
     return this.selectedChipsFrom.value.some(
-      (element) => element.name === chip.name && element.index === chip.index
+      (element: LunaChipsObject) =>
+        element.name === chip.name && element.index === chip.index
     );
   }
 }
@@ -163,4 +166,10 @@ export function LunaChipsObjectCreator(chipList: string[]): LunaChipsObject[] {
 
 function isSameChip(chip1: LunaChipsObject, chip2: LunaChipsObject): boolean {
   return chip1.index === chip2.index && chip1.name === chip2.name;
+}
+export function LunaChipsObjectGetSelectedChipList(
+  cObjLi: LunaChipsObject[],
+  selected: string[]
+): LunaChipsObject[] {
+  return cObjLi.filter((element) => selected.includes(element.name));
 }

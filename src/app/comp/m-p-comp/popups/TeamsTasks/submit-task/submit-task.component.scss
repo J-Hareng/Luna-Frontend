@@ -34,3 +34,13 @@
     position: relative;
   }
 }
+.subFrom {
+  flex-grow: 1;
+}
+.FileLocationSelector {
+  margin-top: 1em;
+}
+.withFileWrapper {
+  display: flex;
+  align-items: center;
+}
