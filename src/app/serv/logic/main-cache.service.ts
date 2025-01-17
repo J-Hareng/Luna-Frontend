@@ -212,6 +212,10 @@ export class MainCacheService {
 
     this.userTeams = [];
     teams.map((Team) => {
+      if (Team.users == null || Team.users == undefined) {
+        Team.users = [];
+        return;
+      }
       if (Team.users.some((user) => user._id === this.user._id)) {
         this.userTeams.push(Team);
       }

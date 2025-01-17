@@ -179,17 +179,21 @@ export class DashCollectionsComponent {
 
   UpdateMap() {
     for (let file of this.GetFiles()) {
-      this.fm.GetFile(file).subscribe(
-        (data) => {
-          let blob = new Blob([data], { type: "application/octet-stream" });
-          let url = window.URL.createObjectURL(blob);
+      if (this.IsExtatsonValid(file.path)) {
+        this.fm.GetFile(file).subscribe(
+          (data) => {
+            let blob = new Blob([data], { type: "application/octet-stream" });
+            let url = window.URL.createObjectURL(blob);
 
-          this.FileMap.set(file.path, url);
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
+            this.FileMap.set(file.path, url);
+          },
+          (error) => {
+            console.error(error);
+          }
+        );
+      } else {
+        this.FileMap.set(file.path, "assets/Luna_icon.svg");
+      }
     }
   }
 

@@ -5,6 +5,12 @@
   [Preselected]="'test'"
   (selectedInputEmitter)="onInputChange($event)"
 ></app-luna-input>
+
+<app-luna-filter-selector
+  [filterList]="this.filters"
+  (sFilter)="onFilterChange($event)"
+>
+</app-luna-filter-selector>
 <!-- <br /> -->
 <div class="ChipsTest" style="width: 30%; height: 100%">
   <p>Luna From Test</p>

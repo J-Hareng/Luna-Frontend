@@ -1,0 +1,12 @@
+<div class="filterWrapper">
+  <button
+    *ngFor="let F of this.filterList"
+    [ngClass]="{ selected: IsActive(F) }"
+    (click)="this.Clicked(F)"
+    class="filterButton NotDef"
+  >
+    <span class="filterText">
+      {{ F }}
+    </span>
+  </button>
+</div>

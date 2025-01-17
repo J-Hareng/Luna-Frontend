@@ -1,0 +1,44 @@
+@import "../../../CssUtilitys/colors.scss";
+.filterWrapper {
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+  background-color: $text-colorLowOp;
+  gap: 1px;
+  border: 1px solid $text-colorLowOp;
+  border-radius: 1em;
+  .filterButton {
+    flex-grow: 1;
+    background: linear-gradient(
+      60deg,
+      $color-surface-a10,
+      $color-surface-a10,
+      $color-secondary-a,
+      $color-trinary-a
+    );
+    // background: $color-surface-a10;
+    border: none;
+    background-size: 400%;
+    transition: all 0.8s;
+    &.selected {
+      background-position: right;
+      span {
+        transition: all 0.8s;
+        color: $color-surface-a0;
+      }
+    }
+    span {
+      font-weight: lighter;
+      font-size: 1.2rem;
+    }
+  }
+}
+
+@keyframes Select {
+  0% {
+    background-color: $color-surface-a10;
+  }
+  100% {
+    background-color: $highlight-background;
+  }
+}

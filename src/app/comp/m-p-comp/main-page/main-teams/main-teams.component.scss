@@ -18,13 +18,14 @@
   #Teams {
     // flex-shrink: 1;
     // height: 100%;
+    flex-grow: 0.4;
     overflow-y: auto;
     .team {
-      background: $color-surface-a10;
-      background-size: 250%;
+      background: $Disabled-gradient;
+      background-size: 500%;
       background-position: left;
 
-      border: 1px solid $color-surface-a30;
+      // border: 1px solid $color-surface-a30;
 
       margin: 1em 0.5em;
       padding: 1em 0.5em;
@@ -35,7 +36,7 @@
       padding-bottom: 0.2em;
 
       button {
-        background: $color-primary-a20;
+        background: $color-surface-a10;
         background-size: 300%;
         height: 4em;
         width: 6em;
@@ -43,25 +44,32 @@
         padding: 0;
         margin-top: 1em;
         margin-bottom: 0;
+        border-radius: 1em;
 
         color: $text-color !important;
-
         &:hover {
-          color: black !important;
-          background-position: right;
         }
       }
     }
     .team.Free {
-      background-position: left;
-      background-size: 400%;
+      background: $color-surface-a10;
+
+      button {
+        border: 1px solid $color-surface-a30;
+        background-color: $color-surface-a10;
+      }
+    }
+    .team.Free.selected {
+      p {
+        color: $text-color !important;
+      }
     }
     .selected {
       background-size: 400%;
+
       background-position: top right !important;
       border-radius: 1rem;
-      p,
-      button {
+      p {
         color: black !important;
       }
     }

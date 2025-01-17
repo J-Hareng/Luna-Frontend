@@ -35,6 +35,7 @@ import { NewTaskComponent } from "../../../popups/TeamsTasks/new-task/new-task.c
 import { EditTaskComponent } from "../../../popups/TeamsTasks/edit-task/edit-task.component";
 import { SubmitTaskComponent } from "../../../popups/TeamsTasks/submit-task/submit-task.component";
 import { FileManagerService } from "../../../../../serv/API/c-serv/file-manager.service";
+import { LunaFilterSelectorComponent } from "../../../../../custom-components/luna-filter-selector/luna-filter-selector.component";
 @Component({
   selector: "app-dash-teams",
   standalone: true,
@@ -50,6 +51,7 @@ import { FileManagerService } from "../../../../../serv/API/c-serv/file-manager.
     MatIcon,
     MatMenuModule,
     MatButtonToggleModule,
+    LunaFilterSelectorComponent,
   ],
   templateUrl: "./dash-teams.component.html",
   styleUrl: "./dash-teams.component.scss",
@@ -63,11 +65,17 @@ export class DashTeamsComponent {
     private apiFile: FileManagerService
   ) {}
 
+  filterList: string[] = ["Free", "In Progress", "Yours"];
+
+  onFilterChange(event: string, team: TeamType) {
+    this.formGroup.get(team._id)?.setValue(event);
+  }
   //* Display Func
   CreateNewFormControll(t: TeamType): string {
     this.formGroup.addControl(t._id, new FormControl(""));
     return t._id;
   }
+
   getTeamFormValue(t: TeamType): string {
     let a = this.formGroup.get(t._id)?.value || "";
     return a;
@@ -230,10 +238,17 @@ export class DashTeamsComponent {
         return;
       }
       console.log(dres);
-      // task.name = dres.name;
-      // task.des = dres.des;
-      // task.coll = dres.collection;
-      // task.tags = dres.tags;
+      task.name = dres.name;
+      task.des = dres.des;
+      task.coll = dres.collection;
+      task.tags = dres.tags;
+      this.mc.isLoadingSmall = true;
+      this.apiTeam.EditTask(task).subscribe((res) => {
+        if (res.status == "OK") {
+          this.mc.updateTeams();
+        }
+        this.mc.isLoadingSmall = false;
+      });
     });
   }
 

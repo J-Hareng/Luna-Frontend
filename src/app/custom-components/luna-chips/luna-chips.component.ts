@@ -40,7 +40,7 @@ export class LunaChipsComponent implements AfterViewInit {
 
   SearchFrom = new FormControl("");
   @ViewChild("tagSelection") tagSelection!: ElementRef;
-
+  
   ngAfterViewInit() {
     if (this.preeselectedChips.length > 0) {
       this.selectedChips = this.preeselectedChips;
@@ -91,6 +91,8 @@ export class LunaChipsComponent implements AfterViewInit {
   }
 
   chipIsKlicked(chip: LunaChipsObject) {
+  
+  
     if (ContainsChip(chip, this.selectedChips)) {
       this.selectedChips = this.selectedChips.filter(
         (element) => !isSameChip(element, chip)

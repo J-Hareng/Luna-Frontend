@@ -13,6 +13,7 @@ import {
   LunaChipsObjectGetSelectedChipList,
   LunaFromChipsComponent,
 } from "../../../custom-components/luna-from-chips/luna-from-chips.component";
+import { LunaFilterSelectorComponent } from "../../../custom-components/luna-filter-selector/luna-filter-selector.component";
 @Component({
   selector: "app-test-luna-utils",
   standalone: true,
@@ -23,6 +24,7 @@ import {
     LunaSlideToggleComponent,
     LunaFileUploadAndLocationSelectorComponent,
     LunaFromChipsComponent,
+    LunaFilterSelectorComponent,
   ],
   templateUrl: "./test-luna-utils.component.html",
   styleUrl: "./test-luna-utils.component.scss",
@@ -57,6 +59,12 @@ export class TestLunaUtilsComponent {
   }
 
   onInputChange(event: string) {
+    console.log(event);
+  }
+
+  filters = ["All", "Free", "Meemj"];
+
+  onFilterChange(event: string) {
     console.log(event);
   }
 }

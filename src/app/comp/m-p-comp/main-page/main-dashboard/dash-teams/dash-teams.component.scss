@@ -1,11 +1,13 @@
 @import "../../../../../../CssUtilitys/colors.scss";
+@import "../../../../../../CssUtilitys/defaults.scss";
 
-::ng-deep .mat-mdc-tab-body-wrapper {
+ng-deep .mat-mdc-tab-body-wrapper {
   height: 100% !important;
 }
 
 ::ng-deep .mat-button-toggle-label-content {
   line-height: 1.2em !important;
+  height: 100% !important;
 }
 
 #NoTeamWrapper {
@@ -81,24 +83,33 @@
         flex-direction: column;
 
         .TeamTitle {
-          font-size: 1em;
+          font-size: 2em;
           color: $text-color;
           font-weight: 500;
         }
         .TeamDes {
-          font-size: 0.5em;
+          font-size: 0.9em;
           color: $description-color;
           font-weight: lighter;
         }
       }
       .team-editBtn {
-        border-radius: 100px;
-        padding: 1em;
-        content: 0px;
+        border-radius: 100px; // Ensure the button stays round
+        width: 2em; // Set explicit width
+        height: 2em; // Set explicit height
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        // border-radius: 100px;
+        // padding: 1em;
+        // content: 0%;
+        // display: inline-block !important;
         background: none;
+        flex-shrink: 1;
+        padding: 0px;
         mat-icon {
-          position: absolute;
-          transform: translate(-50%, -50%);
+          // position: absolute;
+          // transform: translate(-50%, -50%);
         }
         &:hover {
           background-color: $color-surface-mixed-a10;
@@ -118,8 +129,11 @@
             padding-top: 0.2rem;
             width: 34%;
             height: 1.5rem; // the modified height that I wanted.
-
-            // default value is 48px. I wanted the height to be 2rem, but had to adjust this line-height to 1rem so that the icons were vertically centered.
+            button {
+              display: flex !important;
+              justify-content: center !important;
+              // default value is 48px. I wanted the height to be 2rem, but had to adjust this line-height to 1rem so that the icons were vertically centered.
+            }
           }
         }
       }
@@ -132,6 +146,7 @@
             width: max-content;
             h1 {
               width: max-content;
+              font-size: 0.8em;
             }
           }
           .mat-expansion-panel-header-description {

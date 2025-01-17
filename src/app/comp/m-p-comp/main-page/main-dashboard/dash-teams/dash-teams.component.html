@@ -28,8 +28,14 @@
       <mat-divider></mat-divider>
 
       <div class="teamCardContent">
-        <div class="filters">
-          <mat-button-toggle-group
+        <div class="filters" *ngIf="CreateNewFormControll(team)">
+          <app-luna-filter-selector
+            (sFilter)="onFilterChange($event, team)"
+            [filterList]="this.filterList"
+            class="filter"
+          >
+          </app-luna-filter-selector>
+          <!-- <mat-button-toggle-group
             [formControlName]="CreateNewFormControll(team)"
             hideSingleSelectionIndicator
             class="filter"
@@ -48,7 +54,7 @@
             <mat-button-toggle class="NotDef" value="inProg"
               >In progress</mat-button-toggle
             >
-          </mat-button-toggle-group>
+          </mat-button-toggle-group> -->
         </div>
         <div class="tasks">
           <div *ngFor="let task of team.tasks">
@@ -65,7 +71,7 @@
               ></ng-container>
             </ng-container>
             <ng-container
-              *ngIf="getTeamFormValue(team) == 'your' && IsUserInIt(task)"
+              *ngIf="getTeamFormValue(team) == 'Yours' && IsUserInIt(task)"
             >
               <ng-container
                 *ngTemplateOutlet="
@@ -76,7 +82,7 @@
             </ng-container>
             <ng-container
               *ngIf="
-                getTeamFormValue(team) == 'free' &&
+                getTeamFormValue(team) == 'Free' &&
                 WhoIsWorkingOnIt(task).length == 0
               "
             >
@@ -89,7 +95,7 @@
             </ng-container>
             <ng-container
               *ngIf="
-                getTeamFormValue(team) == 'inProg' &&
+                getTeamFormValue(team) == 'In Progress' &&
                 WhoIsWorkingOnIt(task).length != 0
               "
             >
