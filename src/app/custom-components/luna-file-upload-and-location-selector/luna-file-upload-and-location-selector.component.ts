@@ -6,6 +6,7 @@ import {
   LunaChipsObject,
   LunaChipsObjectCreator,
 } from "../luna-chips/luna-chips.component";
+import { LunaUploadObject } from "../../serv/mod/Types";
 import { LunaInputComponent } from "../luna-input/luna-input.component";
 import { CollectionType, TaskType } from "../../serv/mod/Types";
 import { Input } from "@angular/core";
@@ -123,11 +124,4 @@ export class LunaFileUploadAndLocationSelectorComponent implements OnInit {
 
     this.FromControl.setValue(obj);
   }
-}
-
-export interface LunaUploadObject {
-  collection: string;
-  tags: string[];
-  file: File;
-  name: string;
 }

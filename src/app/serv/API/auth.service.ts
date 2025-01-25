@@ -35,6 +35,13 @@ export class AuthService {
       `Bearer ${this.Ls.GetToken()}`
     );
   }
+  GetUserSalt(email: string): Observable<LunaResponse<string>> {
+    let data = { email: email };
+    return this.http.post<LunaResponse<string>>(
+      API_BASE_URL + "/getSalt",
+      data
+    );
+  }
 
   GetUserViaToken(): Observable<userType> {
     return this.http
