@@ -24,6 +24,7 @@ import { BehaviorSubject, Observable, of } from "rxjs";
 import { tap, timestamp } from "rxjs/operators";
 import { map } from "rxjs/operators";
 import { Conditional } from "@angular/compiler";
+import { NotifierStreamService } from "../API/notifier-stream.service";
 
 export enum SiteStatus {
   Main = "MAIN",
@@ -39,7 +40,8 @@ export class MainCacheService {
     private apiAuth: AuthService,
     private apiUser: UserUtilsService,
     private apiTeam: TeamServService,
-    private apiColl: CollServService
+    private apiColl: CollServService,
+    private notifier: NotifierStreamService
   ) {}
 
   private IncrementCounter() {
@@ -120,6 +122,7 @@ export class MainCacheService {
     this.ResetCounter();
     this.isLoading = true;
     this.apiAuth.ValidateSessionToken("Dashboard");
+    this.notifier.connectToStream();
     this.apiUser.GetUserSetupData().subscribe(
       (res) => {
         if (res.error != null && res.error != undefined && res.error != "") {

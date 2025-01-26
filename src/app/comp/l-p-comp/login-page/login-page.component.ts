@@ -18,6 +18,7 @@ import { ExitOnbackklickComponent } from "../../extra/exit-onbackklick/exit-onba
 import { LSServService } from "../../../serv/logic/lsserv.service";
 
 import * as CryptoJS from "crypto-js";
+import { NotifierStreamService } from "../../../serv/API/notifier-stream.service";
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(
@@ -66,7 +67,8 @@ export class LoginPageComponent {
   constructor(
     public apiAuth: AuthService,
     private router: Router,
-    private lsserv: LSServService
+    private lsserv: LSServService,
+    private notifier: NotifierStreamService
   ) {}
 
   ngOnInit(): void {
