@@ -3,6 +3,13 @@ import { Injectable } from "@angular/core";
 import { EventSourcePolyfill } from "event-source-polyfill";
 import { AuthService } from "./auth.service";
 import { API_BASE_URL } from "../../const";
+import { MainCacheService } from "../logic/main-cache.service";
+import {
+  KeepAliveOperation,
+  NotifierBody,
+  TaskObject,
+  UpdateOperation,
+} from "./APImodels/Notifier-Models";
 
 @Injectable({
   providedIn: "root",
@@ -10,8 +17,9 @@ import { API_BASE_URL } from "../../const";
 export class NotifierStreamService {
   private eventSource!: EventSourcePolyfill;
 
-  constructor(private apiAuth: AuthService) {}
-
+  constructor(private apiAuth: AuthService, private mc: MainCacheService) {
+    window.addEventListener("beforeunload", this.closeConnection.bind(this));
+  }
   connectToStream() {
     const headers = {
       Authorization: this.apiAuth.getToken(),
@@ -23,7 +31,7 @@ export class NotifierStreamService {
       API_BASE_URL + "/api/ConnectToSteam",
       {
         headers,
-        heartbeatTimeout: 60000, // Increase the timeout to 60 seconds
+        heartbeatTimeout: 60000,
       }
     );
 
@@ -32,10 +40,21 @@ export class NotifierStreamService {
     };
 
     this.eventSource.onmessage = (event) => {
-      let JsonData = JSON.parse(event.data);
+      let JsonData: NotifierBody = JSON.parse(event.data);
       console.log("Message:", event.data);
-      switch (JsonData.type) {
-        case "KeepAlive":
+
+      switch (JsonData.operation) {
+        case KeepAliveOperation:
+          break;
+
+        case UpdateOperation:
+          console.log("Update Operation");
+          switch (JsonData.type) {
+            case TaskObject:
+              console.log("Task Object");
+              console.log(JsonData.data);
+              this.mc.UpdateTask(JsonData.data);
+          }
           break;
 
         default:

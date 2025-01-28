@@ -40,8 +40,7 @@ export class MainCacheService {
     private apiAuth: AuthService,
     private apiUser: UserUtilsService,
     private apiTeam: TeamServService,
-    private apiColl: CollServService,
-    private notifier: NotifierStreamService
+    private apiColl: CollServService
   ) {}
 
   private IncrementCounter() {
@@ -122,7 +121,6 @@ export class MainCacheService {
     this.ResetCounter();
     this.isLoading = true;
     this.apiAuth.ValidateSessionToken("Dashboard");
-    this.notifier.connectToStream();
     this.apiUser.GetUserSetupData().subscribe(
       (res) => {
         if (res.error != null && res.error != undefined && res.error != "") {
@@ -264,5 +262,20 @@ export class MainCacheService {
 
   getTask(taskId: string): taskInfoType {
     return this.Taskmap.get(taskId) || ({} as taskInfoType);
+  }
+
+  // Task Updates
+  // * Update:
+  UpdateTask(t: TaskType) {
+    let IsOnOit =
+      t.inprogress != undefined &&
+      t.inprogress.length > 0 &&
+      t.inprogress.includes({ _id: this.user._id, name: this.user.name });
+    let task: taskInfoType = {
+      task: t,
+      IsWorkedOn: t.inprogress != undefined && t.inprogress.length > 0,
+      UserIn: IsOnOit,
+    };
+    this.Taskmap.set(t._id, task);
   }
 }

@@ -8,6 +8,7 @@ import { MainPageGroupSelectComponent } from "./main-page-group-select/main-page
 import { MainDashboardComponent } from "./main-dashboard/main-dashboard.component";
 import { MainTeamsComponent } from "./main-teams/main-teams.component";
 import { DashCollectionsComponent } from "./main-dashboard/dash-collections/dash-collections.component";
+import { NotifierStreamService } from "../../../serv/API/notifier-stream.service";
 @Component({
   selector: "app-main-page",
   standalone: true,
@@ -24,9 +25,10 @@ import { DashCollectionsComponent } from "./main-dashboard/dash-collections/dash
   styleUrl: "./main-page.component.scss",
 })
 export class MainPageComponent {
-  constructor(public mc: MainCacheService) {
+  constructor(public mc: MainCacheService, private LN: NotifierStreamService) {
     this.mc.SetUpdata();
     this.mc.SiteStatus = SiteStatus.Main;
+    LN.connectToStream();
   }
 
   SiteStatus = SiteStatus;

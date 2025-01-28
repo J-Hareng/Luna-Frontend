@@ -245,7 +245,7 @@ export class DashTeamsComponent {
       this.mc.isLoadingSmall = true;
       this.apiTeam.EditTask(task).subscribe((res) => {
         if (res.status == "OK") {
-          this.mc.updateTeams();
+          // this.mc.updateTeams();
         }
         this.mc.isLoadingSmall = false;
       });
