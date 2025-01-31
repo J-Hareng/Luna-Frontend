@@ -5,10 +5,13 @@ import { AuthService } from "./auth.service";
 import { API_BASE_URL } from "../../const";
 import { MainCacheService } from "../logic/main-cache.service";
 import {
+  DeleteOperation,
   KeepAliveOperation,
   NotifierBody,
   TaskObject,
+  TeamObject,
   UpdateOperation,
+  UserObject,
 } from "./APImodels/Notifier-Models";
 
 @Injectable({
@@ -54,6 +57,32 @@ export class NotifierStreamService {
               console.log("Task Object");
               console.log(JsonData.data);
               this.mc.UpdateTask(JsonData.data);
+              break;
+
+            case TeamObject:
+              console.log("Team Object");
+              break;
+
+            case UserObject:
+              console.log("User Object");
+              break;
+          }
+          break;
+
+        case DeleteOperation:
+          console.log("Delete Operation");
+          switch (JsonData.type) {
+            case TaskObject:
+              this.mc.DeleteTask(JsonData.data);
+              break;
+
+            case TeamObject:
+              console.log("Team Object");
+              break;
+
+            case UserObject:
+              console.log("User Object");
+              break;
           }
           break;
 

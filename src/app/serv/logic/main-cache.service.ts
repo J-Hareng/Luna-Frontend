@@ -276,6 +276,24 @@ export class MainCacheService {
       IsWorkedOn: t.inprogress != undefined && t.inprogress.length > 0,
       UserIn: IsOnOit,
     };
+    this.Teams.forEach((team) => {
+      if (team.tasks.some((task) => task._id === t._id)) {
+        (team.tasks as LinkType[]).forEach((task) => {
+          if (task._id === t._id) {
+            task.name = t.name;
+          }
+        });
+      }
+    });
+
     this.Taskmap.set(t._id, task);
+  }
+
+  DeleteTask(taskId: string) {
+    this.Taskmap.delete(taskId);
+
+    this.Teams.forEach((team) => {
+      team.tasks = team.tasks.filter((task) => task._id !== taskId);
+    });
   }
 }
