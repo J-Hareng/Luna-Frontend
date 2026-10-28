@@ -2,8 +2,8 @@
 
 Luna is an Angular client for managing collections, files, teams, and tasks.
 
-> **Availability notice:** The Luna site is temporarily unavailable while the
-> project is under development. It is expected to become available again.
+> **Availability notice:** The Luna site is temporarily unavailable. The project
+> is under development. It is not expected to become available again.
 
 ## Current status
 
