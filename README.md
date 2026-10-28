@@ -1,27 +1,87 @@
-# LunaProdV1Client
+# Luna Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.5.
+Luna is an Angular client for managing collections, files, teams, and tasks.
 
-## Development server
+> **Availability notice:** The Luna site is temporarily unavailable. The project
+> is under development. It is not expected to become available again.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Current status
 
-## Code scaffolding
+This repository contains the frontend application and its supporting UI
+components and services. The application is still being developed, so features,
+integrations, and deployment availability may change.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Features
 
-## Build
+- User login and account registration
+- Dashboard navigation
+- Collection and file management
+- File uploads and previews
+- Team and task management
+- Reusable Luna UI components
+- Angular Material-based interface
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Technology
 
-## Running unit tests
+- Angular 18
+- TypeScript
+- Angular Material and CDK
+- RxJS
+- Express and Angular SSR support
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Local development
 
-## Running end-to-end tests
+### Prerequisites
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+- Node.js and npm
+- A configured backend/API if API-connected features are needed
 
-## Further help
+### Install dependencies
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+npm install
+```
+
+### Start the development server
+
+```bash
+npm start
+```
+
+Then open `http://localhost:4200/` in a browser. The development server
+reloads automatically when source files change.
+
+## Available scripts
+
+| Command | Description |
+| --- | --- |
+| `npm start` | Start the Angular development server |
+| `npm run build` | Create a production build |
+| `npm run watch` | Build continuously using the development configuration |
+| `npm test` | Run the unit test suite |
+| `npm run lint` | Run the project linter |
+
+## Main application areas
+
+- `src/app/comp/l-p-comp/` — login and registration pages
+- `src/app/comp/m-p-comp/` — dashboard, collections, teams, and tasks
+- `src/app/custom-components/` — reusable Luna UI components
+- `src/app/serv/` — API and application services
+- `src/CssUtilitys/` — shared styling utilities
+
+## Build and deployment
+
+To create a production build:
+
+```bash
+npm run build
+```
+
+The generated files are written to `dist/`. The public deployment is temporarily
+offline while the application is being developed.
+
+## Contributing
+
+Changes should be focused, tested where practical, and consistent with the
+existing Angular structure. Before submitting changes, run the relevant tests,
+lint checks, and production build.
